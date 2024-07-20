@@ -7,7 +7,7 @@ tag : java
 
 # <br><br>사칙연산 가능한 계산기 만들기
 
-## 1. 코드
+## <br>1. 코드
 
 String 타입의 완성된 하나의 계산식을 입력 받아서 String 타입의 계산 결과를 출력하는, 계산기를 구성하는 코드입니다.
 
@@ -469,7 +469,7 @@ public class Calculator extends JFrame{
 }
 ~~~
 
-## 2. 기록
+## <br>2. 기록
 
 ~~~
 

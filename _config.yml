@@ -22,7 +22,7 @@ title_separator          : " | "
 subtitle                 : "java, mysql, python. spring, and etc"
 name                     : "ysh195"
 description              : "these all are what I made or studied."
-url                      : "ysh195.github.io"
+url                      : "https://ysh195.github.io"
 baseurl                  : # the subpath of your site, e.g. "/blog"
 repository               : # GitHub username/repo-name e.g. "mmistakes/minimal-mistakes"
 teaser                   : # path of fallback teaser image, e.g. "/assets/images/500x300.png"
@@ -124,14 +124,14 @@ author:
       url: "mailto:dnqnp@naver.com"
     - label: "GitHub"
       icon: "fab fa-fw fa-github"
-      url: "ysh195.github.io"
+      url: "https://ysh195.github.io"
 
 # Site Footer
 footer:
   links:
     - label: "GitHub"
       icon: "fab fa-fw fa-github"
-      url: "ysh195.github.io"
+      url: "https://ysh195.github.io"
 
 # Reading Files
 include:

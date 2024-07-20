@@ -5,8 +5,8 @@ categories : works
 tag : [java, 공부, 연습용]
 toc : true
 author_profile : false
-sidebar :
-  nav : "docs"
+sidebar:
+  nav: "docs"
 ---
 
 # <br><br>사칙연산 가능한 계산기 만들기

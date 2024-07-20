@@ -1040,6 +1040,7 @@ public class CardManager {
 
 
 ## 2. 기록
+
 ~~~
   블랙잭
   

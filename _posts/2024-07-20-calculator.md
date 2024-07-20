@@ -1,6 +1,6 @@
 ---
 layout : single
-title : 코딩학원 2주차 - 사칙연산 가능한 계산기
+title : 코딩학원 2주차 - 사칙연산 가능한 계산기 <br>
 categories : java
 ---
 

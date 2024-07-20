@@ -1,3 +1,14 @@
+```javascript
+<style>
+  pre {
+    width: 100%;
+    overflow-x: auto;
+  }
+  code {
+    display: block;
+    width: 100%;
+  }
+</style>
 ----
 layout: post
 title: "코딩학원 2주차 : 사칙연산 가능한 계산기"

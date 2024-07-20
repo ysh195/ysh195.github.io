@@ -3,6 +3,7 @@ layout : single
 title : 코딩학원 2주차 - 사칙연산 가능한 계산기
 categories : works
 tag : [java, 공부, 연습용]
+toc : true
 ---
 
 # <br><br>사칙연산 가능한 계산기 만들기

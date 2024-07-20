@@ -21,7 +21,7 @@ title                    : "ysh195's blog"
 title_separator          : " | "
 subtitle                 : "java, mysql, python. spring, etc"
 name                     : "ysh195"
-description              : "these all are what I made or studied."
+description              : "These are all things that I made or studied. Feel free to look around."
 url                      : "https://ysh195.github.io/"
 baseurl                  : "" # the subpath of your site, e.g. "/blog"
 repository               : # GitHub username/repo-name e.g. "mmistakes/minimal-mistakes"
@@ -115,7 +115,7 @@ analytics:
 author:
   name             : "ysh195"
   avatar           : # path of avatar image, e.g. "/assets/images/bio-photo.jpg"
-  bio              : "these all are what I made or studied. Please feel free to look around."
+  bio              : "These are all things that I made or studied. Feel free to look around."
   location         : "South Korea"
   email            : "mailto:dnqnp@naver.com"
   links:

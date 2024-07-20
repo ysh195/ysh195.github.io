@@ -7,6 +7,7 @@
 
 ## 1. 코드
 
+
 ## main : GamePlay
 ~~~java
 // 게임을 실행할 메인 클래스입니다.
@@ -31,6 +32,7 @@ public class GamePlay{
 
 }
 ~~~
+
 
 ## GameProcess
 ~~~java
@@ -227,6 +229,7 @@ public class GameProcess {
 }
 ~~~
 
+
 ## GamePlayer
 ~~~java
 // 게임을 할 본인을 의미합니다. 편의상 게임 중 플레이어1으로 명명하였습니다.
@@ -364,6 +367,7 @@ public class GamePlayer {
 	
 }
 ~~~
+
 
 ## AnotherPlayer
 ~~~java
@@ -628,6 +632,7 @@ public class AnotherPlayer {
 }
 ~~~
 
+
 ## GameDealer
 ~~~java
 // 게임의 딜러입니다. 메소드가 플레이어와 거의 같으나, 딜러의 경우 계산식에 특별한 과정이 추가됩니다. 
@@ -866,7 +871,6 @@ public class GameDealer {
 ~~~
 
 
-
 ## CardManager
 ~~~java
 // 게임에 사용되는 카드 중 아직 사용되지 않은 것들을 관리할 카드 매니저입니다.
@@ -1034,7 +1038,8 @@ public class CardManager {
 }
 ~~~
 
-2. 기록
+
+##2. 기록
 ~~~
 블랙잭
 

@@ -7,7 +7,7 @@ main:
     
 docs : 
   - title : "구분"
-    child : 
+    children : 
       - title: "Category"
         url : /categories/
       - title: "Tag"

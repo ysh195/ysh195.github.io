@@ -5,6 +5,8 @@ categories : works
 tag: [java, 공부, 연습용]
 toc : true
 author_profile : false
+sidebar :
+  nav : "docs"
 ---
 
 # <br><br>혼자서 컴퓨터와 대결할 수 있는 블랙잭 카드게임 만들기

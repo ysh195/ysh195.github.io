@@ -117,7 +117,7 @@ author:
   avatar           : # path of avatar image, e.g. "/assets/images/bio-photo.jpg"
   bio              : "these all are what I made or studied. Please feel free to look around."
   location         : "South Korea"
-  email            :
+  email            : "dnqnp@naver.com"
   links:
     - label: "Email"
       icon: "fas fa-fw fa-envelope-square"

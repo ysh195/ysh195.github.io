@@ -124,14 +124,14 @@ author:
       url: "dnqnp@naver.com"
     - label: "GitHub"
       icon: "fab fa-fw fa-github"
-      url: "https://ysh195.github.io"
+      url: "https://ysh195.github.io/"
 
 # Site Footer
 footer:
   links:
     - label: "GitHub"
       icon: "fab fa-fw fa-github"
-      url: "https://ysh195.github.io"
+      url: "https://ysh195.github.io/"
 
 # Reading Files
 include:

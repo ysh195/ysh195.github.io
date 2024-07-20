@@ -9,3 +9,7 @@
 ----
 ## 네이버 Search Advisor로 내 블로그를 검색에 노출 중
 ### https://searchadvisor.naver.com/
+
+----
+### 기타
+* 블로그 내 키워드 검색에서 제외하고 싶으면 해당 게시물의 머릿말 속성에서 search : false 쓰면 됨

@@ -117,11 +117,11 @@ author:
   avatar           : # path of avatar image, e.g. "/assets/images/bio-photo.jpg"
   bio              : "these all are what I made or studied. Please feel free to look around."
   location         : "South Korea"
-  email            : "dnqnp@naver.com"
+  email            : "mailto:dnqnp@naver.com"
   links:
     - label: "Email"
       icon: "fas fa-fw fa-envelope-square"
-      url: "dnqnp@naver.com"
+      url: "mailto:dnqnp@naver.com"
     - label: "GitHub"
       icon: "fab fa-fw fa-github"
       url: "https://ysh195.github.io"

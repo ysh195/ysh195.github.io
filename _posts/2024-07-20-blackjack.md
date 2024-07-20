@@ -7,7 +7,7 @@ tag: java
 
 # <br><br>혼자서 컴퓨터와 대결할 수 있는 블랙잭 카드게임 만들기
 
-## 1. 코드
+## <br>1. 코드
 
 
 ## main : GamePlay
@@ -1041,7 +1041,7 @@ public class CardManager {
 ~~~
 
 
-## 2. 기록
+## <br>2. 기록
 
 ~~~
   블랙잭

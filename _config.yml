@@ -19,7 +19,7 @@ locale                   : "ko-KR"
 rtl                      : # true, false (default) # turns direction of the page into right to left for RTL languages
 title                    : "ysh195's blog"
 title_separator          : " | "
-subtitle                 : "java, mysql, python. spring, etc"
+subtitle                 : "java, mysql, python, spring, etc"
 name                     : "ysh195"
 description              : "These are all things that I made or studied. Feel free to look around."
 url                      : "https://ysh195.github.io/"

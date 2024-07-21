@@ -12,12 +12,12 @@ author_profile : false
 
 번호|이미지
 ---|---|
-**1**|![ysh195]({{site.url}}/images/mc1.PNG)
-**2**|![ysh195]({{site.url}}/images/mc2.png)
-**3**|![ysh195]({{site.url}}/images/mc3.PNG)
-**4**|![ysh195]({{site.url}}/images/mc4.PNG)
-**5**|![ysh195]({{site.url}}/images/mc5.PNG)
-**6**|![ysh195]({{site.url}}/images/mc6.PNG)
+**1**|![ysh195]({{site.url}}/assets/images/mc1.PNG)
+**2**|![ysh195]({{site.url}}/assets/images/mc2.png)
+**3**|![ysh195]({{site.url}}/assets/images/mc3.PNG)
+**4**|![ysh195]({{site.url}}/assets/images/mc4.PNG)
+**5**|![ysh195]({{site.url}}/assets/images/mc5.PNG)
+**6**|![ysh195]({{site.url}}/assets/images/mc6.PNG)
 
 
 ## <br>2. 코드

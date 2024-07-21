@@ -15,10 +15,20 @@
 ~~~
 현재 추가한 내용
 
- .breadcrumbs{
+.breadcrumbs{
     display: flex !important;
     justify-content: flex-start !important;
-  }
+}
+
+pre, code {
+  display: block;
+  word-wrap: break-word !important;
+  white-space: pre-wrap !important;
+  text-align: justify !important;
+  max-width: 100% !important;
+  overflow: auto !important;
+  padding: 5px;
+}
 ~~~
 * 사이드바 쓰려면 아래의 내용을 위쪽 포스트 설정에 입력
  ~~~

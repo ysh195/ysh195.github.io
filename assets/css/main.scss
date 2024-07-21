@@ -4,8 +4,12 @@ search: false
 ---
 #main{
   margin : 0 !important;
-.pags__inner-wrap{
-  width : 150% !important;
+.page__inner-wrap{
+    float: inline-start;
+    margin-top: 1em;
+    margin-inline: 0;
+    width: 170%;
+    clear: both;
 }
 @charset "utf-8";
 

@@ -82,3 +82,10 @@ redirect_profile: false
 redirect_from:
  - /이전 카테고리명/이전 게시물 제목
 ~~~
+* 사용자지정 서식 간단 적용
+~~~
+적용할 대상 끝에 {: .서식명}을 붙이면 됨.
+현재 지정된 사용자 지정 서식
+ - img-width-half : 이미지 크기를 반 줄여줌.
+ - line-auto-div : 자동 줄 나눔.
+~~~

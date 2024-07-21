@@ -114,7 +114,7 @@ analytics:
 # Site Author
 author:
   name             : "ysh195"
-  avatar           : "/assets/images/coconut.jpg"
+  avatar           : "/assets/images/coconut.png"
   bio              : "These are all things that I made or studied. Feel free to look around."
   location         : "South Korea"
   email            : "mailto:dnqnp@naver.com"
@@ -130,6 +130,9 @@ footer:
       icon: "fas fa-fw fa-envelope-square"
       url: "mailto:dnqnp@naver.com"
     - label: "GitHub"
+      icon: "fab fa-fw fa-github"
+      url: "https://ysh195.github.io/"
+    - label: "YouTube"
       icon: "fab fa-fw fa-github"
       url: "https://ysh195.github.io/"
 

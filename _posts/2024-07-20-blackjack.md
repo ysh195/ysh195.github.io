@@ -10,6 +10,11 @@ author_profile : false
 
 ## <br>1. 완성 이미지
 
+번호|이미지
+---|---|
+**1**|![ysh195](../assets/images/bj1.PNG)
+**2**|![ysh195](../assets/images/bj2.PNG)
+
 ## <br>2. 코드
 
 

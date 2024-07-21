@@ -64,5 +64,5 @@ https://www.youtube.com/redirect?event=video_description&redir_token=QUFFLUhqbGx
   ~~~
 * 포스트 내에 이미지 추가
 ~~~
-![ysh195]({{site.url}}/images/포스트 제목 전체(ex : 2024-07-20-calculator/이미지파일이름.확장자)
+![ysh195](../assets/images/파일이름.확장자)
 ~~~

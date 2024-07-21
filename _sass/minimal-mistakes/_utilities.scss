@@ -567,12 +567,8 @@ pre {
   }
 }
 
-.img-width-half {
-  width: 50%;
-}
-
-.line-auto-div {
-  width: 85%;
+.img-limit-width {
+  width: auto;
   height: auto;
-  display: inline-block;
+  max-width: 90%;
 }

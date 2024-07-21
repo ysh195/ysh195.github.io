@@ -12,8 +12,8 @@ author_profile : false
 
 번호|이미지
 ---|---|
-**1**|![ysh195]({{site.url}}/assets/images/bj1.PNG)
-**2**|![ysh195]({{site.url}}/assets/images/bj2.PNG)
+**1**|![ysh195]({{site.url}}/assets/images/bj/bj1.PNG)
+**2**|![ysh195]({{site.url}}/assets/images/bj/bj2.PNG)
 
 ## <br>2. 코드
 

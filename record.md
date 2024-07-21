@@ -85,7 +85,8 @@ redirect_from:
 * 사용자지정 서식 간단 적용
 ~~~
 적용할 대상 끝에 {: .서식명}을 붙이면 됨.
-현재 지정된 사용자 지정 서식
+
+현재 지정된 사용자 지정 서식 ( _sass/minimal-mistakes/_utilities.scss )
  - img-width-half : 이미지 크기를 반 줄여줌.
  - line-auto-div : 자동 줄 나눔.
 ~~~

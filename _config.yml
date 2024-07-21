@@ -121,7 +121,7 @@ author:
   links:
     - label: "GitHub"
       icon: "fab fa-fw fa-github"
-      url: "https://github.com/ysh195/Study"
+      url: "https://github.com/ysh195"
 #    - label: "YouTube"
 #      icon: "fab fa-fw fa-youtube"
 #      url: "https://ysh195.github.io/"
@@ -134,7 +134,7 @@ footer:
       url: "mailto:dnqnp@naver.com"
     - label: "GitHub"
       icon: "fab fa-fw fa-github"
-      url: "https://github.com/ysh195/Study"
+      url: "https://github.com/ysh195"
 #    - label: "YouTube"
 #      icon: "fab fa-fw fa-youtube"
 #      url: "https://ysh195.github.io/"

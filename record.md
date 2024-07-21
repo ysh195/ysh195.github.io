@@ -97,3 +97,7 @@ redirect_from:
 현재 지정된 사용자 지정 서식 ( _sass/minimal-mistakes/_utilities.scss )
  - img-limit-width : 이미지가 너무 커서 안 보이는 일을 막아줌.
 ~~~
+12. 게시물 기본 설정
+~~~
+_config.yml 의 맨 아래 default 부분에 원하는 내용 추가
+~~~

@@ -19,7 +19,7 @@ author_profile : false
 ## <br>2. 코드
 
 ## main : TimeCounter
-~~~
+~~~java
 package timeCounter;
 
 import java.text.SimpleDateFormat;
@@ -43,7 +43,7 @@ public class TimeCounter {
 ~~~
 
 ## Screen
-~~~
+~~~java
 package timeCounter;
 
 import java.awt.*;

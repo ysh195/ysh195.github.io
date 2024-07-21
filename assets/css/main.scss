@@ -6,7 +6,12 @@ search: false
 .breadcrumbs{
     display: flex !important;
     justify-content: flex-start !important;
-  }
+}
+
+pre {
+  max-width: 100%;
+  word-break: break-all;
+}
 
 @charset "utf-8";
 

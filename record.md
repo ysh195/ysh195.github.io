@@ -35,7 +35,7 @@
 ~~~
 * 유튜브 영상 및 기타 미디어 연결하는 방법.
 * ~~~
-  {% include video id="XsxDH4HcOWA" provider="youtube" %}
-  <br> 여기서 말하는 video id는 유튜브 영상 주소의 https://www.youtube.com/watch?v= 뒤에 영어하고 숫자 조합으로 나오는 걸 말함. 주소표시줄에 없으면 공유 - 퍼가기에서 확인 가능.<br>
-유튜브 영상 및 기타 미디어 사용법 링크<br> https://www.youtube.com/redirect?event=video_description&redir_token=QUFFLUhqa1N1TWpqQzB3OGsxVE9vc3pkdndtakRmNlJnZ3xBQ3Jtc0tuVDdqUjgybUJrZEg2QTc4WGhXcDZ0Sy1kUmJraDhwMl9VcTRDbHVRUWJHV1l3a0pENkNMRThuQnQtNlNIZ3h2WGVFZkFiZU0xU0hqV01pNUJFNlJVYjI0YURzbjBEak1FNWlhaVhkNHlGbTFtY2gzVQ&q=https%3A%2F%2Fmmistakes.github.io%2Fminimal-mistakes%2Fdocs%2Fhelpers%2F%23responsive-video-embed&v=q0P3TSoVNDM
+    {% include video id="XsxDH4HcOWA" provider="youtube" %}
+    <br> 여기서 말하는 video id는 유튜브 영상 주소의 https://www.youtube.com/watch?v= 뒤에 영어하고 숫자 조합으로 나오는 걸 말함. 주소표시줄에 없으면 공유 - 퍼가기에서 확인 가능.<br>
+  유튜브 영상 및 기타 미디어 사용법 링크<br> https://www.youtube.com/redirect?event=video_description&redir_token=QUFFLUhqa1N1TWpqQzB3OGsxVE9vc3pkdndtakRmNlJnZ3xBQ3Jtc0tuVDdqUjgybUJrZEg2QTc4WGhXcDZ0Sy1kUmJraDhwMl9VcTRDbHVRUWJHV1l3a0pENkNMRThuQnQtNlNIZ3h2WGVFZkFiZU0xU0hqV01pNUJFNlJVYjI0YURzbjBEak1FNWlhaVhkNHlGbTFtY2gzVQ&q=https%3A%2F%2Fmmistakes.github.io%2Fminimal-mistakes%2Fdocs%2Fhelpers%2F%23responsive-video-embed&v=q0P3TSoVNDM
   ~~~

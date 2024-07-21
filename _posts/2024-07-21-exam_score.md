@@ -12,19 +12,19 @@ author_profile : false
 
 번호|이미지
 ---|---|
-**1**|![ysh195]({{site.url}}/images/es1.png)
-**2**|![ysh195]({{site.url}}/images/es2.png)
-**3**|![ysh195]({{site.url}}/images/es3.png)
-**4**|![ysh195]({{site.url}}/images/es4.png)
-**5**|![ysh195]({{site.url}}/images/es5.png)
-**6**|![ysh195]({{site.url}}/images/es6.png)
-**7**|![ysh195]({{site.url}}/images/es7.png)
-**8**|![ysh195]({{site.url}}/images/es8.png)
-**9**|![ysh195]({{site.url}}/images/es9.png)
-**10**|![ysh195]({{site.url}}/images/es10.png)
-**11**|![ysh195]({{site.url}}/images/es11.png)
-**12**|![ysh195]({{site.url}}/images/es12.png)
-**13**|![ysh195]({{site.url}}/images/es13.png)
+**1**|![ysh195]({{site.url}}/assets/images/es1.png)
+**2**|![ysh195]({{site.url}}/assets/images/es2.png)
+**3**|![ysh195]({{site.url}}/assets/images/es3.png)
+**4**|![ysh195]({{site.url}}/assets/images/es4.png)
+**5**|![ysh195]({{site.url}}/assets/images/es5.png)
+**6**|![ysh195]({{site.url}}/assets/images/es6.png)
+**7**|![ysh195]({{site.url}}/assets/images/es7.png)
+**8**|![ysh195]({{site.url}}/assets/images/es8.png)
+**9**|![ysh195]({{site.url}}/assets/images/es9.png)
+**10**|![ysh195]({{site.url}}/assets/images/es10.png)
+**11**|![ysh195]({{site.url}}/assets/images/es11.png)
+**12**|![ysh195]({{site.url}}/assets/images/es12.png)
+**13**|![ysh195]({{site.url}}/assets/images/es13.png)
 
 
 ## <br>2. 코드

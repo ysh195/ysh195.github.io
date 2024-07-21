@@ -16,6 +16,7 @@ docs :
         url : /categories/
       - title: "Tag"
         url : /tags/
+        
 counts:
   - title : "카테고리"
     use: true

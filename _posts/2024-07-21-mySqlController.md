@@ -22,7 +22,10 @@ author_profile : false
 
 ## <br>2. 코드
 
+이것을 실행시키기 위해서는 mysql 드라이버 라이브러리를 빌드패스에 추가해야 합니다.
+
 ## main : MainOperator
+메인은 별 의미 없음. 그냥 실행시키는 역할. 그리고 메서드 소개하는 정도
 ~~~java
 package mySqlConnection;
 
@@ -164,9 +167,9 @@ public class DBControler {
 	
 	private static Connection conn = null;
 	private static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-	private String DBUserName = "ysh"; // 사용하기 전에 직접 입력해서 수정해야 함
-	private String password = "0423"; // 사용하기 전에 직접 입력해서 수정해야 함
-	private String DBName = "test";
+	private String DBUserName = "input your DBusername"; // 사용하기 전에 직접 입력해서 수정해야 함
+	private String password = "password"; // 사용하기 전에 직접 입력해서 수정해야 함
+	private String DBName = "DBname";
 	private String url = "jdbc:mysql://localhost:3306/" + DBName + "?serverTimezone=UTC"; // url도 상황에 따라 수정 필요
 	// 그리고 이건 mysql용임. 다른 DB 프로그램은 약간씩 문법이 달라서 못 쓸 수도 있음
 	

@@ -12,9 +12,9 @@ author_profile : false
 
 번호|이미지
 ---|---|
-**1**|![ysh195](https://github.com/ysh195/ysh195.github.io/blob/d184ebfa93919f8d410ebdd21d621ce380647369/images/tc/tc1.png)
-**2**|![ysh195](https://github.com/ysh195/ysh195.github.io/blob/d184ebfa93919f8d410ebdd21d621ce380647369/images/tc/tc2.png)
-**3**|![ysh195](https://github.com/ysh195/ysh195.github.io/blob/d184ebfa93919f8d410ebdd21d621ce380647369/images/tc/tc3.png)
+**1**|![ysh195](../images/tc/tc1.png)
+**2**|![ysh195](../images/tc/tc2.png)
+**3**|![ysh195](../images/tc/tc3.png)
 
 ## <br>2. 코드
 

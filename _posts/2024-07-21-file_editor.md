@@ -12,10 +12,10 @@ author_profile : false
 
 번호|이미지
 ---|---|
-**1**|![ysh195](../assets/images/fe1.png)
+**1**|![ysh195](../assets/images/fe1.PNG)
 **2**|![ysh195](../assets/images/fe2.png)
 **3**|![ysh195](../assets/images/fe3.png)
-**4**|![ysh195](../assets/images/fe4.png)
+**4**|![ysh195](../assets/images/fe4.PNG)
 **5**|![ysh195](../assets/images/fe5.png)
 **6**|![ysh195](../assets/images/fe6.png)
 **7**|![ysh195](../assets/images/fe7.png)

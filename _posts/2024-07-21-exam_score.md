@@ -12,1070 +12,829 @@ author_profile : false
 
 번호|이미지
 ---|---|
-**1**|![ysh195](../assets/images/bj1.PNG)
-**2**|![ysh195](../assets/images/bj2.PNG)
+**1**|![ysh195](../assets/images/es1.PNG)
+**2**|![ysh195](../assets/images/es2.PNG)
+**3**|![ysh195](../assets/images/es3.PNG)
+**4**|![ysh195](../assets/images/es4.PNG)
+**5**|![ysh195](../assets/images/es5.PNG)
+**6**|![ysh195](../assets/images/es6.PNG)
+**7**|![ysh195](../assets/images/es7.PNG)
+**8**|![ysh195](../assets/images/es8.PNG)
+**9**|![ysh195](../assets/images/es9.PNG)
+**10**|![ysh195](../assets/images/es10.PNG)
+**11**|![ysh195](../assets/images/es11.PNG)
+**12**|![ysh195](../assets/images/es12.PNG)
+**13**|![ysh195](../assets/images/es13.PNG)
+
 
 ## <br>2. 코드
 
-
-## main : GamePlay
+## main : Operator
 ~~~java
-// 게임을 실행할 메인 클래스입니다.
-// GamePlayer, GameDealer, AnotherPlayer의 클래스 내용이 거의 유사한데, 상속과 abstract로 처리할 걸 그랬나
-package blackjack_Pack;
+package examScore;
 
-public class GamePlay{
+public class Operator {
 
 	public static void main(String[] args) {
+		StudentManager sm = StudentManager.getInstance();
+		sm.initialized();
 		
-		GameProcess GP = new GameProcess();
-		
-		GP.open_game();
-		
-		GP.make_yourHands();
-		
-		GP.who_is_the_winner();
-		
-		GP.we_have_a_winner();
-
+		MainFrame mainframe = new MainFrame(sm);
 	}
 
 }
 ~~~
 
-
-## GameProcess
+## Student
 ~~~java
-// 게임의 세부적인 진행 사항을 구성하는 게임프로세스입니다.
+package examScore;
 
-package blackjack_Pack;
-import java.util.Scanner;
-
-public class GameProcess {
+public class Student {
 	
-	CardManager cm = new CardManager();
+	// 필드
+	private String name;
+	private int kor_score;
+	private int eng_score;
+	private int math_score;
+	private int science_score;
+	private int society_score;
 	
-	GamePlayer user = new GamePlayer();
-	GameDealer dealer = new GameDealer();
-	AnotherPlayer ap = new AnotherPlayer();
-	
-	static int save_myScore;
-	
-	public GameProcess() {}
-	
-	void open_game() {
-		
-		cm.Create_Card();
-		
-		System.out.println("첫 번째 카드를 받습니다.");
-		
-		user.Get_hands(cm.draw_Card());
-		user.Show_hands();
-		
-		dealer.Get_hands(cm.draw_Card());
-		
-		ap.Get_hands(cm.draw_Card());
-				
-		System.out.println("첫 번째 카드는 모두에게 공개됩니다.");
-		System.out.println("딜러 : " + dealer.Pick_Hands(0));
-		System.out.println("또다른 플레이어 : " + ap.Pick_Hands(0));
-		// System.out.println("본인 : " + user.Pick_Hands(0)); 이건 이미 봤으니까 또 보여줄 필요 없으려나?
-		
-		String[] unveiled_cards = {dealer.Pick_Hands(0), user.Pick_Hands(0), ap.Pick_Hands(0)};
-		
-		dealer.recognize_yours(unveiled_cards);
-		ap.recognize_yours(unveiled_cards);
-		
-		System.out.println("두 번째 카드를 받습니다.");
-		
-		dealer.Get_hands(cm.draw_Card());
-		ap.Get_hands(cm.draw_Card());
-		
-		user.Get_hands(cm.draw_Card());
-		user.Show_hands();
-		
+	// 생성자
+	public Student() {}
+	public Student(String name, int kor_score, int eng_score, int math_score, int science_score, int society_score) {
+		this.name = name;
+		this.kor_score = kor_score;
+		this.eng_score = eng_score;
+		this.math_score = math_score;
+		this.science_score = science_score;
+		this.society_score = society_score;
 	}
 	
-	void make_yourHands() {
-		boolean show_must_go_on = true;
-		
-		while(show_must_go_on) { 
-			
-			if(dealer.game_continue) { // 딜러의 턴
-				if(dealer.make_a_decision()) { // 딜러는 카드 드로우에 대한 선택지가 없는 수준이라 판단에 인수가 필요 없음.
-					dealer.Get_hands(cm.draw_Card());
-					System.out.println("딜러가 카드를 한 장 받습니다.");
-				}
-				else {				
-					System.out.println("딜러가 더 이상 카드를 받지 않습니다.");
-					dealer.good_game();
-				}
-			}
-			else {
-				System.out.println("딜러는 이미 카드 구성을 끝마쳤습니다.");
-				dealer.good_game();
-			}
-			
-			if(ap.game_continue) { // 또다른 플레이어의 턴
-				int ap_count = cm.Count_used();
-				
-				if(ap.make_a_decision(ap_count)) { // 어나더 플레이어는 카드 드로우에 대한 선택이 가능해서 판단에 인수가 필요함.
-					ap.Get_hands(cm.draw_Card());
-					System.out.println("또다른 플레이어가 카드를 한 장 받습니다.");
-				}
-				else {
-					System.out.println("또다른 플레이어가 더 이상 카드를 받지 않습니다.");
-					ap.good_game();
-				}	
-			}
-			else {
-				System.out.println("또다른 플레이어가 더 이상 카드를 받지 않습니다.");
-				ap.good_game();
-			}
-			
-			if(user.game_continue) { // 유저의 턴
-				
-				Scanner sc = new Scanner(System.in);
-				System.out.println("카드를 더 받으시겠습니까? Y / N");
-				String answer = sc.nextLine();
-				
-				if(answer.equals("N")||answer.equals("n")) {
-					user.good_game();
-				}
-				else {
-					user.Get_hands(cm.draw_Card());
-					user.Show_hands();
-				}
-				
-			}
-			
-			if((dealer.game_continue==false)&&(user.game_continue==false)&&(ap.game_continue==false)) { // 모두 턴을 종료하면 덱 구성 끝
-				show_must_go_on = false;
-			}
-		
+	// 메서드
+	public void setAll(String name, int kor_score, int eng_score, int math_score, int science_score, int society_score) {
+		this.name = name;
+		this.kor_score = kor_score;
+		this.eng_score = eng_score;
+		this.math_score = math_score;
+		this.science_score = science_score;
+		this.society_score = society_score;
+	}
+	
+	public int getMyTotal() {
+		return kor_score + eng_score + math_score + science_score + society_score;
+	}
+	
+	public int getAnyScore(String subject) {
+		switch(subject) {
+		case "국어":
+			return kor_score;
+		case "영어":
+			return eng_score;
+		case "수학":
+			return math_score;
+		case "과학":
+			return science_score;
+		case "사회":
+			return society_score;
+		default:
+			System.out.println("정규 과목이 아닙니다.");
+			return 0;
 		}
 	}
 	
-	void who_is_the_winner() {
-		
-		System.out.println("모든 플레이어와 딜러의 카드 수령이 끝났습니다.");
-		System.out.println("점수 계산을 진행합니다.");
-		
-		save_myScore = user.Calc_myScore();
-		
-		System.out.println("모든 점수 계산이 끝났습니다. 결과를 공개합니다.");
-		
-		System.out.println("============= 딜러 =============");
-		dealer.Show_hands();
-		System.out.println("점수 : " + dealer.Final_Dealer_Score());
-		System.out.println("===============================");
-		
-		System.out.println("");
-		System.out.println("===== 플레이어2(또다른 플레이어) =====");
-		ap.Show_hands();
-		System.out.println("점수 : " + ap.Calc_myScore());
-		System.out.println("===============================");
-
-		System.out.println("");
-		System.out.println("========= 플레이어1(본인)=========");
-		user.Show_hands();
-		System.out.println("점수 : " + save_myScore);
-		System.out.println("===============================");
-				
+	public String getName() {
+		return name;
 	}
-	
-	void we_have_a_winner() {
-
-		this_is_judgement("플레이어1(본인)", save_myScore);
-		this_is_judgement("플레이어2(또다른 플레이어)", ap.Calc_myScore());
+	public void setName(String name) {
+		this.name = name;
 	}
-	
-	void this_is_judgement(String player_name, int playerS_score) { // 아래는 블랙잭 게임 결과에 따른 승패에 대한 판단표입니다.
-/*		
-		딜러	
-플레이어	    	 21초과		블랙잭 		21미만
-		21초과	딜러 win		딜러 win		딜러 win
-		블랙잭	플레이어 win	무승부		플레이어 win
-		21미만	플레이어 win  딜러 win		점수 판단(동점 시 무승부)
-*/	
-// 이러한 내용이 담긴 String 2차원 배열로서 표를 구성하고, 점수에 따라 표에서 적절한 값을 찾도록 하였습니다.
-		
-		int dealerS_score = dealer.Final_Dealer_Score();
-		
-		String[][] judgement_table = {
-		{"딜러 win", "딜러 win", "딜러 win"},
-		{"플레이어 win", "무승부", "플레이어 win"},
-		{"플레이어 win", "딜러 win", "점수판단"}
-		};
-		
-		int dealerS_side = (dealerS_score == 21) ? 1 : ((dealerS_score > 21) ? 0 : 2); 
-		int playerS_side = (playerS_score == 21) ? 1 : ((playerS_score > 21) ? 0 : 2);
-		
-		String judge_text = judgement_table[playerS_side][dealerS_side]; // 배열의 height가 플레이어 쪽이고, width가 딜러쪽.
-		
-		if(judge_text.equals("딜러 win")) {
-			System.out.println(player_name + "님, 안타깝습니다. 딜러의 승리입니다.");
-		}
-		else if(judge_text.equals("플레이어 win")){
-			System.out.println(player_name + "님, 축하드립니다. 당신의 승리입니다.");
-		}
-		else if(judge_text.equals("무승부")) {
-			System.out.println(player_name + "님, 이번 경기는 무승부입니다.");
-		}
-		else { // 점수판단일 경우
-			if(dealerS_score>playerS_score) {
-				System.out.println(player_name + "님, 안타깝습니다. 딜러의 승리입니다.");
-			}
-			else if(dealerS_score<playerS_score) {
-				System.out.println(player_name + "님, 축하드립니다. 당신의 승리입니다.");
-			}
-			else {
-				System.out.println(player_name + "님, 이번 경기는 무승부입니다.");
-			}
-		}
-		
+	public int getKor_score() {
+		return kor_score;
+	}
+	public void setKor_score(int kor_score) {
+		this.kor_score = kor_score;
+	}
+	public int getEng_score() {
+		return eng_score;
+	}
+	public void setEng_score(int eng_score) {
+		this.eng_score = eng_score;
+	}
+	public int getMath_score() {
+		return math_score;
+	}
+	public void setMath_score(int math_score) {
+		this.math_score = math_score;
+	}
+	public int getScience_score() {
+		return science_score;
+	}
+	public void setScience_score(int science_score) {
+		this.science_score = science_score;
+	}
+	public int getSociety_score() {
+		return society_score;
+	}
+	public void setSociety_score(int society_score) {
+		this.society_score = society_score;
 	}
 
 }
 ~~~
 
-
-## GamePlayer
+## StudentManager
 ~~~java
-// 게임을 할 본인을 의미합니다. 편의상 게임 중 플레이어1으로 명명하였습니다.
-package blackjack_Pack;
-import java.util.Scanner;
+package examScore;
 
-public class GamePlayer { 
+import java.util.ArrayList; // 차라리 수정사항 적용할 때마다 반영하는 게 더 낫지 않을까?
+
+public class StudentManager { 
 	
-	String[] hands = new String[30];
-	int hand_count=0;
-	boolean game_continue = true;
+	private static ArrayList<Student> ARRAYLIST = new ArrayList<>();
 	
-	public GamePlayer(){}
+	private StudentManager() {}
+	private static StudentManager replace = new StudentManager();
+	public static StudentManager getInstance() {
+		return replace;
+	}
 	
-	void Show_hands() {
-		if(hand_count<=0)
-		{
-			System.out.println("수중에 카드가 없습니다.");
+	void initialized() {
+		int x_size = 5;
+		int y_size = 10;
+		String[] initial_names = {"김1","김2","김3","박1","박2","박3","이1","이2","이3","최1"};
+		int[][] initial_scores = new int[y_size][x_size];
+		for(int i=0; i<y_size; i++) {
+			for(int j=0; j<x_size; j++) {
+				initial_scores[i][j] = (int)(Math.random()*101);
+			}
+			ARRAYLIST.add(new Student(initial_names[i],initial_scores[i][0],initial_scores[i][1],initial_scores[i][2],initial_scores[i][3],initial_scores[i][4]));
+		}
+	}
+	
+	void update(String[] nameList, int[][] scoreList) { // 자바 테이블 체계상 두 배열의 길이는 항상 같을 수밖에 없음
+		
+		ArrayList<Student> temp = new ArrayList<>(); // 타입 변환 중의 오류는 여기에 값을 넣어줄 곳에서 처리할 테니 상관없음. 여긴 값을 넣어서 arraylist만 업데이트하면 됨
+		
+		for(int i=0; i<nameList.length; i++) {
+			temp.add(new Student(nameList[i],scoreList[i][0],scoreList[i][1],scoreList[i][2],scoreList[i][3],scoreList[i][4]));
+		}
+		
+		System.out.println("데이터 동기화에 성공하였습니다.");
+		ARRAYLIST = temp;
+
+	}
+	
+	float avgBySubject(String subjectName) {
+		
+		int student_count = ARRAYLIST.size(); // 학생 수
+		
+		if(student_count<=0) { // 혹시 0 나누기라서 계산이 안 되거나, 이상한 수가 나왔을 때에 대한 대비
+			return 0;
+		}
+		
+		int total = 0;
+		switch(subjectName) {
+		case "국어":
+			total = ARRAYLIST.stream().mapToInt(Student::getKor_score).sum(); // map을 쓰면 특정 클래스 타입의 메소드를 불러올 수 있네
+			break; // 여기서도 getAnyScore 쓰고 싶은데, mapToInt로 메서드 쓰려면 인수 필요 없는 것이어야 함
+		case "영어":
+			total = ARRAYLIST.stream().mapToInt(Student::getEng_score).sum();
+			break;
+		case "수학":
+			total = ARRAYLIST.stream().mapToInt(Student::getMath_score).sum();
+			break;
+		case "과학":
+			total = ARRAYLIST.stream().mapToInt(Student::getScience_score).sum();
+			break;
+		case "사회":
+			total = ARRAYLIST.stream().mapToInt(Student::getSociety_score).sum();
+			break;
+		case "전체":
+			total = ARRAYLIST.stream().mapToInt(Student::getMyTotal).sum();
+			return (float)total/(student_count*5);
+		default:
+			System.out.println("잘못된 입력입니다.");
+			return 0;
+		}
+		
+		return (float)total/student_count;
+	}
+	
+	float avgByName(String studentName) {
+		int subject_count = 5;
+		int total = 0;
+		
+		if(ARRAYLIST.stream().filter(s -> s.getName().equals(studentName)).count() == 0) {
+			System.out.println("존재하지 않는 학생입니다.");
+			return 0;
+		}
+		
+		if(studentName == "전체") {
+			total = ARRAYLIST.stream().mapToInt(Student::getMyTotal).sum();
 		}
 		else {
-			for(int i=0; i<hand_count; i++) {
-			System.out.print(hands[i] + " | ");
-			}
-		}
-		System.out.println("");
-	} // Show_hands : 자신의 패를 sysout으로 출력합니다.
-	
-	void Get_hands(String card) {
-		hands[hand_count]=card;
-		hand_count++;
-	} // Get_hands : 자신의 패에 카드를 추가합니다.
-	
-	String Pick_Hands(int i) {
-		return hands[i];
-	} // Pick_Hands : 자신의 패 중 지정한 순서의 카드를 출력합니다. 이는 블랙잭 경기 규칙 중 카드 공개가 포함되어 있기 때문에 그 부분을 구현하기 위한 것입니다.
-	
-	int Calc_myScore() {
-		
-		int[] num_counter = new int[13]; // 카드는 A, 2... 10, J, Q, K으로, 총 13가지 카드가 있습니다. 이 배열에는 각 카드 종류별 갯수가 저장됩니다.
-		int result=0;
-		
-		for(int i=0; i<hand_count; i++) {
-			// 자신의 패를 의미하는 hands 배열에는 자신이 가지고 있는 카드의 정보가 담겨 있습니다.
-			// 향상된 for문을 사용하여 카드 정보를 String s에 대입하고, 그 s에 각 카드 정보와 일치하는 부분이 있는지 확인합니다.
-			// 이러한 과정으로 자신의 패를 모두 확인하여, 각 카드를 몇 장씩 가지고 있는지 계산합니다.
-			if(hands[i].contains("A")) {
-				num_counter[0]++;
-			}
-			if(hands[i].contains("2")) {
-				num_counter[1]++;
-			}
-			if(hands[i].contains("3")) {
-				num_counter[2]++;
-			}
-			if(hands[i].contains("4")) {
-				num_counter[3]++;
-			}
-			if(hands[i].contains("5")) {
-				num_counter[4]++;
-			}
-			if(hands[i].contains("6")) {
-				num_counter[5]++;
-			}
-			if(hands[i].contains("7")) {
-				num_counter[6]++;
-			}
-			if(hands[i].contains("8")) {
-				num_counter[7]++;
-			}
-			if(hands[i].contains("9")) {
-				num_counter[8]++;
-			}
-			if(hands[i].contains("10")) {
-				num_counter[9]++;
-			}
-			if(hands[i].contains("J")) {
-				num_counter[10]++;
-			}
-			if(hands[i].contains("Q")) {
-				num_counter[11]++;
-			}
-			if(hands[i].contains("K")) {
-				num_counter[12]++;
-			}
-		} // 각 카드의 소지한 갯수 확인을 위한, for문 종료
-		
-		
-		// 이 아래는 블랙잭의 특수한 점수 환산 방법으로 인한 것입니다.
-		// 점수 계산 시, 플레이어는 A카드를 1점으로 계산할 것인지, 10점으로 계산할 것인지 선택할 수 있습니다.
-		int selection_available = num_counter[0]; // 선택 가능 횟수입니다. A카드의 갯수만큼 선택 가능합니다. num_counter[0]에는 소지한 A카드의 갯수가 저장되어 있으므로, 이를 저장합니다.
-		int wildCard = 0; // A카드를 10점으로 환산한 횟수입니다.
-		
-		while(selection_available>0) { // A카드의 갯수만큼 환산 여부를 묻습니다. 다만 소지한 A카드의 갯수가 0개라면 이를 실행하지 않습니다.
-			
-			Scanner sc = new Scanner(System.in);
-			System.out.println("A 카드를 몇 점으로 계산하시겠습니까? 1. [1점] | 2. [10점]");
-			int answer = sc.nextInt();
-			
-			if(answer == 2) {
-				wildCard++;
-				num_counter[0]--;
-				selection_available--;
-			}
-			else {
-				selection_available--;
-			}
-			
-			System.out.println("남은 A 카드 선택 횟수 : " + selection_available);			
+			total = ARRAYLIST.stream().filter(s -> s.getName().equals(studentName)).mapToInt(Student::getMyTotal).sum();
 		}
 		
-		result += wildCard*10;
-		// 여기까지가 A카드에 대한 특수한 계산입니다. 
-		
-		for(int i=0; i<13; i++) { // 보통의 점수 계산입니다.
-			switch(i+1) {
-			case 11:
-			case 12:
-			case 13:
-				result += num_counter[i]*10;
-				break;
-			default:
-				result += num_counter[i]*(i+1);
-				break;
-			} // 블랙잭의 규칙에 따라 J, Q, K는 10점으로 계산합니다.
-			// 스스로도 다소의 혼동이 있어 내용을 정리해 두었습니다.
-			// 만약 A카드를 10으로 변환했다면 위에서 num_counter[0]--;를 통해 자신이 10으로 변환한 횟수만큼 이미 num_counter[0]은 줄어들었고, 10으로 변환하지 않았다면 그것은 1로 사용하겠다는 의미입니다.
-			// 따라서 계산이 정상적으로 진행됩니다.
-		}
-		return result;
-	} // Calc_myScore : 블랙잭 룰에 따른 점수 계산 방법입니다.
-	
-	void good_game() {
-		game_continue = false; // 이거 this 쓰는 게 맞나?
-	} // good_game : 카드를 더 이상 받지 않기로 결정했습니다. 다른 플레이어의 카드 구성이 끝날 때까지 대기합니다.
-	
-}
-~~~
-
-
-## AnotherPlayer
-~~~java
-// 본인이나 딜러가 아닌 또 다른 플레이어로서, 컴퓨터인 플레이어입니다.
-// 대부분의 메서드가 게임플레이어와 동일하나, 다른 플레이어의 A카드 사용이나 카드 드로우 여부 등을
-// 플레이어 본인이 대신 선택해줄 수는 없으므로, 컴퓨터가 알아서 처리할 수 있도록 조건문을 설정하였습니다.
-
-package blackjack_Pack;
-import java.util.Scanner;
-
-public class AnotherPlayer {
-	
-	String[] hands = new String[30];
-	int hand_count=0;
-	
-	boolean game_continue = true;
-	
-	String[] recognized_cards = new String[5];
-	int recognized_cards_count = 0;
-	
-	public AnotherPlayer(){}
-	
-	void Show_hands() {
-		if(hand_count<=0)
-		{
-			System.out.println("수중에 카드가 없습니다.");
-		}
-		else {
-			for(int i=0; i<hand_count; i++) {
-			System.out.print(hands[i] + " | ");
-			}
-		}
-		System.out.println("");
-	} // Show_hands : 자신의 패를 sysout으로 출력합니다.
-	
-	void Get_hands(String card) {
-		hands[hand_count]=card;
-		hand_count++;
-	} // Get_hands : 자신의 패에 카드를 추가합니다.
-	
-	String Pick_Hands(int i) {
-		return hands[i];
-	} // Pick_Hands : 자신의 패 중 지정한 순서의 카드를 출력합니다. 이는 블랙잭 경기 규칙 중 카드 공개가 포함되어 있기 때문에 그 부분을 구현하기 위한 것입니다.
-			
-	int Calc_myScore() {
-		int[] num_counter = new int[13];
-		int result=0;
-		for(int i=0; i<hand_count; i++) {
-			// 자신의 패를 의미하는 hands 배열에는 자신이 가지고 있는 카드의 정보가 담겨 있습니다.
-			// 향상된 for문을 사용하여 카드 정보를 String s에 대입하고, 그 s에 각 카드 정보와 일치하는 부분이 있는지 확인합니다.
-			// 이러한 과정으로 자신의 패를 모두 확인하여, 각 카드를 몇 장씩 가지고 있는지 계산합니다.
-			if(hands[i].contains("A")) {
-				num_counter[0]++;
-			}
-			if(hands[i].contains("2")) {
-				num_counter[1]++;
-			}
-			if(hands[i].contains("3")) {
-				num_counter[2]++;
-			}
-			if(hands[i].contains("4")) {
-				num_counter[3]++;
-			}
-			if(hands[i].contains("5")) {
-				num_counter[4]++;
-			}
-			if(hands[i].contains("6")) {
-				num_counter[5]++;
-			}
-			if(hands[i].contains("7")) {
-				num_counter[6]++;
-			}
-			if(hands[i].contains("8")) {
-				num_counter[7]++;
-			}
-			if(hands[i].contains("9")) {
-				num_counter[8]++;
-			}
-			if(hands[i].contains("10")) {
-				num_counter[9]++;
-			}
-			if(hands[i].contains("J")) {
-				num_counter[10]++;
-			}
-			if(hands[i].contains("Q")) {
-				num_counter[11]++;
-			}
-			if(hands[i].contains("K")) {
-				num_counter[12]++;
-			}
-		} // 각 카드의 소지한 갯수 확인을 위한, for문 종료
-		
-		// 이 아래는 블랙잭의 특수한 점수 환산 방법으로 인한 것입니다.
-		// 점수 계산 시, 플레이어는 A카드를 1점으로 계산할 것인지, 10점으로 계산할 것인지 선택할 수 있습니다.		
-		for(int i=0; i<13; i++) { // 보통의 점수 계산이지만, 와일드카드 계산을 위해 1(카드 A)은 계산하지 않고 넘어갑니다.
-			// 선택 가능 횟수입니다. A카드의 갯수만큼 선택 가능합니다. num_counter[0]에는 소지한 A카드의 갯수가 저장되어 있으므로, 이를 저장합니다.
-			switch(i+1) {
-			case 1:
-				break; // 1(카드 A)은 계산하지 않고 넘어갑니다. 이는 뒤에서 따로 계산하기 위합니다.
-			case 11:
-			case 12:
-			case 13:
-				result += num_counter[i]*10;
-				break;
-			default:
-				result += num_counter[i]*(i+1);
-				break;
-			} // 블랙잭의 규칙에 따라 J, Q, K는 10점으로 계산합니다.
-		}
-		
-		int selection_available = num_counter[0]; // A카드 선택권의 숫자입니다.
-		int[] arr = new int[selection_available]; // A카드 선택권 사용의 경우에 수를 계산할 배열입니다.
-		int candidate = 0; // 최종적으로 선택하기에 가장 적절해 보이는, 숫자를 저장할 변수입니다.
-		
-		for(int i=0; i<selection_available; i++) { // 갯수가 제한된 선택권을 1과 10에 각각 사용했을 때의 결과를 계산하는 for문입니다.
-			int j=selection_available-i;
-			arr[i]= i*10 + j;
-			
-			if((17<=(arr[i]+result))&&((arr[i]+result)<21)&&(arr[i]>candidate)){ // 선택하기 좋은 숫자를 고르는 조건문입니다.
-				candidate = arr[i];
-			}
-		}
-		
-		candidate = (candidate <= selection_available) ? selection_available : candidate;
-		// 하지만 좋은 숫자가 없어서 결국 아무것도 고르지 못했다면 모두 1을 선택한 것으로 계산합니다.
-		
-		result += candidate;
-		
-		return result;
-	} // Calc_myScore : 그러나 A 선택권 없이 계산한 점수가 21을 초과할 경우 A 선택권을 사용할 수 있습니다.
-
-	void good_game() {
-		game_continue = false;
-	}  // good_game : 카드를 더 이상 받지 않기로 결정했습니다. 다른 플레이어의 카드 구성이 끝날 때까지 대기합니다.
-	
-	void recognize_yours(String[] strArr) {
-		recognized_cards_count = strArr.length;
-		int count=0; // recognized_cards 배열에 앞에서부터 차례대로 정보를 입력하기 위한 카운트입니다.
-		
-		for(int i=0; i<hand_count; i++) { // 입력된 배열 strArr은 공개된 모든 카드의 정보가 입력된 배열입니다.
-			for(int j=0; j<recognized_cards_count; j++) { // 그 중에서 자신의 카드와 일치하는 것을 조사합니다
-				if(hands[i].equals(strArr[j])){ // 자신이 가진 카드는 배열에 저장하지 않고, 자신의 것이 아닌 것만 저장합니다. 
-					break;
-				}
-				else {
-					recognized_cards[count] = strArr[j];
-					count++;
-				}	
-			}
-		}
-	} // recognize_yours : 게임 진행 중 타인의 카드가 공개됩니다. 이 때, 공개된 카드의 정보들을 수집하고 기억합니다.
-	// 플레이어가 선택해줄 수 없는, 컴퓨터의 입장이기 때문에 자체적인 판단이 필요합니다.
-	
-	boolean make_a_decision(int used_card_number) {
-		
-		int now_myScore = Calc_myScore();
-		int random_num = (int)(Math.random()*101);
-		int possibility;
-		
-		if(now_myScore>=21) { // 다른 임의의 컴퓨터 플레이어는 카드 드로우 여부를 선택하는 것에 제약이 없습니다. 따라서 21 미만이라면 뭘 선택해도 좋습니다.
-			return false;
-		}
-		else {
-		
-			int count = 0;
-			String[] AllCards_I_know = new String[32]; // 일단 현재 알고 있는(= 사용된) 카드들 정리
-			int[] num_sort = new int[13]; // int 배열이니 0으로 초기화해주지 않아도 무방.
-			
-			for(int i=0; i<hand_count; i++){
-				AllCards_I_know[count] = hands[i];
-				count++;
-			}
-			
-			for(int i=0; i<recognized_cards_count; i++){
-				AllCards_I_know[count] = recognized_cards[i];
-				count++;
-			}
-			
-			for(int i=0; i<count; i++) { // 사용된 카드들을 종류별로 갯수 정리 시작
-				
-				if(AllCards_I_know[i] == null) { // 솔직히 다 멀쩡한 값만 골라서 집어넣도록 구성했는데 왜 그런지 모르겠지만, null값 때문에 오류가 나는 경우가 많음.
-					break; // 그래서 null이면 계산 안 하도록 처리.
-				}
-				else {
-					if(AllCards_I_know[i].contains("A")) {
-						num_sort[0]++;
-					}
-					if(AllCards_I_know[i].contains("2")) {
-						num_sort[1]++;
-					}
-					if(AllCards_I_know[i].contains("3")) {
-						num_sort[2]++;
-					}
-					if(AllCards_I_know[i].contains("4")) {
-						num_sort[3]++;
-					}
-					if(AllCards_I_know[i].contains("5")) {
-						num_sort[4]++;
-					}
-					if(AllCards_I_know[i].contains("6")) {
-						num_sort[5]++;
-					}
-					if(AllCards_I_know[i].contains("7")) {
-						num_sort[6]++;
-					}
-					if(AllCards_I_know[i].contains("8")) {
-						num_sort[7]++;
-					}
-					if(AllCards_I_know[i].contains("9")) {
-						num_sort[8]++;
-					}
-					if(AllCards_I_know[i].contains("10")) {
-						num_sort[9]++;
-					}
-					if(AllCards_I_know[i].contains("J")) {
-						num_sort[10]++;
-					}
-					if(AllCards_I_know[i].contains("Q")) {
-						num_sort[11]++;
-					}
-					if(AllCards_I_know[i].contains("K")) {
-						num_sort[12]++;
-					}
-				}
-			} // 사용된 카드들을 종류별로 갯수 정리 시작
-			
-			boolean[] I_need = new boolean[13]; // 자신이 필요한 숫자가 무엇인지 판단하는 과정입니다.
-			
-			for(int i=0; i<13; i++) {
-				
-				int added_score = (i>10) ? 10 : i+1;
-				
-				if(21>(now_myScore+added_score)) {
-					I_need[i]=true;
-				}
-				else {
-					I_need[i]=false;
-				}
-			}
-			
-			int number_I_want = 0; // 자신이 원하는 숫자 중 남아 있는 숫자의 갯수를 저장할 변수입니다.
-			
-			for(int i=0; i<13; i++) {
-				if(I_need[i]) { // 각 종류별로 동일한 카드는 4장이고, num_sort에 저장된 숫자는 이미 사용된 숫자의 갯수입니다.
-					number_I_want += (4-num_sort[i]); // 그러니 자신이 원하는 종류의 카드 중 남아 있는 갯수는 4-num_sort입니다.
-					// 예를 들어, 자신이 필요한 카드는 5입니다. 그런데 카드 5 중 이미 사용되었음을 인지한 갯수는 1개입니다. 이 때, 남은 5카드는 3장입니다.				
-				}
-			}
-			
-			possibility = (int)(number_I_want/(52-used_card_number)*100); // 총 52장의 카드 중 사용된 카드를 빼고, 남은 카드 중에서 자신이 원하는 카드가 나올 확률을 계산합니다. 
-			
-		} // else문 종료
-		
-		return (random_num<possibility)? true : false;	// 무작위로 정해진 난수가 자신이 카드를 뽑을 확률보다 낮으면 카드를 더 뽑는 것으로 판단하고, 높으면 멈춥니다.
-		// 예를 들어, 원하는 카드가 나올 확률이 25일 때, 난수가 25와 같거나 보다 크면 뽑지 않고, 25보다 작으면 카드를 뽑습니다.
-		// 반대로, 원하는 카드가 나올 확률이 85일 때, 난수가 85와 같거나 보다 크면 뽑지 않고, 85보다 작으면 카드를 뽑습니다.
-		// 이러한 조건을 통해, 보다 확률이 높은 쪽의 결론이 도출되도록 하였습니다.
-		
-	} // make_a_decision : 카드를 더 받을지에 대한 판단을 내립니다.
-	// 플레이어가 선택해줄 수 없는, 컴퓨터의 입장이기 때문에 자체적인 판단이 필요합니다.
-
-}
-~~~
-
-
-## GameDealer
-~~~java
-// 게임의 딜러입니다. 메소드가 플레이어와 거의 같으나, 딜러의 경우 계산식에 특별한 과정이 추가됩니다. 
-
-package blackjack_Pack;
-import java.util.Scanner;
-
-public class GameDealer { 
-	
-	String[] hands = new String[30];
-	int hand_count=0;
-	
-	boolean game_continue = true;
-	
-	String[] recognized_cards = new String[5];
-	int recognized_cards_count = 0;
-	
-	public GameDealer(){}
-	
-	void Show_hands() {
-		if(hand_count<=0)
-		{
-			System.out.println("수중에 카드가 없습니다.");
-		}
-		else {
-			for(int i=0; i<hand_count; i++) {
-			System.out.print(hands[i] + " | ");
-			}
-		}
-		System.out.println("");
-	} // Show_hands : 자신의 패를 sysout으로 출력합니다.
-	
-	void Get_hands(String card) {
-		hands[hand_count]=card;
-		hand_count++;
-	} // Get_hands : 자신의 패에 카드를 추가합니다.
-	
-	String Pick_Hands(int i) {
-		return hands[i];
-	} // Pick_Hands : 자신의 패 중 지정한 순서의 카드를 출력합니다. 이는 블랙잭 경기 규칙 중 카드 공개가 포함되어 있기 때문에 그 부분을 구현하기 위한 것입니다.
-		
-	int Calc_Dealer_Score1() {
-		int[] num_counter = new int[13];
-		int result=0;
-		for(int i=0; i<hand_count; i++) {
-			// 자신의 패를 의미하는 hands 배열에는 자신이 가지고 있는 카드의 정보가 담겨 있습니다.
-			// 향상된 for문을 사용하여 카드 정보를 String s에 대입하고, 그 s에 각 카드 정보와 일치하는 부분이 있는지 확인합니다.
-			// 이러한 과정으로 자신의 패를 모두 확인하여, 각 카드를 몇 장씩 가지고 있는지 계산합니다.
-			if(hands[i].contains("A")) {
-				num_counter[0]++;
-			}
-			if(hands[i].contains("2")) {
-				num_counter[1]++;
-			}
-			if(hands[i].contains("3")) {
-				num_counter[2]++;
-			}
-			if(hands[i].contains("4")) {
-				num_counter[3]++;
-			}
-			if(hands[i].contains("5")) {
-				num_counter[4]++;
-			}
-			if(hands[i].contains("6")) {
-				num_counter[5]++;
-			}
-			if(hands[i].contains("7")) {
-				num_counter[6]++;
-			}
-			if(hands[i].contains("8")) {
-				num_counter[7]++;
-			}
-			if(hands[i].contains("9")) {
-				num_counter[8]++;
-			}
-			if(hands[i].contains("10")) {
-				num_counter[9]++;
-			}
-			if(hands[i].contains("J")) {
-				num_counter[10]++;
-			}
-			if(hands[i].contains("Q")) {
-				num_counter[11]++;
-			}
-			if(hands[i].contains("K")) {
-				num_counter[12]++;
-			}
-		} // 각 카드의 소지한 갯수 확인을 위한, for문 종료
-		
-		// 딜러는 플레이어와 달리 A카드의 점수 계산 방법을 선택할 수 없습니다.
-		
-		for(int i=0; i<13; i++) { // 보통의 점수 계산입니다.
-			switch(i+1) {
-			case 11:
-			case 12:
-			case 13:
-				result += num_counter[i]*10;
-				break;
-			default:
-				result += num_counter[i]*(i+1);
-				break;
-			} // 블랙잭의 규칙에 따라 J, Q, K는 10점으로 계산합니다.
-		}
-
-		return result;
-	} // Calc_Dealer_Score1 : 딜러는 플레이어와 달리 A카드의 점수 계산 방법을 선택할 수 없습니다.
-	
-	int Calc_Dealer_Score2() {
-		int[] num_counter = new int[13];
-		int result=0;
-		for(int i=0; i<hand_count; i++) {
-			// 자신의 패를 의미하는 hands 배열에는 자신이 가지고 있는 카드의 정보가 담겨 있습니다.
-			// 향상된 for문을 사용하여 카드 정보를 String s에 대입하고, 그 s에 각 카드 정보와 일치하는 부분이 있는지 확인합니다.
-			// 이러한 과정으로 자신의 패를 모두 확인하여, 각 카드를 몇 장씩 가지고 있는지 계산합니다.
-			if(hands[i].contains("A")) {
-				num_counter[0]++;
-			}
-			if(hands[i].contains("2")) {
-				num_counter[1]++;
-			}
-			if(hands[i].contains("3")) {
-				num_counter[2]++;
-			}
-			if(hands[i].contains("4")) {
-				num_counter[3]++;
-			}
-			if(hands[i].contains("5")) {
-				num_counter[4]++;
-			}
-			if(hands[i].contains("6")) {
-				num_counter[5]++;
-			}
-			if(hands[i].contains("7")) {
-				num_counter[6]++;
-			}
-			if(hands[i].contains("8")) {
-				num_counter[7]++;
-			}
-			if(hands[i].contains("9")) {
-				num_counter[8]++;
-			}
-			if(hands[i].contains("10")) {
-				num_counter[9]++;
-			}
-			if(hands[i].contains("J")) {
-				num_counter[10]++;
-			}
-			if(hands[i].contains("Q")) {
-				num_counter[11]++;
-			}
-			if(hands[i].contains("K")) {
-				num_counter[12]++;
-			}
-		} // 각 카드의 소지한 갯수 확인을 위한, for문 종료
-		
-		
-		// 이 아래는 블랙잭의 특수한 점수 환산 방법으로 인한 것입니다.
-		// 점수 계산 시, 플레이어는 A카드를 1점으로 계산할 것인지, 10점으로 계산할 것인지 선택할 수 있습니다.
-		for(int i=0; i<13; i++) { // 보통의 점수 계산이지만, 와일드카드 계산 조건을 구성해야 하기 때문에 1(카드 A)은 계산하지 않고 넘어갑니다.
-			// 선택 가능 횟수입니다. A카드의 갯수만큼 선택 가능합니다. num_counter[0]에는 소지한 A카드의 갯수가 저장되어 있으므로, 이를 저장합니다.
-			switch(i+1) {
-			case 1:
-				break; // 1(카드 A)은 계산하지 않고 넘어갑니다. 이는 뒤에서 따로 계산하기 위합니다.
-			case 11:
-			case 12:
-			case 13:
-				result += num_counter[i]*10;
-				break;
-			default:
-				result += num_counter[i]*(i+1);
-				break;
-			} // 블랙잭의 규칙에 따라 J, Q, K는 10점으로 계산합니다.
-		}
-		
-		int selection_available = num_counter[0]; // A카드 선택권의 숫자입니다.
-		int[] arr = new int[selection_available]; // A카드 선택권 사용의 경우에 수를 계산할 배열입니다.
-		int candidate = 0; // 최종적으로 선택하기에 가장 적절해 보이는, 숫자를 저장할 변수입니다.
-		
-		for(int i=0; i<selection_available; i++) { // 갯수가 제한된 선택권을 1과 10에 각각 사용했을 때의 결과를 계산하는 for문입니다.
-			int j=selection_available-i;
-			arr[i]= i*10 + j;
-			
-			if((17<=(arr[i]+result))&&((arr[i]+result)<21)&&(arr[i]>candidate)){ // 선택하기 좋은 숫자를 고르는 조건문입니다.
-				candidate = arr[i];
-			}
-		}
-		
-		candidate = (candidate <= selection_available) ? selection_available : candidate;
-		// 하지만 좋은 숫자가 없어서 결국 아무것도 고르지 못했다면 모두 1을 선택한 것으로 계산합니다.
-		
-		result += candidate;
-		
-		return result;
-	} // Calc_Dealer_Score2 : 그러나 A 선택권 없이 계산한 점수가 21을 초과할 경우 A 선택권을 사용할 수 있습니다.
-	
-	int Final_Dealer_Score() {
-		int result = Calc_Dealer_Score1(); // A선택권 없을 때의 점수입니다.
-		int sub_score = Calc_Dealer_Score2(); // A선택권을 사용했을 때의 점수입니다.
-		
-		return (result>21) ? sub_score : result; // 21을 오버했을 때보다 차라리 숫자가 낮은 편이 딜러가 이기는 경우의 수가 더 많으므로, 더 낮은 수를 선택.
-		// 만약 sub_score도 21을 넘었다면 어차피 둘 다 넘은 거라 승부에는 아무런 상관이 없음
+		return (float)total/subject_count;
 	}
 	
-	void good_game() {
-		game_continue = false;
-	}  // good_game : 카드를 더 이상 받지 않기로 결정했습니다. 다른 플레이어의 카드 구성이 끝날 때까지 대기합니다.
-	
-	void recognize_yours(String[] strArr) {
-		recognized_cards_count = strArr.length;
-		int count=0; // recognized_cards 배열에 앞에서부터 차례대로 정보를 입력하기 위한 카운트입니다.
+	String[][] allToStringArray(){
 		
-		for(int i=0; i<hand_count; i++) { // 입력된 배열 strArr은 공개된 모든 카드의 정보가 입력된 배열입니다.
-			for(int j=0; j<recognized_cards_count; j++) { // 그 중에서 자신의 카드와 일치하는 것을 조사합니다
-				if(hands[i].equals(strArr[j])){ // 자신이 가진 카드는 배열에 저장하지 않고, 자신의 것이 아닌 것만 저장합니다. 
-					break;
-				}
-				else {
-					recognized_cards[count] = strArr[j];
-					count++;
-				}	
-			}
-		}
-	} // recognize_yours : 게임 진행 중 타인의 카드가 공개됩니다. 이 때, 공개된 카드의 정보들을 수집하고 기억합니다.
-	// 플레이어가 선택해줄 수 없는, 컴퓨터의 입장이기 때문에 자체적인 판단이 필요합니다.
-	
-	boolean make_a_decision() {
+		int y = ARRAYLIST.size();
+		String[][] temp = new String[y][6];
 		
-		int now_myScore = Final_Dealer_Score();
-		// 블랙잭의 규칙에 의해 딜러는 점수가 17보다 작으면 무조건 뽑아야 하지만 17 이상이면 무조건 멈춰야 합니다.
+		// toArray의 리턴 타입은 object[]
+		Object[] nameList = ARRAYLIST.stream().map(Student::getName).toArray(); // 각 항목별로 배열로 분리.
+		Object[] kor_list = ARRAYLIST.stream().map(Student::getKor_score).toArray();
+		Object[] eng_list = ARRAYLIST.stream().map(Student::getEng_score).toArray();
+		Object[] math_list = ARRAYLIST.stream().map(Student::getMath_score).toArray();
+		Object[] sci_list = ARRAYLIST.stream().map(Student::getScience_score).toArray();
+		Object[] soc_list = ARRAYLIST.stream().map(Student::getSociety_score).toArray();
 		
-		return (now_myScore < 17)? true : false; 
-	} // make_a_decision : 카드를 더 받을지에 대한 판단을 내립니다.
-	// 플레이어가 선택해줄 수 없는, 컴퓨터의 입장이기 때문에 자체적인 판단이 필요합니다.
-	
-}
-~~~
-
-
-## CardManager
-~~~java
-// 게임에 사용되는 카드 중 아직 사용되지 않은 것들을 관리할 카드 매니저입니다.
-
-package blackjack_Pack;
-
-public class CardManager {
-	
-	String[][] card = new String[4][13];
-	int[] remained_card = new int[13];
-	int used_number;
-	
-	public CardManager() {}
-	
-	void Create_Card(){
-	
-	for(int i=0; i<card.length; i++) {
-		
-		String shape="";
-		String num="";
-		
-		switch(i) {
-		case 0:
-			shape = "하트";
-			break;
-		case 1:
-			shape = "클로버";
-			break;
-		case 2:
-			shape = "다이아";
-			break;
-		case 3:
-			shape = "스페이드";
-			break;
-		default :
-			break;
-		}
-		
-		for(int j=0; j<card[i].length; j++) {
-
-			switch(j+1) {
-			case 1:
-				num = "A";
-				break;
-			case 11:
-				num = "J";
-				break;
-			case 12:
-				num = "Q";
-				break;
-			case 13:
-				num = "K";
-				break;
-			default:
-				num = String.valueOf(j+1);
-				break;
-			}
+		for(int i=0; i<y; i++) {
 			
-			card[i][j] = "[" + shape + " " + num + "]";
+			// 먼저 변수 선언. 이 메서드 내에서 많이 씀
+			String name;
+			String kor_score = String.valueOf(kor_list[i]);
+			String eng_score;
+			String math_score;
+			String sci_score;
+			String soc_score;
+		
+			// 타입 변환 및 오류 대비. 사실 다 object 타입이라 상관없지 않나 싶음
+			try {name = String.valueOf(nameList[i]);}catch(Exception e) {name = ""; System.out.println("StudentManger - allToStringArray - name : String타입으로 변환하기에 적합하지 않습니다."); e.getStackTrace();}
+			try {kor_score = String.valueOf(kor_list[i]);}catch(Exception e) {kor_score = ""; System.out.println("StudentManger - allToStringArray - kor : int타입으로 변환하기에 적합하지 않습니다."); e.getStackTrace();}
+			try {eng_score = String.valueOf(eng_list[i]);}catch(Exception e) {eng_score = ""; System.out.println("StudentManger - allToStringArray - eng: int타입으로 변환하기에 적합하지 않습니다."); e.getStackTrace();}
+			try {math_score = String.valueOf(math_list[i]);}catch(Exception e) {math_score = ""; System.out.println("StudentManger - allToStringArray - math : int타입으로 변환하기에 적합하지 않습니다."); e.getStackTrace();}
+			try {sci_score = String.valueOf(sci_list[i]);}catch(Exception e) {sci_score = ""; System.out.println("StudentManger - allToStringArray - sci : int타입으로 변환하기에 적합하지 않습니다."); e.getStackTrace();}
+			try {soc_score = String.valueOf(soc_list[i]);}catch(Exception e) {soc_score = ""; System.out.println("StudentManger - allToStringArray - soc : int타입으로 변환하기에 적합하지 않습니다."); e.getStackTrace();}
+			
+			// 변환된 값을 temp에 저장
+			temp[i][0] = name;
+			temp[i][1] = kor_score;
+			temp[i][2] = eng_score;
+			temp[i][3] = math_score;
+			temp[i][4] = sci_score;
+			temp[i][5] = soc_score;
+			
 		}
-	}
-	} // Create_Card : 카드를 새롭게 생성합니다.
-	
-	void Show_Remain_Card() {
-		
-		for(int i=0; i<card.length; i++) {
-
-			for(int j=0; j<card[i].length; j++) {
-				System.out.println(card[i][j]+" ");
-					}
-
-		}
-	} // Show_Remain_Card : 남아 있는 카드 목록들을 sysout으로 보여줍니다.
-	
-	String draw_Card(){
-		
-		int x=0, y=0;
-		
-		do {
-		 x = (int)(Math.random()*4); // 눈 앞에 보여줄 숫자가 아니라 배열 순서값이니까 0부터 출력
-		 y = (int)(Math.random()*13);
-		}while(card[x][y].equals("used"));
-		
-		String temp = card[x][y];
-		
-		card[x][y]="used";
 		
 		return temp;
-	} // draw_Card : 무작위로 카드 한 장을 뽑습니다. 뽑은 카드가 이미 사용되었다면 사용된 적 없는 카드가 나올 때까지 계속 뽑습니다.
-	 // 사용된 카드에는 "used"를 저장하고, 그 카드에 저장되어 있던 값을 출력합니다.
+	}
 	
-	int Count_Remain_Card(String str) {
+	void whose_score_is(String subject, int score) {
 		
-		int count=0;
+		ARRAYLIST.forEach(s -> {
+			if(s.getAnyScore(subject) == score) {
+				System.out.println(s.getName() + " (" + String.valueOf(s.getAnyScore(subject)) +"점)");
+			}
+		});
+	}
+	
+	void MaxScoreBySubject(String subject) {
+		int maxScore = 0;
 		
-		for(int i=0; i<card.length; i++) {
-			for(int j=0; j<card[i].length; j++) {
-				if(card[i][j].contains(str)) {
-					count++;
+		switch(subject) {
+		case "국어":
+			maxScore = ARRAYLIST.stream().mapToInt(s -> s.getKor_score()).max().getAsInt(); // min/max 계산 시 리턴값이 optionalInt라서 마지막에 그냥 int로 변환
+			break;
+		case "영어":
+			maxScore = ARRAYLIST.stream().mapToInt(s -> s.getEng_score()).max().getAsInt();
+			break;
+		case "수학":
+			maxScore = ARRAYLIST.stream().mapToInt(s -> s.getMath_score()).max().getAsInt();
+			break;
+		case "과학":
+			maxScore = ARRAYLIST.stream().mapToInt(s -> s.getScience_score()).max().getAsInt();
+			break;
+		case "사회":
+			maxScore = ARRAYLIST.stream().mapToInt(s -> s.getSociety_score()).max().getAsInt();
+			break;
+		default:
+			System.out.println("적절한 입력이 아닙니다.");
+			return;
+		}
+		
+		System.out.print(subject + " 과목의 최고 득점자 : "); // 일부러 print로 해서 뒤와 이어지게 함
+		whose_score_is(subject, maxScore); // 콘솔에 텍스트 출력함.
+				
+	}
+	
+	void MinScoreBySubject(String subject) {
+		int minScore = 0;
+		
+		switch(subject) {
+		case "국어":
+			minScore = ARRAYLIST.stream().mapToInt(s -> s.getKor_score()).min().getAsInt();
+			break;
+		case "영어":
+			minScore = ARRAYLIST.stream().mapToInt(s -> s.getEng_score()).min().getAsInt();
+			break;
+		case "수학":
+			minScore = ARRAYLIST.stream().mapToInt(s -> s.getMath_score()).min().getAsInt();
+			break;
+		case "과학":
+			minScore = ARRAYLIST.stream().mapToInt(s -> s.getScience_score()).min().getAsInt();
+			break;
+		case "사회":
+			minScore = ARRAYLIST.stream().mapToInt(s -> s.getSociety_score()).min().getAsInt();
+			break;
+		default:
+			System.out.println("적절한 입력이 아닙니다.");
+			return;
+		}
+		
+		System.out.print(subject + " 과목의 최저 득점자 : "); // 일부러 print로 해서 뒤와 이어지게 함
+		whose_score_is(subject, minScore); // 콘솔에 텍스트 출력함.
+				
+	}
+	
+	void TopAvg() {
+		Object[] nameListObj = ARRAYLIST.stream().map(Student::getName).toArray();
+		
+		String[] nameListStr = new String[nameListObj.length];
+		float[] avgScores = new float[nameListObj.length];
+		int hisOrder = 0;
+		float maxScore = 0;
+		for (int i=0; i<nameListObj.length; i++) {
+			
+			// 배열에 값을 입력하는 과정.
+			nameListStr[i] = String.valueOf(nameListObj[i]); // object[]라서 String[]처럼 처리할 수가 없음. 그래서 값을 String으로 변환하는 중
+			avgScores[i] = avgByName(nameListStr[i]); // 변환된 이름으로 각자의 평균 점수 계산해서 배열에 입력
+			
+			if(maxScore < avgScores[i]) { // 평균 점수들 중에서 최고 점수가 몇 점이고, 최고점수가 있는 순서를 저장.
+				maxScore = avgScores[i];
+				hisOrder=i;
+			}
+		}
+		
+		System.out.println("전체 평균 최고 득점자 : " + nameListStr[hisOrder] + " (평균 : " + String.valueOf(maxScore) +")");
+
+	}
+	
+	// 전체 평균 최고 득점자 표시
+}
+~~~
+
+## MainFrame
+~~~java
+package examScore;
+
+import javax.swing.*;
+import javax.swing.table.DefaultTableModel; // 테이블 수정에 관련된 패키지
+import javax.swing.table.JTableHeader;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+
+public class MainFrame { // 학생 추가 및 삭제, 현재 데이터 리턴, 변동 사항 반영. 여기까지는 확정인데, 평균이나 등수 같은 거 표현을 어떻게 할 지 아직 고민. 그냥 귀찮으니까 한 번에 할까
+	
+	static JComboBox combo = new JComboBox();
+	static JTable table;
+	
+	public MainFrame(StudentManager studentManager) { // 저장소와 사용자가 보는 파일 목록은 서로 연동되지 않고, 별개로 동작합니다.
+	
+		Dimension dim = new Dimension(700,300);
+		
+		JFrame frame = new JFrame("학생 성적 계산");
+		frame.setLocation(200, 400);
+		frame.setPreferredSize(dim);
+		
+		String[][] contents = studentManager.allToStringArray();
+		String[] header = {"학생 이름", "국어","영어","수학","과학","사회"};
+		DefaultTableModel model = new DefaultTableModel(contents,header); // 테이블 세팅과 관련된 것
+		table = new JTable(model); // 테이블 생성.
+		JScrollPane scrollpane = new JScrollPane(table);
+		// 내용을 모델에 넘기고, 모델을 테이블에 연결.
+		
+		setComboBox();
+	
+		JPanel panel = new JPanel();
+		JPanel panel1 = new JPanel();
+		
+		panel.setLayout(new BoxLayout(panel,BoxLayout.Y_AXIS)); //
+		panel1.setLayout(new BoxLayout(panel1,BoxLayout.X_AXIS)); //
+		
+		JLabel text1 = new JLabel("       리스트  관리");
+		JLabel blank = new JLabel(" ");
+		
+		JButton add_Btn = new JButton("         추가        ");
+		add_Btn.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				String[] temp = {"","","","","",""};
+				model.addRow(temp);
+			}
+			
+		});
+				
+		JButton remove_Btn = new JButton("         삭제        ");
+		remove_Btn.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				
+				if(table.getRowCount()<=0) {
+					System.out.println("더 이상 삭제할 수 없습니다.");
+					return;
 				}
-			}
-
-		}
-		
-		return count;
-	} // Count_Remain_Card : 남아 있는 카드 중 찾고자 하는 값이 포함된 갯수를 찾습니다. 에이스 : "A", 킹 : "K"...와 같이 표기하니 찾고자 하는 문자 그대로 입력하면 됩니다.
-	
-	void Count_All_Remain_Card() {
-		
-		for(int i=0; i<13; i++) {
-			remained_card[i] = 0;
-		} // 이전에 이미 카운트해서 저장된 숫자가 있을 수 있으니, 한 번 0으로 만들어줍니다.
-		
-		for(int j=0; j<13; j++) { // j값에 따라 Count_Remain()에 들어갈 문자열이 달라지도록 합니다.
-			
-			String num="";
-			
-			switch(j+1) {
-			case 1:
-				num = "A";
-				break;
-			case 11:
-				num = "J";
-				break;
-			case 12:
-				num = "Q";
-				break;
-			case 13:
-				num = "K";
-				break;
-			default:
-				num = String.valueOf(j+1);
-				break;
+				
+				if(table.getSelectedRow() == -1) {
+					model.setRowCount(table.getRowCount()-1);
+				}
+				else {
+					model.removeRow(table.getSelectedRow());
+				}
+				setComboBox();
 			}
 			
-			remained_card[j] = Count_Remain_Card(num); // j값에 따라 문자열이 변화하며 순차적으로 Count_Remain()을 실행합니다.
-		}
+		});
 		
-	} // Count_All_Remain_Card : Count_Remain 메서드로 13번을 반복하기엔 너무나도 번거롭고 오래 걸립니다.
-	// 따라서 메서드 하나를 실행시키는 것으로 모두 처리할 수 있도록 Count_All_Remain 함수를 만들었습니다.
-	
-	void Show_All_Remains_Count() {
-		System.out.println("남은 카드들");
-		for(int i=0; i<13; i++) {
-			System.out.println((i+1) + " : "+ remained_card[i]);
-		}
-	} // Show_All_Remains_Count : 각 카드가 몇 장씩 남았는지 sysout으로 출력합니다. 다만, Count_Remain 혹은 Count_All_Remain 을 사용한 후에 사용하지 않으면 0이 출력될 뿐입니다.
+		JButton synchroniztion_Btn = new JButton("데이터 동기화");
+		synchroniztion_Btn.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				System.out.println("데이터 동기화를 진행합니다.");
+				studentManager.update(getNameData(), getScoreData());
+				setComboBox();
+			}
+			
+		});
+			
+		JButton all_result_Btn = new JButton("전체 결과");
+		all_result_Btn.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				String[] nameList = getNameData();
+				String[] subjectList = {"국어","영어","수학","과학","사회"};
+				int[][] scoreList = getScoreData();
+				
+				boolean[] occupied = new boolean[nameList.length];
+				int count_occupied = 0;
+				for(int i=0; i<nameList.length; i++) {
+					if(nameList[i].equals("")) { // 내가 ""으로 저장했으니 아마 되겠지?
+						occupied[i] = false;
+					}
+					else {
+						occupied[i] = true;
+						count_occupied++;
+					}
+				}
+				
+				int[] avgBySub = new int[5];				
+				for(int i=0; i<nameList.length; i++) { // 일단 합계 구하기
+					if(occupied[i]) {
+						avgBySub[0] += scoreList[i][0];
+						avgBySub[1] += scoreList[i][1];
+						avgBySub[2] += scoreList[i][2];
+						avgBySub[3] += scoreList[i][3];
+						avgBySub[4] += scoreList[i][4];
+					}
+				}
 
-	int Count_used() {
-		
-		used_number = 0; // 이미 계산된 것이 있을 수 있으니 한 번 초기화
-		
-		for(int i=0; i<4; i++) {
-			for(int j=0; j<13; j++) {
-				if(card[i][j].equals("used")) {
-					used_number++;
+				for(int i=0; i<5; i++) { // 갯수로 나눠서 평균 구하기. 과목별 평균 그래프 그리는 데에 필요한 건 다 준비됨
+					avgBySub[i] = avgBySub[i]/count_occupied;
+				}
+				
+				String[] newNameList = new String[count_occupied];
+				int[] avgByName = new int[count_occupied];
+				count_occupied = 0;
+				
+				for(int i=0;i<nameList.length; i++) {
+					if(occupied[i]) {
+						newNameList[count_occupied] = nameList[i];
+						avgByName[count_occupied] = (scoreList[i][0] + scoreList[i][1] + scoreList[i][2] + scoreList[i][3] + scoreList[i][4]) / 5;
+						count_occupied++;
+					}
+				}
+				
+				CreateGragh gragh1 = new CreateGragh(subjectList, avgBySub);
+				gragh1.setScreenTitle("과목별 평균 점수");
+				gragh1.setScreenVisible();
+				
+				CreateGragh gragh2 = new CreateGragh(newNameList, avgByName);
+				gragh2.setScreenTitle("학생별 평균 점수");
+				gragh2.setScreenVisible();
+				
+				for(String s : subjectList) {
+					studentManager.MaxScoreBySubject(s); // 이게 arrayList-stream-filter로 처리하니까 동점자도 같이 나옴.
+					studentManager.MinScoreBySubject(s);
 				}
 				
 			}
+			
+		});
+		
+		JButton eachResult_Btn = new JButton("개별 결과");
+		eachResult_Btn.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// 항목이 실제로 존재하는지에 대한 검증은 필요 없음. 콤보 박스로 선택하는데, 콤보 박스는 저장소의 데이터랑 바로 연동되기 때문에 항상 옳음.
+				int location = -1;
+				Object selectedOne = combo.getSelectedItem();
+				String selectedStr = String.valueOf(selectedOne);
+				for(int i=0; i<table.getRowCount(); i++) {
+					if(table.getValueAt(i, 0).equals(selectedOne)) {
+						location = i;
+						break;
+					}
+				}
+				// 배열 중에서 찾으니 검색에 실패했다면 location = -1인 점을 이용
+				// 어차피 콤보 내에서만 선택되기 때문에 오류가 날 일은 많지 않고, 이름 중에서 못 찾았다면 당연히 과목일 것임.
+				// 근데 혹시라도 오류의 가능성이 있으니 switch문 중 default로 처리
+				if(location == -1) {
+										
+					switch(selectedStr) { // 알아서 적당히 처리.
+					case "국어":
+						location = 1;
+						break;
+					case "영어":
+						location = 2;
+						break;
+					case "수학":
+						location = 3;
+						break;
+					case "과학":
+						location = 4;
+						break;
+					case "사회":
+						location = 5;
+						break;						
+					default:
+						System.out.println("잘못된 입력입니다.");
+						return;
+					}
+					
+					// getNameData()와 getScoreData()는 이름 없는 빈 칸도 일단 저장은 하게 해둬서 그래프 그리는 데에 쓸 데이터로는 적합하지 않음. 그래서 일일이 찾아야 함
+					int count1 = 0, count2 = 0, total = 0;
+					
+					for(int i=0; i<table.getRowCount(); i++) {
+						if( (String.valueOf(table.getValueAt(i, 0)).length() >= 1) && (String.valueOf(table.getValueAt(i, 0)) != null) ) {
+							count1++;							
+						}
+					}
+					
+					String[] studentNameList = new String[count1];
+					int[] scoresList = new int[count1];
+					
+					
+					for(int i=0; i<table.getRowCount(); i++) {
+						if( (String.valueOf(table.getValueAt(i, 0)).length() >= 1) && (String.valueOf(table.getValueAt(i, 0)) != null) ) {
+							studentNameList[count2] = String.valueOf(table.getValueAt(i, 0));
+							try {
+								int num = Integer.valueOf(String.valueOf(table.getValueAt(i, location)));
+								scoresList[count2] = Math.min(100, Math.max(0, num));
+							}
+							catch(Exception err) {
+								System.out.println("MainFrame - eachResult_Btn : Int 타입으로 변환하기에 적합하지 않은 숫자입니다.");
+								scoresList[count2] = 0;
+							}
+							total += scoresList[count2];
+							count2++;							
+						}
+						
+						if(count2 == count1) {
+							break;
+						}
+					}
+					
+					CreateGragh gragh = new CreateGragh(studentNameList,scoresList);
+					gragh.setScreenTitle("학생별 " + selectedStr + " 과목 점수");
+					gragh.setTextLabel("         "+selectedStr+" 과목의 평균 점수 : " + String.valueOf((float)total/studentNameList.length));
+					gragh.setScreenVisible();
+				
+				}
+				else { // 애초에 테이블 내의 이름 중에서 위치를 탐색했으니, 이쪽은 더 찾을 필요 없이 바로 계산.
+					String[] subjectNameList = {"국어","영어","수학","과학","사회"};
+					int[] scoresList = new int[5];
+					int total = 0;
+					for(int i=0; i<5; i++) {
+						try {
+							int num = Integer.valueOf(String.valueOf(table.getValueAt(location, i+1))); // 이름이 0부터 시작하니까 점수들은 1부터 시작해야 함
+							scoresList[i] = Math.min(100, Math.max(0, num)); 
+						}
+						catch(Exception err) {
+							scoresList[i] = 0;
+							System.out.println("MainFrame - eachResult_Btn : Int 타입으로 변환하기에 적합하지 않은 숫자입니다.");
+						}
+						total += scoresList[i];
+					}
+					
+					CreateGragh gragh = new CreateGragh(subjectNameList,scoresList);
+					gragh.setScreenTitle(selectedStr + "의 성적표");
+					gragh.setTextLabel("         "+selectedStr+"의 평균 점수 : " + String.valueOf((float)total/scoresList.length));
+					gragh.setScreenVisible();
+					
+				}
+					
+					
+				// 그게 과목중에 있으면 > 학생들 이름 + 학생별 과목 점수
+				// 아니면 > 과목명 + 해당 학생의 전체 점수
+				// 점수와 이름은 해당 항목의 위치를 테이블 내에서 찾아서 getNameData()와 getScoreData()로 가져온 데이터에서 추출하면 됨.
+				// 그렇게 String[]과 int[] 타입으로 바꿔서 CreateGragh에 넣어주면 끝. 평균은 프레임 내부에서 해결하는 걸로.
+								
+			}
+			
+		});
+		
+		panel.add(text1);
+		panel.add(blank);
+		panel.add(add_Btn);
+		panel.add(remove_Btn);
+		panel.add(synchroniztion_Btn);
+
+		panel1.add(all_result_Btn);
+		panel1.add(eachResult_Btn);
+		panel1.add(combo);
+	
+		frame.add(scrollpane,BorderLayout.CENTER);		
+		frame.add(panel,BorderLayout.EAST);
+		frame.add(panel1,BorderLayout.SOUTH);		
+		frame.pack();
+		
+		frame.setVisible(true);
+
+	}
+	
+	void setComboBox() {
+		
+		combo.removeAllItems(); // 일단 다 지움
+		
+		String[] subjectText = {"국어","영어","수학","과학","사회"}; // 목록에 과목 추가
+		for(String s: subjectText) {
+			combo.addItem(s);
 		}
 		
-		return used_number;
+		for(int i=0; i<table.getRowCount(); i++) { // 목록에 학생 이름 추가
+			if((String.valueOf(table.getValueAt(i, 0)).length() > 0) && (String.valueOf(table.getValueAt(i, 0)) != null) ) {
+				combo.addItem(table.getValueAt(i, 0));
+			}			
+		}
+	}
+	
+	String[] getNameData() {
+		int length = table.getRowCount();
+		String[] output = new String[length];
+		for(int i=0; i<length; i++) {
+			try { // String 타입으로 변환하는 과정에서 문제 생기면 에러로 잡음
+				String str = String.valueOf(table.getValueAt(i, 0)); // x축 0번은 이름란이니까.
+				if((str.length() <= 0) || (str == null) ) { // 테이블 데이터 가져올 때는 값이 없어도 오류도 뭣도 안 뜸. 그래서 길이가 0이거나 null일 때로 설정
+					output[i] = "";
+				}
+				else {
+					output[i] = str; // 값이 멀쩡히 존재하고, String타입으로 변환 가능하면 저장
+				}
+			}
+			catch(Exception e) {
+				System.out.println("MainFrame - getNameData : String 타입으로 변환하기에 적절하지 않습니다.");
+				output[i] = "";
+			}
+		}
+		
+		return output;
+	}
+	
+	int[][] getScoreData(){
+		
+		int length = table.getRowCount();
+		int[][] output = new int[length][5];
+		
+		for(int i=0; i<length; i++) {
+			for(int j=0; j<5; j++) {
+				try {
+					if((String.valueOf(table.getValueAt(i, j+1)).length() <= 0 ) || (String.valueOf(table.getValueAt(i, j+1)) == null)) {
+						System.out.println("MainFrame - getNameData : Int 타입으로 변환하기에 적절하지 않습니다.");
+						output[i][j] = 0;
+					}
+					else {
+						int num = Integer.valueOf(String.valueOf(table.getValueAt(i, j+1))); // table 값을 바로 int로 바꾸면 왜인지 모르게 입력이 안 됨.
+						output[i][j] = Math.min(100, Math.max(0, num)); 
+					}	
+				}
+				catch(Exception e) {
+					System.out.println("MainFrame - getNameData : Int 타입으로 변환하기에 적절하지 않습니다.");
+					output[i][j] = 0;
+				}
+			}
+		}
+		
+		return output;
 	}
 
+}
+~~~
+
+## CreateGragh
+~~~java
+package examScore;
+
+import javax.swing.*;
+import java.awt.*;
+
+public class CreateGragh {
+	
+	private JFrame frame = new JFrame("");
+	private JLabel textLine = new JLabel("");
+	
+	public CreateGragh(String[] nameList, int[] scoreList) {
+		
+		System.out.println("시험 결과를 출력합니다.");
+		
+		int x_size = 100*(1+nameList.length);
+		frame.setLocation(500,200);
+		frame.setSize(x_size+50,400);		
+				
+		buildGUI(nameList, scoreList); // 임시 입력
+
+	}
+	
+	private void buildGUI(String[] nameList, int[] scoreList) {
+		
+		frame.setLayout(new BorderLayout());
+		
+		Container contentpane = frame.getContentPane();
+		
+		ResultPanel resultPanel = new ResultPanel(nameList, scoreList);
+				
+		contentpane.add(resultPanel,BorderLayout.CENTER);		
+		contentpane.add(textLine,BorderLayout.SOUTH);
+		
+	}
+	
+	void setScreenTitle(String str) {
+		frame.setTitle(str);
+	}
+	
+	void setScreenVisible() {	
+		frame.setVisible(true);	
+	}
+	
+	void setTextLabel(String str) {
+		textLine.setText(str);
+		Font font = new Font("Serif",Font.BOLD,20);
+		textLine.setFont(font);
+	}
+
+}
+
+~~~
+
+## ResultPanel
+~~~java
+package examScore;
+
+import java.awt.*;
+import javax.swing.*;
+
+public class ResultPanel extends JPanel {
+	
+	private String[] nameList;
+	private int[] numberList;
+	
+	public ResultPanel(String[] nameList, int[] numberList) {
+		this.nameList = nameList;
+		this.numberList = numberList;
+		repaint();
+	}
+	
+	public void paint(Graphics g) {
+		g.clearRect(0, 0, getWidth(), getHeight());
+		g.drawLine(50, 250, 100*(nameList.length+1)-20, 250);
+		
+		for(int i=1; i<11; i++) {
+			g.drawString(i*10+"", 25, 255-(20*i));
+			g.drawLine(50, 250-(20*i), 100*(nameList.length+1)-20, 250-(20*i));
+		}
+				
+		g.drawLine(50, 50, 50, 250);
+		g.drawLine(100*(nameList.length+1)-20, 50, 100*(nameList.length+1)-20, 250);
+		
+		for(int i=0; i<nameList.length; i++) {			
+			g.drawString(nameList[i], 100*(1+i), 270);	
+		}
+		g.setColor(Color.BLUE);
+		
+		for(int i=0; i<numberList.length; i++) {
+			if(numberList[i] > 0) {
+				g.fillRect(10+100*(i+1), 250-numberList[i]*2, 10, numberList[i]*2);
+			}		
+		}
+	}
 }
 ~~~
 
 ## <br>3. 기록
 
 ~~~
-  블랙잭
-  
-  a.코딩학원 3주차만에 무언가를 만들어내서 스스로 뿌듯하고 기쁘지만, 부족한 점이 많았음.
-  
-  b. 상속을 안 써서 비효율
-  - 뒤늦게 생각났지만 GamePlayer, GameDealer, AnotherPlayer 겹치는 기능이 대부분임. 차라리 상속을 사용해서 겹치는 부분의 코딩 및 수정에 들어가는 시간을 줄였더라면 훨씬 효율적이고 좋았을 것임
-  - 거의 막힘 없이 쳤는데도, 코딩에 4~5시간 정도 걸렸고, 사소한 수정도 똑같은 걸 3번씩 해서 매우 비효율적이었음.
-  
-  c. 여전히 public, private나 static에 대한 이해도가 부족함. 그리고 그나마 this는 이제 이해함
-  
-  d. String 타입의 변수를 활용하는 것이 까다로웠음
-  
-  - 특히 계산과정에서 발생하는 null값의 처리가 문제였음
-  
-  - AnotherPlayer는 unveiled cards를 recognized yours로 받아옴.
-  > 받아온 카드와 자신의 패를 대조해서, 받아온 카드 중 자신의 카드는 제외하고 새롭게 알게 된 카드만 추려냄.
-  >> 그리고 새롭게 알게 된 카드와 자신의 패를 합쳐서 recognized cards에 저장함.
-  >>> recognized cards에 저장한 카드는 나중에 카드 카운팅 과정을 거쳐 현재 자신의 상황에서 카드를 더 받는 것이 이득일지, 멈추는 것이 이득일지 컴퓨터가 자체적으로 판단하는 데에 사용됨.
-  
-  - 근데 위의 저장 과정으로 인해 사용 시에 문제가 발생함.
-  > unveiled cards의 갯수를 확인하고, 그것을 하나하나 대조하도록 하여 모든 카드가 빠짐없이 확인되면서도, 카드 갯수만큼만 반복하는 만큼 null값이 들어갈 여지가 없다고 생각했음
-  >> 그러나 unveiled cards (= n개)에는 필연적으로 자신의 카드가 하나는 섞여 있고, 자신의 카드는 제외하고 저장하니까 저장된 갯수는 (n-1)개인데 앞으로 체크는 n번만큼 함.
-  >>> 그러니 아직 값이 저장되지 않은 곳(null값이 들어있는 곳)까지 계산에 사용하면서 null 오류가 발생함.
-  
-  - 이 문제는 저장 과정이 끝난 후 앞으로 카운트에 사용할 숫자에서 자신의 카드 갯수만큼 빼서 해결함.
-  
-  e. 간단하게 구성할 수 있는 조건문도 괜히 복잡하게 꼬아서 오류가 났었음. 조건문 구성할 때 좀 더 빈틈없고 간결하게 구성할 필요가 있음.
+1. 5~6주차 연습.
+2. ArrayList와 stream을 주로 사용해서 만든다는 주목적은 달성함.
+3. 이번에는 구성과 연결에 좀 더 신경 써서 코딩하고, 각 객체들을 연결하는 과정이 전보다 매끄러웠음
+4. 하지만 기존에는 그냥 콘솔 메시지로 결과를 출력할 생각이었는데, 그래프로 출력하는 것으로 수정하는 과정에서 ArrayList와 stream의 비중이 확 줄어들었음
+   - 그래도 만들어 둔 게 아까워서 마지막에 전체 결과 출력에 좀 넣었음.
+6. 이번에 만들면서 왜 ui를 기준으로 코드를 설계해야 하는지 깨달았음. 결국 가장 많은 데이터 입력과 오류 보정 등이 필요한 곳은 유저가 사용하는 곳이고, 그곳을 어떻게 처리할 지가 핵심임
+   - 이전에는 ui가 빈약하고, 그냥 내부적으로 처리하는 게 대부분이어서 데이터 저장을 기준으로 했지만, 이번에 ui를 더 추가해보니 유저가 입력할 데이터가 먼저고, 저장소는 그 다음.
+   - 유저가 직접적으로 이용할 단말기에서부터 뻗어가야 함
+7. 데이터 저장 방법을 treeSet으로 할 걸 그랬나? 애초에 arraylist와 stream을 연습하는 게 목적이라서 그렇게 했지만 다른 컬렉션을 쓰는 게 더 효율적이었다고 봄
 ~~~

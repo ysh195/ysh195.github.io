@@ -12,7 +12,7 @@ author_profile : false
 
 번호|이미지
 ---|---|
-**1**|![ysh195](https://ysh195.github.io/images/fe/fe1.png)
+**1**|![ysh195](https://ysh195.github.io/images/fe/fe1.PNG)
 **2**|![ysh195](https://ysh195.github.io/images/fe/fe2.png)
 **3**|![ysh195](https://ysh195.github.io/images/fe/fe3.png)
 **4**|![ysh195](https://ysh195.github.io/images/fe/fe4.png)

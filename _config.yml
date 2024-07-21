@@ -307,8 +307,9 @@ defaults:
       toc_sticky : true
       toc_label : 목차
       toc_icon: "fas fa-indent"
-      sidebar:
-        nav:
-          "counts"
+# 사이드바 활성화 하고 싶으면 이거에서 # 지우면 됨.      
+#      sidebar:
+#        nav:
+#          "counts"
 
 date_format : "%Y-%M-%D"

@@ -15,9 +15,9 @@ String 타입의 완성된 하나의 계산식을 입력 받아서 String 타입
 
 번호|이미지
 ---|---
-1|![ysh195](../assets/images/calc1.png){: .img-limit-width}
-2|![ysh195](../assets/images/calc2.png){: .img-limit-width}
-3|![ysh195](../assets/images/calc3.png){: .img-limit-width}
+1|![ysh195](../assets/images/calc1.PNG){: .img-limit-width}
+2|![ysh195](../assets/images/calc2.PNG){: .img-limit-width}
+3|![ysh195](../assets/images/calc3.PNG){: .img-limit-width}
 
 ## <br>2. 코드
 

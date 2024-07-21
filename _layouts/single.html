@@ -19,7 +19,7 @@ layout: default
 {% endif %}
 
 <div id="main" role="main">
-  {% include sidebar.html %}
+  {% include sidebar.html %} <!-- 사이드바의 존부와 위치에 관한 것임 -->
 
   <article class="page" itemscope itemtype="https://schema.org/CreativeWork"{% if page.locale %} lang="{{ page.locale }}"{% endif %}>
     {% if page.title %}<meta itemprop="headline" content="{{ page.title | replace: '|', '&#124;' | markdownify | strip_html | strip_newlines | escape_once }}">{% endif %}
@@ -28,7 +28,7 @@ layout: default
     {% if page.last_modified_at %}<meta itemprop="dateModified" content="{{ page.last_modified_at | date_to_xmlschema }}">{% endif %}
 
     <div class="page__inner-wrap">
-      {% include top-banner.html %}
+      {% include top-banner.html %} <!-- 배너의 존부와 위치에 관한 것임 -->
       {% unless page.header.overlay_color or page.header.overlay_image %}
         <header>
           {% if page.title -%}

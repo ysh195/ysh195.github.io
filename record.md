@@ -74,3 +74,11 @@ https://www.youtube.com/redirect?event=video_description&redir_token=QUFFLUhqbGx
 ~~~
 ![ysh195](../assets/images/파일이름.확장자)
 ~~~
+* 게시물의 카테고리나 게시물 제목을 바꿔서 주소가 변경될 경우, 이전 주소로도 연결되게 하는 방법. 근데 이거 설치하는 데에 엄청 애먹었는데 생각보다 별 거 없어서 괜히 했나 싶음. 오히려 삭제하거나 하면 오류 생길까 걱정됨.
+~~~
+상단의 게시물 속성에 다음과 같은 내용을 추가한다.
+
+redirect_profile: false
+redirect_from:
+ - /이전 카테고리명/이전 게시물 제목
+~~~

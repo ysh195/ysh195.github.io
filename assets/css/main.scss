@@ -3,17 +3,6 @@
 search: false
 ---
 
-#main{
-  margin : 0 !important;
-}
-.breadcrumbs{
-  display: flex !important;
-  justify-content: flex-start !important;
-}
-.page__inner-wrap{
-    width: 170% !important;
-}
-
 @charset "utf-8";
 
 @import "minimal-mistakes/skins/{{ site.minimal_mistakes_skin | default: 'default' }}"; // skin

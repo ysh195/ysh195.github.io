@@ -3,7 +3,12 @@
 search: false
 ---
 .pags__inner-wrap{
-  width : 70%;
+  width : auto;
+  max-width : 70%;
+}
+article.page {
+  width : auto;
+  max-width : 70%;
 }
 @charset "utf-8";
 

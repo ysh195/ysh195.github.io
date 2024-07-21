@@ -62,3 +62,7 @@ https://www.youtube.com/redirect?event=video_description&redir_token=QUFFLUhqbGx
 
   이걸 활용해서 글자색도 수정 가능.
   ~~~
+* 포스트 내에 이미지 추가
+~~~
+![ysh195]({{site.url}}/images/포스트 제목 전체(ex : 2024-07-20-calculator/이미지파일이름.확장자)
+~~~

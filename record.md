@@ -101,3 +101,8 @@ redirect_from:
 ~~~
 _config.yml 의 맨 아래 default 부분에 원하는 내용 추가
 ~~~
+13. banner 사용
+~~~
+배너 구성은 _include - top-banner.html 에서 하고
+배너의 배치는 _layouts - single.html 에서 함
+~~~

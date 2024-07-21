@@ -80,7 +80,7 @@ https://www.youtube.com/redirect?event=video_description&redir_token=QUFFLUhqbGx
   ~~~
 9. 포스트 내에 이미지 추가. 이렇게 하면 내 깃허브 포스팅에서는 깨진 걸로 보이지만 다른 사람들의 화면에서는 멀쩡한 걸로 보임
 ~~~
-![ysh195]({{site.url}}/images/파일이름.확장자)
+![ysh195]({{site.url}}/assets/images/파일이름.확장자)
 ~~~
 10. 게시물의 카테고리나 게시물 제목을 바꿔서 주소가 변경될 경우, 이전 주소로도 연결되게 하는 방법. 근데 이거 설치하는 데에 엄청 애먹었는데 생각보다 별 거 없어서 괜히 했나 싶음. 오히려 삭제하거나 하면 오류 생길까 걱정됨.
 ~~~

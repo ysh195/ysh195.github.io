@@ -12,6 +12,13 @@
 ----
 ### 기타
 * assets/css/main.scss에서 스타일 수정됨.
+~~~
+현재 추가한 내용
+ .breadcrumbs{
+    display: flex !important;
+    justify-content: flex-start !important;
+  }
+~~~
 * 사이드바 쓰려면 아래의 내용을 위쪽 포스트 설정에 입력
  ~~~
   sidebar:

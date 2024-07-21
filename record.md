@@ -14,6 +14,7 @@
 * assets/css/main.scss에서 스타일 수정됨.
 ~~~
 현재 추가한 내용
+
  .breadcrumbs{
     display: flex !important;
     justify-content: flex-start !important;

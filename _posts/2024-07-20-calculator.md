@@ -13,7 +13,7 @@ String 타입의 완성된 하나의 계산식을 입력 받아서 String 타입
 
 ## <br>1. 코드
 
-~~~java
+```java
 package one;
 
 import java.awt.BorderLayout;
@@ -467,16 +467,14 @@ public class Calculator extends JFrame{
 	}
 
 }
-~~~
-{: .line-auto-div}
+```
 
 ## <br>2. 기록
 
-~~~
+```
+Calculator
 
-    Calculator
-
-    1. 코드 설명
+1. 코드 설명
 
     1-1. String 타입의 완성된 계산식을 입력하면 String 타입의 결과값을 출력하는 계산기.
     
@@ -516,5 +514,4 @@ public class Calculator extends JFrame{
 
     * 좀 더 난이도가 높겠지만 블랙잭도 만들 수 있을 것 같은데(완료 / 다른 레포지토리에 보관)
 
-~~~
-{: .line-auto-div}
+```

@@ -1040,7 +1040,7 @@ public class CardManager {
 
 }
 ~~~
-
+{: .line-auto-div}
 
 ## <br>2. 기록
 
@@ -1073,3 +1073,4 @@ public class CardManager {
   
   2-4. 간단하게 구성할 수 있는 조건문도 괜히 복잡하게 꼬아서 오류가 났었음. 조건문 구성할 때 좀 더 빈틈없고 간결하게 구성할 필요가 있음.
 ~~~
+{: .line-auto-div}

@@ -13,9 +13,7 @@
 ### 기타
 * assets/css/main.scss에서 스타일 수정됨.
 * 이 블로그에 대한 원 저작자의 업데이트를 반영하고 싶으면
-  > a. 현재 메인 브랜치로 되어 있는데, 이것을 updateBranch로 변경<br>
-  > b. 리포지토리 상단에 뜨는 업데이트 공지 메시지에서 Sync fork 클릭 - Disdarding changes 클릭<br>
-  > c. 
+  > 그냥 이 영상 참고. https://www.youtube.com/watch?v=zoZ4LF-8j2E&list=PLIMb_GuNnFwfMm3alTSOmDK4AnpdG7USY&index=3
 * 블로그 내 키워드 검색에서 제외하고 싶으면 해당 게시물의 머릿말 속성에서 search : false 쓰면 됨
 * 중간에 뭔가 확 강조하고 싶거나 공지해야 할 때 https://mmistakes.github.io/minimal-mistakes/docs/utility-classes/#notices 사용. 그냥 문장 끝에 달아주면 됨. 이런 식으로{: .notice}
 * 그리고 여러 문장을 한 번에 묶어서 강조하려면 div로 묶어야 함.

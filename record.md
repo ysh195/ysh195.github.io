@@ -12,13 +12,12 @@
 ----
 ### 기타
 * assets/css/main.scss에서 스타일 수정됨.
-* 사이드바 쓰려면
+* 사이드바 쓰려면 아래의 내용을 위쪽 포스트 설정에 입력
 * ~~~
   sidebar:
     nav:
       "docs"
   ~~~
-* 를 위쪽 포스트 설정에 입력
 * 이 블로그에 대한 원 저작자의 업데이트를 반영하고 싶으면
   > 그냥 이 영상 참고. https://www.youtube.com/watch?v=zoZ4LF-8j2E&list=PLIMb_GuNnFwfMm3alTSOmDK4AnpdG7USY&index=3
 * 블로그 내 키워드 검색에서 제외하고 싶으면 해당 게시물의 머릿말 속성에서 search : false 쓰면 됨

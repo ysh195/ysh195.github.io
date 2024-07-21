@@ -1,5 +1,5 @@
 ---
-title: "연도별 게시물"
+title: "연도별"
 permalink: /year-archive/
 layout: posts
 author_profile: true

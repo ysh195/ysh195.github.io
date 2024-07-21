@@ -3,6 +3,11 @@
 search: false
 ---
 
+.breadcrumbs{
+    display: flex !important;
+    justify-content: flex-start !important;
+  }
+
 @charset "utf-8";
 
 @import "minimal-mistakes/skins/{{ site.minimal_mistakes_skin | default: 'default' }}"; // skin

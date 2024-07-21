@@ -1,9 +1,3 @@
-/*
-사이드바 쓰려면
-sidebar:
-  nav: "docs"
-*/
-
 ---
 layout : single
 title : 코딩학원 3주차 - 블랙잭 카드게임 만들기

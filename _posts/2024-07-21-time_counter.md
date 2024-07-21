@@ -12,9 +12,9 @@ author_profile : false
 
 번호|이미지
 ---|---|
-**1**|![ysh195]({{site.url}}/images/tc/tc1.png)
-**2**|![ysh195]({{site.url}}/images/tc/tc2.png)
-**3**|![ysh195]({{site.url}/images/tc/tc3.png)
+**1**|![ysh195](../images/tc/tc1.png)
+**2**|![ysh195](../images/tc/tc2.png)
+**3**|![ysh195](../images/tc/tc3.png)
 
 ## <br>2. 코드
 

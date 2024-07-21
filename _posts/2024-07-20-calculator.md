@@ -467,7 +467,7 @@ public class Calculator extends JFrame{
 	}
 
 }
-~~~
+~~~{: .line-auto-div}
 
 ## <br>2. 기록
 
@@ -515,4 +515,4 @@ public class Calculator extends JFrame{
 
     * 좀 더 난이도가 높겠지만 블랙잭도 만들 수 있을 것 같은데(완료 / 다른 레포지토리에 보관)
 
-~~~
+~~~{: .line-auto-div}

@@ -53,10 +53,12 @@ https://www.youtube.com/redirect?event=video_description&redir_token=QUFFLUhqbGx
   _sass - _navigation.scss의 .nav_title(대략 516번째라고 함)
   
   .nav_title{
-  ...
-  background : $primary-color;
-  ...
+    ...
+    background : $primary-color;
+    ...
   }
   
-  $primary-color 를 $toc-color로 수정 
+  $primary-color 를 $toc-color로 수정
+
+  이걸 활용해서 글자색도 수정 가능.
   ~~~

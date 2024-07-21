@@ -6,6 +6,9 @@ search: false
     margin: 10px !important;
     width: 200% !important;
 }
+.initial-content{
+  width: 100% !important;
+}
 @charset "utf-8";
 
 @import "minimal-mistakes/skins/{{ site.minimal_mistakes_skin | default: 'default' }}"; // skin

@@ -12,6 +12,9 @@ pre {
   word-wrap: break-word !important;
   white-space: pre-wrap !important;
   text-align: left !important;
+  max-width: 100% !important;
+  overflow: auto !important;
+  padding: 5px;
 }
 
 @charset "utf-8";

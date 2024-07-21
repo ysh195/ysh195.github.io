@@ -26,7 +26,7 @@ url                      : "https://ysh195.github.io"
 baseurl                  : ""
 repository               : # GitHub username/repo-name e.g. "mmistakes/minimal-mistakes"
 teaser                   : # path of fallback teaser image, e.g. "/assets/images/500x300.png"
-logo                     : "https://ysh195.github.io/assets/images/coconut.png" # "/assets/images/coconut.png"
+logo                     : "https://ysh195.github.io/assets/images/coconut.png" # 안 되면 이걸로 "/assets/images/coconut.png"
 masthead_title           : # overrides the website title displayed in the masthead, use " " for no title
 breadcrumbs              : true # true, false (default)
 words_per_minute         : 200

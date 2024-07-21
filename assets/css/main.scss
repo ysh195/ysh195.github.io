@@ -9,8 +9,8 @@ search: false
 }
 
 pre {
-  max-width: 100%;
-  word-break: break-all;
+  max-width: 100% !important;
+  word-break: break-all !important;
 }
 
 @charset "utf-8";

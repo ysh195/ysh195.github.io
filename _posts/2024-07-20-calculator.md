@@ -5,6 +5,8 @@ categories : works
 tag : [java, 공부, 연습용]
 toc : true
 toc_sticky : true
+toc_label : 목차
+toc_icon: "fas fa-indent"
 author_profile : false
 ---
 

@@ -1,6 +1,6 @@
 ---
 layout : single
-title : 코딩학원 2주차 - 사칙연산 가능한 계산기
+title : 코딩 2주차 - 사칙연산 가능한 계산기
 categories : works
 tag : [java, 공부, 연습용]
 author_profile : false

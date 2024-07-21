@@ -15,7 +15,7 @@ String 타입의 완성된 하나의 계산식을 입력 받아서 String 타입
 
 번호|이미지
 ---|---
-**1**|![ysh195]({{site.url}}/images/calc/calc1.PNG)
+**1**|![ysh195]({{ site.url }}{{ site.baseurl }}/images/calc/calc1.PNG)
 **2**|![ysh195]({{site.url}}/images/calc/calc2.PNG)
 **3**|![ysh195]({{site.url}}/images/calc/calc3.PNG)
 

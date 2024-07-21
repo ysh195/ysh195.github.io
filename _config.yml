@@ -114,7 +114,7 @@ analytics:
 # Site Author
 author:
   name             : "ysh195"
-  avatar           : # path of avatar image, e.g. "/assets/images/bio-photo.jpg"
+  avatar           : "/assets/images/coconut.jpg"
   bio              : "These are all things that I made or studied. Feel free to look around."
   location         : "South Korea"
   email            : "mailto:dnqnp@naver.com"

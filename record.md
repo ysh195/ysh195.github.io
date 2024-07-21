@@ -45,14 +45,18 @@ https://www.youtube.com/redirect?event=video_description&redir_token=QUFFLUhqbGx
 * 목차 색깔 바꾸기
   ~~~
   _sass - _valuable.scss 내부 어딘가(되도록 찾기 쉬운 맨 앞이나 맨 뒤에)
+  
   $toc-color : 원하는 색깔코드 !default;
+  
   를 선언
   
   _sass - _navigation.scss의 .nav_title(대략 516번째라고 함)
+  
   .nav_title{
   ...
   background : $primary-color;
   ...
   }
+  
   $primary-color 를 $toc-color로 수정 
   ~~~

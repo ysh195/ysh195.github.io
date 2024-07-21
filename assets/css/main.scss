@@ -6,7 +6,8 @@ search: false
   margin : 0 !important;
 }
 .breadcrumbs{
-    text-align: left !important;
+  display: flex !important;
+  justify-content: flex-start !important;
 }
 .page__inner-wrap{
     float: inline-start  !important;

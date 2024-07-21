@@ -12,7 +12,7 @@ author_profile : false
 
 번호|이미지
 ---|---|
-**1**|![ysh195]({{site.baseurl}}/images/bj/bj1.PNG)
+**1**|![ysh195](https://ysh195.github.io/images)/bj/bj1.PNG)
 **2**|![ysh195]({{site.url}}{{site.baseurl}}/images/bj/bj2.PNG)
 
 ## <br>2. 코드

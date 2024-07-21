@@ -1,6 +1,6 @@
 ---
 layout : single
-title : 코딩학원 3주차 - 블랙잭 카드게임 만들기
+title : 코딩 3주차 - 블랙잭 카드게임 만들기
 categories : works
 tag: [java, 공부, 연습용]
 author_profile : false

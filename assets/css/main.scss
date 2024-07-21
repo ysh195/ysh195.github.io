@@ -7,10 +7,6 @@ search: false
 .pags__inner-wrap{
   width : 150% !important;
 }
-article.page {
-  width : auto;
-  max-width : 70% !important;
-}
 @charset "utf-8";
 
 @import "minimal-mistakes/skins/{{ site.minimal_mistakes_skin | default: 'default' }}"; // skin

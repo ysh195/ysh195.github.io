@@ -16,7 +16,7 @@ author_profile : false
 **2**|![ysh195]({{site.url}}/assets/images/fe2.png)
 **3**|![ysh195]({{site.url}}/assets/images/fe3.png)
 **4**|![ysh195]({{site.url}}/assets/images/fe4.PNG)
-**5**|![ysh195]({{site.url}/assets}/images/fe5.png)
+**5**|![ysh195]({{site.url}}/assets/images/fe5.png)
 **6**|![ysh195]({{site.url}}/assets/images/fe6.png)
 **7**|![ysh195]({{site.url}}/assets/images/fe7.png)
 **8**|![ysh195]({{site.url}}/assets/images/fe8.png)

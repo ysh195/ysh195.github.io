@@ -12,15 +12,15 @@ author_profile : false
 
 번호|이미지
 ---|---|
-**1**|![ysh195]({{site.url}}/images/fe/fe1.PNG)
-**2**|![ysh195]({{site.url}}/images/fe/fe2.png)
-**3**|![ysh195]({{site.url}}/images/fe/fe3.png)
-**4**|![ysh195]({{site.url}}/images/fe/fe4.PNG)
-**5**|![ysh195]({{site.url}}/images/fe/fe5.png)
-**6**|![ysh195]({{site.url}}/images/fe/fe6.png)
-**7**|![ysh195]({{site.url}}/images/fe/fe7.png)
-**8**|![ysh195]({{site.url}}/images/fe/fe8.png)
-**9**|![ysh195]({{site.url}}/images/fe/fe9.png)
+**1**|![ysh195](../images/fe/fe1.PNG)
+**2**|![ysh195](../images/fe/fe2.png)
+**3**|![ysh195](../images/fe/fe3.png)
+**4**|![ysh195](../images/fe/fe4.PNG)
+**5**|![ysh195](../images/fe/fe5.png)
+**6**|![ysh195](../images/fe/fe6.png)
+**7**|![ysh195](../images/fe/fe7.png)
+**8**|![ysh195](../images/fe/fe8.png)
+**9**|![ysh195](../images/fe/fe9.png)
 
 ## <br>2. 코드
 

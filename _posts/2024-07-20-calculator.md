@@ -12,7 +12,7 @@ String 타입의 완성된 하나의 계산식을 입력 받아서 String 타입
 사칙 연산과 () 연산 모두 가능합니다. 그리고 실수로 "."버튼을 안 넣었지만, "."을 이용한 실수 및 소숫점 계산도 가능합니다.
 
 ## <br>1. 코드
-![ysh195]({{site.url}}/assets/images/2024-07-20-calculator/coconut.png)
+![ysh195](../assets/images/coconut.png)
 ~~~java
 package one;
 

@@ -103,4 +103,5 @@ _config.yml 의 맨 아래 default 부분에 원하는 내용 추가
 배너 구성은 _includes/top-banner.html 에서 하고
 배너의 배치는 _layouts - single.html 에서 함
 ~~~
-14. 현재 _includes/footer.html (15~16줄)에서 footer - feed 숨김 처리 해둠.
+14. 현재 _includes/footer.html (15~17줄)에서 footer - feed 숨김 처리 해둠.
+15. 현재 _data/ui-text.yml (30줄, 621줄)에서 "follow" / "팔로우"라고 되어 있는 것들 "Contact"라고 수정해둠.

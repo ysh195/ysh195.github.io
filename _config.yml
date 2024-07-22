@@ -312,4 +312,4 @@ defaults:
 #        nav:
 #          "counts"
 
-date_format : "%Y-%M-%D"
+date_format : "%Y-%m-%d"

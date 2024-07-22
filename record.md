@@ -68,7 +68,7 @@ https://www.youtube.com/redirect?event=video_description&redir_token=QUFFLUhqbGx
   ~~~
 8. 목차 색깔 바꾸기
 ~~~
-  _sass - _valuable.scss 내부 어딘가(되도록 찾기 쉬운 맨 앞이나 맨 뒤에)
+  _sass/_valuable.scss 내부 어딘가(되도록 찾기 쉬운 맨 앞이나 맨 뒤에)
   
   $toc-color : 원하는 색깔코드 !default;
   
@@ -109,7 +109,7 @@ _config.yml 의 맨 아래 default 부분에 원하는 내용 추가
 13. banner 사용
 ~~~
 배너 구성은 _includes/top-banner.html 에서 하고
-배너의 배치는 _layouts - single.html 에서 함
+배너의 배치는 _layouts/single.html 에서 함
 ~~~
 14. 현재 _includes/footer.html (15~17줄)에서 footer - feed 숨김 처리 해둠.
 15. 현재 _data/ui-text.yml (30줄, 621줄)에서 "follow" / "팔로우"라고 되어 있는 것들 "Contact"라고 수정해둠. 그리고 611줄에서 "분 소요"로 되어 있는 것을 "분 소요 예상(정독 시)" 로 수정해둠

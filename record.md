@@ -25,11 +25,15 @@ pre, code {
   display: block;
   word-wrap: break-word !important;
   white-space: pre-wrap !important;
-  text-align: justify !important;
+  text-align: left !important;
   max-width: 100% !important;
   overflow: auto !important;
-  padding: 5px;
-  font-size: 0.8rem;
+  padding: 10px;
+  text-size-adjust: none;
+}
+
+.page__related{
+  float: inline-start !important;
 }
 ~~~
 3. 사이드바 쓰려면 아래의 내용을 위쪽 포스트 설정에 입력

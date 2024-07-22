@@ -29,10 +29,10 @@ pre, code {
   max-width: 100% !important;
   overflow: auto !important;
   padding: 10px;
-  webkit-text-size-adjust : 100%;
-  ms-text-size-adjust : 100%;
-  moz-text-size-adjust : 100%;
-  o-text-size-adjust : 100%;
+  webkit-text-size-adjust : none;
+  ms-text-size-adjust : none;
+  moz-text-size-adjust : none;
+  o-text-size-adjust : none;
 }
 
 .page__related{

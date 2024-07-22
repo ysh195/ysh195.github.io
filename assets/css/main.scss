@@ -16,7 +16,10 @@ pre, code {
   max-width: 100% !important;
   overflow: auto !important;
   padding: 10px;
-  text-size-adjust: none;
+  webkit-text-size-adjust : 100%;
+  ms-text-size-adjust : 100%;
+  moz-text-size-adjust : 100%;
+  o-text-size-adjust : 100%;
 }
 
 .page__related{

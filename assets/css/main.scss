@@ -20,14 +20,15 @@ pre, code {
   position : relative;
 }
 
-pre::before, code::before {
-  content:"";
-  position: absolute;
-  top:0;
-  left:0;
-  width: 2em;
+pre::first-line, code::first-line {
+  text-indent:0;
+  padding-left:0;
 }
 
+pre::first-letter, code::first-letter {
+  text-indent: -1.5em;
+  padding-left: 1.5em;
+}
 
 @charset "utf-8";
 

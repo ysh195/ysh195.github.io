@@ -15,7 +15,8 @@ pre, code {
   text-align: match-parent !important;
   max-width: 100% !important;
   overflow: auto !important;
-  padding: 5px;
+  padding-left: 1em;
+  text-indent : -1em;
 }
 
 @charset "utf-8";

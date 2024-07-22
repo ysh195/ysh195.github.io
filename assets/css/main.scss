@@ -16,18 +16,13 @@ pre, code {
   max-width: 100% !important;
   overflow: auto !important;
   padding: 5px;
-  text-indent: 10px;
-  position : relative;
+  text-indent: 1.5em;
 }
 
-pre::first-line, code::first-line {
-  text-indent:0;
-  padding-left:0;
-}
-
-pre::first-letter, code::first-letter {
-  text-indent: -1.5em;
-  padding-left: 1.5em;
+pre::before, code::before {
+  content: "";
+  display: inline-block;
+  width: 1.5em;
 }
 
 @charset "utf-8";

@@ -105,3 +105,4 @@ _config.yml 의 맨 아래 default 부분에 원하는 내용 추가
 ~~~
 14. 현재 _includes/footer.html (15~17줄)에서 footer - feed 숨김 처리 해둠.
 15. 현재 _data/ui-text.yml (30줄, 621줄)에서 "follow" / "팔로우"라고 되어 있는 것들 "Contact"라고 수정해둠.
+16. 현재 _includes/page__meta.html (8줄)에서 날짜 포맷 수정해둠

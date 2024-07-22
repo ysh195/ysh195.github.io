@@ -21,7 +21,7 @@ title                    : "ysh195's blog"
 title_separator          : " | "
 subtitle                 : "java, mysql, python, spring, etc"
 name                     : "ysh195"
-description              : "These are all things that I made or studied. Feel free to look around."
+description              : "제가 공부하거나 직접 만든 것들을 업로드하고 있습니다."
 url                      : "https://ysh195.github.io"
 baseurl                  : ""
 repository               : # GitHub username/repo-name e.g. "mmistakes/minimal-mistakes"
@@ -115,7 +115,7 @@ analytics:
 author:
   name             : "ysh195"
   avatar           : "https://ysh195.github.io/assets/images/coconut.png"
-  bio              : "These are all things that I made or studied. Feel free to look around."
+  bio              : "제가 공부하거나 직접 만든 것들을 업로드하고 있습니다."
   location         : "South Korea"
   email            : "dnqnp@naver.com"
   links:

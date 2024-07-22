@@ -16,13 +16,6 @@ pre, code {
   max-width: 100% !important;
   overflow: auto !important;
   padding: 5px;
-  text-indent: 1.5em;
-}
-
-pre::before, code::before {
-  content: "";
-  display: inline-block;
-  width: 1.5em;
 }
 
 @charset "utf-8";

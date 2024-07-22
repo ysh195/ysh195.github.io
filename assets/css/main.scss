@@ -16,7 +16,18 @@ pre, code {
   max-width: 100% !important;
   overflow: auto !important;
   padding: 5px;
+  text-indent: 10px;
+  position : relative;
 }
+
+pre::before, code::before {
+  content:"";
+  position: absolute;
+  top:0;
+  left:0;
+  width: 2em;
+}
+
 
 @charset "utf-8";
 

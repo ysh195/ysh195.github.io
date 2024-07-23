@@ -14,7 +14,20 @@
 1. 게시물 본문 사이즈를 바꾸고 싶으면 _sass/minimal-mistakes/_page.scss 내부의 .page의 width를 만지면 됨.
 2. assets/css/main.scss에서 스타일 수정됨.
 ~~~
+추가한 사항
+
+1. breadcrumbs
+: 화면 상단에 Home/Works/.... 라고 표시되는 창이 왔다갔다 하니까 정리가 안 되고, 마음에 안 들어서 게시물 본문과 정렬하여 왼쪽에 고정시킴
+
+2. pre, code
+: "/~~~"나 "/```"  사이에 들어가는 코드들이 화면 밖으로 계속 나가서 화면 밖으로 나가면 자동 줄바꿈 되도록 수정. 그 외에도 글자 크기 등에 대해 수정함
+
+3. page__related
+: 화면 하단에 "참고"라고 뜨면서 다른 게시물들 추천하는데, 위치가 이상해서 게시물 본문과 정렬하여 왼쪽에 고정시킴
+~~~
+~~~
 현재 추가한 내용
+
 
 .breadcrumbs{
     display: flex !important;
@@ -115,3 +128,9 @@ _config.yml 의 맨 아래 default 부분에 원하는 내용 추가
 15. 현재 _data/ui-text.yml (30줄, 621줄)에서 "follow" / "팔로우"라고 되어 있는 것들 "Contact"라고 수정해둠. 그리고 611줄에서 "분 소요"로 되어 있는 것을 "분 소요 예상(정독 시)" 로 수정해둠
 16. 현재 _includes/page__meta.html (8줄)에서 날짜/시간 포맷 수정해둠
 17. /_sass/minimal-mistakes/\_reset.scss 에서 각 폰트 사이즈 조절 가능
+18. 이 리포지토리의 가장 바깥(최상위 디렉토리)에 robots.txt 파일을 추가하고 그 파일에 다음과 같이 입력하여서 게시물들을 검색에 노출시킴
+~~~
+User-agent: *
+Disallow:
+Sitemap: https://ysh195.github.io/sitemap.xml
+~~~

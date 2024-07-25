@@ -1,14 +1,16 @@
 ---
 layout : single
-title : mySql 컨트롤러 만들기
+title : mySql 컨트롤 라이브러리 만들기
 categories : works
 tag: [java, 공부, 연습용]
 author_profile : false
 ---
 
-# <br><br>mySql과 간단하게 연결하고 조작할 수 있는 컨트롤러를 만들자
+# <br><br>mySql과 간단하게 연결하고 조작할 수 있게 해주는 컨트롤 라이브러리를 만들자
 
 ## <br>1. 완성 이미지
+
+라이브러리 하나로 mysql을 간단하게 컨트롤하고자 만들었습니다.
 
 번호|이미지
 ---|---|

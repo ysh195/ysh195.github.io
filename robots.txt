@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 Disallow: /private*/
-Sitemap: {{ '/sitemap.xml' | relative_url | prepnd: site.url }}
+Sitemap: https://ysh195.github.io/sitemap.xml

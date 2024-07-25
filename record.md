@@ -136,3 +136,4 @@ User-agent: *
 Disallow:
 Sitemap: https://ysh195.github.io/sitemap.xml
 ~~~
+19. 폰트 수정 _sass/minimal-mistakes.scss에서 import로 폰트 사용.\n그리고 같은 폴더 내의 variables.scss의 17줄 $sans-serif : 의 뒤 ""로 된 것들의 맨 앞에 새로운 폰트명을 입력.

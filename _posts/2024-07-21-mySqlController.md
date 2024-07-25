@@ -1,6 +1,6 @@
 ---
 layout : single
-title : mySqlController 만들기
+title : mySql 컨트롤러 만들기
 categories : works
 tag: [java, 공부, 연습용]
 author_profile : false

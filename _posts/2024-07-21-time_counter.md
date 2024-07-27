@@ -6,7 +6,7 @@ tag: [java, 공부, 연습용]
 author_profile : false
 ---
 
-# <br><br>디지털 시계 만들기
+# <br><br>디지털 시계
 
 ## <br>1. 완성 이미지
 

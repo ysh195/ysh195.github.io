@@ -80,7 +80,7 @@ https://www.youtube.com/redirect?event=video_description&redir_token=QUFFLUhqbGx
   ~~~
 8. 목차 색깔 바꾸기
 ~~~
-  _sass/_valuable.scss 내부 어딘가(되도록 찾기 쉬운 맨 앞이나 맨 뒤에)
+  _sass/minimal-mistakes/_valuable.scss 내부 어딘가(되도록 찾기 쉬운 맨 앞이나 맨 뒤에)
   
   $toc-color : 원하는 색깔코드 !default;
   

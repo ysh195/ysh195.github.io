@@ -42,8 +42,6 @@ pre {
   word-wrap: break-word;
   width: 100%;
   padding: 10px;
-  background-color: lightgray !important;
-  color: black;
 }
 
 code {

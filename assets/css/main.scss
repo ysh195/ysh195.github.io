@@ -16,6 +16,11 @@ pre {
   padding: 10px;
 }
 
+// 이렇게 해야 pre 내부의 code들의 배경색이 code의 설정을 따르지 않음
+pre code {
+  background-color: transparent;
+}
+
 code {
   width: auto;
   background-color: lightgray !important;

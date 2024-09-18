@@ -48,7 +48,6 @@ pre {
 
 code {
   width: auto;
-  padding: 10px;
   background-color: lightgray !important;
   color: black;
 }

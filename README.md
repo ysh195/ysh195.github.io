@@ -36,18 +36,17 @@
     justify-content: flex-start !important;
 }
 
-pre, code {
-  display: block;
-  word-wrap: break-word !important;
-  white-space: pre-wrap !important;
-  text-align: left !important;
-  max-width: 100% !important;
-  overflow: auto !important;
+pre {
+  overflow-x: auto;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  width: 100%;
   padding: 10px;
-  webkit-text-size-adjust : none;
-  ms-text-size-adjust : none;
-  moz-text-size-adjust : none;
-  o-text-size-adjust : none;
+}
+
+code {
+  width: auto;
+  padding: 10px;
 }
 
 .page__related{

@@ -8,19 +8,30 @@ search: false
     justify-content: flex-start !important;
 }
 
-pre, code {
-  display: block;
-  word-wrap: break-word !important;
-  white-space: pre-wrap !important;
-  text-align: left !important;
-  max-width: 100% !important;
-  overflow: auto !important;
-  padding: 10px;
-  webkit-text-size-adjust : none;
-  ms-text-size-adjust : none;
-  moz-text-size-adjust : none;
-  o-text-size-adjust : none;
+pre {
+  overflow-x: auto;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  width: 100%;
 }
+
+code {
+  width: auto;
+}
+
+// pre, code {
+//   display: block;
+//   word-wrap: break-word !important;
+//   white-space: pre-wrap !important;
+//   text-align: left !important;
+//   max-width: 100% !important;
+//   overflow: auto !important;
+//   padding: 10px;
+//   webkit-text-size-adjust : none;
+//   ms-text-size-adjust : none;
+//   moz-text-size-adjust : none;
+//   o-text-size-adjust : none;
+// }
 
 .page__related{
   float: inline-start !important;

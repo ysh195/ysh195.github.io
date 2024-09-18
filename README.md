@@ -79,14 +79,8 @@ https://www.youtube.com/redirect?event=video_description&redir_token=QUFFLUhqbGx
   https://www.youtube.com/redirect?event=video_description&redir_token=QUFFLUhqa1N1TWpqQzB3OGsxVE9vc3pkdndtakRmNlJnZ3xBQ3Jtc0tuVDdqUjgybUJrZEg2QTc4WGhXcDZ0Sy1kUmJraDhwMl9VcTRDbHVRUWJHV1l3a0pENkNMRThuQnQtNlNIZ3h2WGVFZkFiZU0xU0hqV01pNUJFNlJVYjI0YURzbjBEak1FNWlhaVhkNHlGbTFtY2gzVQ&q=https%3A%2F%2Fmmistakes.github.io%2Fminimal-mistakes%2Fdocs%2Fhelpers%2F%23responsive-video-embed&v=q0P3TSoVNDM
   ~~~
 8. 목차 색깔 바꾸기
-~~~
-  _sass/minimal-mistakes/_valuable.scss 내부 어딘가(되도록 찾기 쉬운 맨 앞이나 맨 뒤에)
-  
-  $toc-color : 원하는 색깔코드 !default;
-  
-  를 선언
-  
-  _sass - _navigation.scss의 .nav_title(대략 516번째라고 함)
+~~~  
+  _sass/minimal-mistakes/_navigation.scss의 .nav_title(대략 516번째라고 함)
   
   .nav_title{
     ...

@@ -58,9 +58,8 @@ public class ChatGpt {
 
     HttpHeaders headers = new HttpHeaders();
     headers.setContentType(MediaType.APPLICATION_JSON);
-    headers.setBearerAuth(openAiKey); // add [token : bearer token] on [header : authorization]
+    headers.setBearerAuth(openAiKey);
 
-    // create http request and set my settings on it
     HttpEntity<String> request = new HttpEntity<>(jsonPayload, headers);
 
     RestTemplate restTemplate = new RestTemplate();
@@ -144,9 +143,8 @@ String jsonPayload = String.format(
 
 HttpHeaders headers = new HttpHeaders();
 headers.setContentType(MediaType.APPLICATION_JSON);
-headers.setBearerAuth(openAiKey); // add [token : bearer token] on [header : authorization]
+headers.setBearerAuth(openAiKey);
 
-// create http request and set my settings on it
 HttpEntity<String> request = new HttpEntity<>(jsonPayload, headers);
 ~~~
 

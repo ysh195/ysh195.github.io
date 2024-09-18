@@ -40,7 +40,7 @@ public class ChatGpt {
     String answerSetting = "";
 
     String jsonPayload = String.format(
-        """
+        \"""
         {
           "model": "%s",
           "messages": [
@@ -49,7 +49,7 @@ public class ChatGpt {
             {"role": "assistant", "content": "You are %s assistant"}
           ]
         }
-        """,
+        \""",
         chatGptModel,
         systemInitialSetting,
         yourQuestion,

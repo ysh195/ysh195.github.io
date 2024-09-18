@@ -91,6 +91,12 @@ https://www.youtube.com/redirect?event=video_description&redir_token=QUFFLUhqbGx
   $primary-color 를 $toc-color로 수정
 
   이걸 활용해서 글자색도 수정 가능.
+
+  현재 목차 요소 색깔을 바꿔놨음
+  .active a {
+      background-color: #55acee;
+      // @include yiq-contrasted($active-color);
+  }
   ~~~
 9. 포스트 내에 이미지 추가하려면 무조건 permalink로 절대참조할 것.
 10. 게시물의 카테고리나 게시물 제목을 바꿔서 주소가 변경될 경우, 이전 주소로도 연결되게 하는 방법. 근데 이거 설치하는 데에 엄청 애먹었는데 생각보다 별 거 없어서 괜히 했나 싶음. 오히려 삭제하거나 하면 오류 생길까 걱정됨.

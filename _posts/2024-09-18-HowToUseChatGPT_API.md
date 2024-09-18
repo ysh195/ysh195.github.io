@@ -148,7 +148,7 @@ headers.setBearerAuth(openAiKey);
 HttpEntity<String> request = new HttpEntity<>(jsonPayload, headers);
 ~~~
 
-`jsonPayload`는 `request`의 구체적인 내용을 설정을 위한 변수입니다.<br>
+`jsonPayload`는 `request`의 구체적인 내용을 설정하기 위한 변수입니다.<br>
 유지 보수를 용이하게 하고, 가독성을 향상시키고자
 `String.format()`
 을 사용했습니다.<br>

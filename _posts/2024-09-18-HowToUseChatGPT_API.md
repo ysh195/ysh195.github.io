@@ -7,7 +7,7 @@ author_profile : false
 ---
 
 # chatGPT API 사용법
-
+- - -
 api 키는 openai 홈페이지에서 간단히 발급 받으실 수 있으니 생략합니다.
 <br>
 

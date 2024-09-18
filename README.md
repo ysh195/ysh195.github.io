@@ -22,7 +22,7 @@
 
 2. pre, code
 : "~~~"나 "```"  사이에 들어가는 코드들이 화면 밖으로 계속 나가서 화면 밖으로 나가면 자동 줄바꿈 되도록 수정.
-그 외에도 글자 크기 등에 대해 수정함
+그 외에도 배경색과 글자색 등 수정
 
 3. page__related
 : 화면 하단에 "참고"라고 뜨면서 다른 게시물들 추천하는데, 위치가 이상해서 게시물 본문과 정렬하여 왼쪽에 고정시킴
@@ -42,16 +42,17 @@ pre {
   word-wrap: break-word;
   width: 100%;
   padding: 10px;
+  background-color: lightgray !important;
+  color: black !important;
 }
 
 code {
   width: auto;
   padding: 10px;
+  background-color: lightgray !important;
+  color: black !important;
 }
 
-.page__related{
-  float: inline-start !important;
-}
 ~~~
 3. 사이드바 쓰려면 아래의 내용을 위쪽 포스트 설정에 입력
  ~~~

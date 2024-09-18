@@ -140,3 +140,14 @@ Sitemap: https://ysh195.github.io/sitemap.xml
 19. 폰트 수정 _sass/minimal-mistakes.scss에서 import로 폰트 사용.   
 그리고 같은 폴더 내의 variables.scss의 17줄 $sans-serif : 의 뒤 ""로 된 것들의 맨 앞에 새로운 폰트명을 입력.   
 !! 폰트 함부러 바꾸면 구글 검색엔진이 크롤링하기에 적합하지 않은 사이트라고 판단해서 검색 대상에서 제외당하니까 주의   
+20. _sass/minimal-mistakes/_page.scss의 .page__content - :not(pre) > code
+pre 내부에 있지 않은 code의 색상을 일괄적으로 지정하는 css가 있어서 수정함
+~~~
+  :not(pre) > code {
+    padding-top: 0.1rem;
+    padding-bottom: 0.1rem;
+    font-size: 0.8em;
+    background: lightgray;
+    // background: $code-background-color;
+    border-radius: $border-radius;
+~~~

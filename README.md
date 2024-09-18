@@ -50,7 +50,7 @@ pre code {
 
 code {
   width: auto;
-  background-color: lightgray !important;
+  background-color: lightgray;
   color: black;
 }
 

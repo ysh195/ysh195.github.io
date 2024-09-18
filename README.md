@@ -43,14 +43,14 @@ pre {
   width: 100%;
   padding: 10px;
   background-color: lightgray !important;
-  color: black !important;
+  color: black;
 }
 
 code {
   width: auto;
   padding: 10px;
   background-color: lightgray !important;
-  color: black !important;
+  color: black;
 }
 
 ~~~

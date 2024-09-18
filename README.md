@@ -36,7 +36,8 @@
     justify-content: flex-start !important;
 }
 
-// pre 내부에 있지 않은 code들의 색상은 따로 지정하는 곳이 있고, pre 내부에 있는 애들은 그냥 pre의 스타일을 따르면 됨
+// pre 내부에 있지 않은 code들의 색상은 따로 지정하는 곳이 있고,
+// pre 내부에 있는 애들은 그냥 pre의 스타일을 따르게 됨
 pre {
   overflow-x: auto;
   white-space: pre-wrap;

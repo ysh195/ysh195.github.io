@@ -44,6 +44,10 @@ pre {
   padding: 10px;
 }
 
+pre code {
+  background-color: transparent;
+}
+
 code {
   width: auto;
   background-color: lightgray !important;

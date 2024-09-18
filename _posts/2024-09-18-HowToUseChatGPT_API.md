@@ -153,7 +153,7 @@ HttpEntity<String> request = new HttpEntity<>(jsonPayload, headers);
 <br/>
 jsonPayload는 request의 구체적인 내용을 설정을 위한 변수입니다.<br/>
 유지 보수를 용이하게 하고, 가독성을 향상시키고자 
-**`String.format( )`**
+`String.format( )`
 을 사용했습니다.<br/>
 request에 사용할 headers를 생성하고, request의 형식은 json으로 설정합니다. 그리고 발급 받은 openAiKey를 보안 인증에 사용합니다.<br/>
 이렇게 만든 jsonPayload와 headers를 사용하여 request를 구성합니다.<br/>
@@ -187,7 +187,7 @@ catch(Exception e){
 <br/>
 
 api 요청을 전달하고 그 결과값을 받아올 restTemplate을 생성합니다.<br/>
-**`restTemplate.exchange(api 요청을 보낼 uri, 요청 방식, 요청 내용, 받아올 결과의 클래스 타입)`**
+`restTemplate.exchange(api 요청을 보낼 uri, 요청 방식, 요청 내용, 받아올 결과의 클래스 타입)`
 과 같이 구성합니다.<br/>
 
 * uri는 고정된 것입니다.

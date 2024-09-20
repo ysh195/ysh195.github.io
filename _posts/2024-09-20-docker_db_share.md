@@ -34,7 +34,7 @@ author_profile: false
 <br>
 도커 터미널에 아래와 같이 입력합니다.
 
-```
+```java
 docker pull mysql --(1)
 docker image ls
 docker run --name mysql -d -p 3306:3306 -e MYSQL_ROOT_PASSWORD=1111 mysql --(2)
@@ -64,7 +64,7 @@ CREATE DATABASE [DB이름]; --(8)
 
 도커 터미널에서 mysql 컨테이너 내부의 터미널에 접속하고, 아래와 같이 입력합니다.
 
-```
+```java
 docker exec -it mysql /bin/bash --(1)
 nano /etc/mysql/mysql.conf.d/mysqld.cnf --(2)
 bind-address = 0.0.0.0 --(2)
@@ -92,7 +92,7 @@ application.properties과 application.yml의 역할 및 기능은 동일하고, 
 
 application.yml로 한다면
 
-```
+```java
 >> application.yml
 spring:
   datasource:
@@ -106,7 +106,7 @@ spring:
 
 application.properties로 한다면
 
-```
+```java
 >> application.properties
 spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
 spring.datasource.url=jdbc:mysql://[호스트IP]:3306/[DB이름]?serverTimezone=Asia/Seoul&useUnicode=true
@@ -118,7 +118,7 @@ spring.datasource.password=1111
 
 프로젝트 폴더의 디렉터리 루트(가장 밖. 프로젝트 폴더 들어오면 바로 보이는 곳)에 docker-compose.yml 파일을 생성합니다.
 
-```
+```java
 >> docker-compose.yml
 version: '3.8'
 

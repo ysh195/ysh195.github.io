@@ -1,289 +1,150 @@
-# [Minimal Mistakes Jekyll theme](https://mmistakes.github.io/minimal-mistakes/)
-
-[![LICENSE](https://img.shields.io/badge/license-MIT-lightgrey.svg)](https://raw.githubusercontent.com/mmistakes/minimal-mistakes/master/LICENSE)
-[![Jekyll](https://img.shields.io/badge/jekyll-%3E%3D%203.7-blue.svg)](https://jekyllrb.com/)
-
-Minimal Mistakes is a flexible two-column Jekyll theme, perfect for building personal sites, blogs, and portfolios. As the name implies, styling is purposely minimalistic to be enhanced and customized by you :smile:.
-
-:sparkles: See what's new in the [CHANGELOG](CHANGELOG.md).
-
-**Note:** The theme uses the [jekyll-include-cache](https://github.com/benbalter/jekyll-include-cache) plugin which will need to be installed in your `Gemfile` and must be retained in the `plugins` array of `_config.yml`. Otherwise you'll encounter `Unknown tag 'include_cached'` errors at build.
-
-[![Minimal Mistakes live preview][2]][1]
-
-[1]: https://mmistakes.github.io/minimal-mistakes/
-[2]: screenshot.png (live preview)
-
-![layout examples](screenshot-layouts.png)
-
-## Notable features
-
-- Bundled as a "theme gem" for easier installation/upgrading.
-- Compatible with GitHub Pages.
-- Support for Jekyll's built-in Sass/SCSS preprocessor.
-- Nine different skins (color variations).
-- Several responsive layout options (single, archive index, search, splash, and paginated home page).
-- Optimized for search engines with support for [Twitter Cards](https://dev.twitter.com/cards/overview) and [Open Graph](http://ogp.me/) data.
-- Optional [header images](https://mmistakes.github.io/minimal-mistakes/docs/layouts/#headers), [custom sidebars](https://mmistakes.github.io/minimal-mistakes/docs/layouts/#sidebars), [table of contents](https://mmistakes.github.io/minimal-mistakes/docs/helpers/#table-of-contents), [galleries](https://mmistakes.github.io/minimal-mistakes/docs/helpers/#gallery), related posts, [breadcrumb links](https://mmistakes.github.io/minimal-mistakes/docs/configuration/#breadcrumb-navigation-beta), [navigation lists](https://mmistakes.github.io/minimal-mistakes/docs/helpers/#navigation-list), and more.
-- Commenting support (powered by [Disqus](https://disqus.com/), [Facebook](https://developers.facebook.com/docs/plugins/comments), Google+, [Discourse](https://www.discourse.org/), static-based via [Staticman](https://staticman.net/), [utterances](https://utteranc.es/), and [giscus](https://giscus.app/)).
-- [Google Analytics](https://www.google.com/analytics/) support.
-- UI localized text in English (default), Arabic (عربي), Brazilian Portuguese (Português brasileiro), Catalan, Chinese, Czech, Danish, Dutch, Finnish, French (Français), German (Deutsch), Greek, Hebrew, Hindi (हिंदी), Hungarian, Indonesian, Irish (Gaeilge), Italian (Italiano), Japanese, Kiswahili, Korean, Malayalam, Myanmar (Burmese), Nepali (Nepalese), Norwegian (Norsk), Persian (فارسی), Polish, Punjabi (ਪੰਜਾਬੀ), Romanian, Russian, Slovak, Spanish (Español), Swedish, Thai, Turkish (Türkçe), Ukrainian (Українська) and Vietnamese.
-
-## Skins (color variations)
-
-This theme comes in nine different skins (in addition to the default one).
-
-| `air` | `contrast` | `dark` |
-| --- | --- | --- |
-| [![air skin](https://mmistakes.github.io/minimal-mistakes/assets/images/air-skin-archive.png)](https://mmistakes.github.io/minimal-mistakes/assets/images/air-skin-archive-large.png) | [![contrast skin](https://mmistakes.github.io/minimal-mistakes/assets/images/contrast-skin-archive.png)](https://mmistakes.github.io/minimal-mistakes/assets/images/contrast-skin-archive-large.png) | [![dark skin](https://mmistakes.github.io/minimal-mistakes/assets/images/dark-skin-archive.png)](https://mmistakes.github.io/minimal-mistakes/assets/images/dark-skin-archive-large.png) |
-
-| `dirt` | `mint` | `sunrise` |
-| --- | --- | --- |
-| [![dirt skin](https://mmistakes.github.io/minimal-mistakes/assets/images/dirt-skin-archive.png)](https://mmistakes.github.io/minimal-mistakes/assets/images/dirt-skin-archive-large.png) | [![mint skin](https://mmistakes.github.io/minimal-mistakes/assets/images/mint-skin-archive.png)](https://mmistakes.github.io/minimal-mistakes/assets/images/mint-skin-archive-large.png) | [![sunrise skin](https://mmistakes.github.io/minimal-mistakes/assets/images/sunrise-skin-archive.png)](https://mmistakes.github.io/minimal-mistakes/assets/images/sunrise-skin-archive-large.png) |
-
-| `aqua` | `neon` | `plum` |
-| --- | --- | --- |
-| [![aqua skin](https://mmistakes.github.io/minimal-mistakes/assets/images/aqua-skin-archive.png)](https://mmistakes.github.io/minimal-mistakes/assets/images/aqua-skin-archive-large.png) | [![neon skin](https://mmistakes.github.io/minimal-mistakes/assets/images/neon-skin-archive.png)](https://mmistakes.github.io/minimal-mistakes/assets/images/neon-skin-archive-large.png) | [![plum skin](https://mmistakes.github.io/minimal-mistakes/assets/images/plum-skin-archive.png)](https://mmistakes.github.io/minimal-mistakes/assets/images/plum-skin-archive-large.png) |
-
-## Demo pages
-
-| Name                                        | Description                                           |
-| ------------------------------------------- | ----------------------------------------------------- |
-| [Post with Header Image][header-image-post] | A post with a large header image. |
-| [HTML Tags and Formatting Post][html-tags-post] | A variety of common markup showing how the theme styles them. |
-| [Syntax Highlighting Post][syntax-post] | Post displaying highlighted code. |
-| [Post with a Gallery][gallery-post] | A post showing several images wrapped in `<figure>` elements. |
-| [Sample Collection Page][sample-collection] | Single page from a collection. |
-| [Categories Archive][categories-archive] | Posts grouped by category. |
-| [Tags Archive][tags-archive] | Posts grouped by tag. |
-
-Additional sample posts are available under [posts archive][year-archive] on the demo site. Source files for these (and the entire demo site) can be found in [`/docs`](docs).
-
-[header-image-post]: https://mmistakes.github.io/minimal-mistakes/layout-header-image-text-readability/
-[gallery-post]: https://mmistakes.github.io/minimal-mistakes/post%20formats/post-gallery/
-[html-tags-post]: https://mmistakes.github.io/minimal-mistakes/markup/markup-html-tags-and-formatting/
-[syntax-post]: https://mmistakes.github.io/minimal-mistakes/markup-syntax-highlighting/
-[sample-collection]: https://mmistakes.github.io/minimal-mistakes/recipes/chocolate-chip-cookies/
-[categories-archive]: https://mmistakes.github.io/minimal-mistakes/categories/
-[tags-archive]: https://mmistakes.github.io/minimal-mistakes/tags/
-[year-archive]: https://mmistakes.github.io/minimal-mistakes/year-archive/
-
-## Installation
-
-There are three ways to install: as a [gem-based theme](https://jekyllrb.com/docs/themes/#understanding-gem-based-themes), as a [remote theme](https://blog.github.com/2017-11-29-use-any-theme-with-github-pages/) (GitHub Pages compatible), or forking/directly copying all of the theme files into your project.
-
-### Gem-based method
-
-With Gem-based themes, directories such as the `assets`, `_layouts`, `_includes`, and `_sass` are stored in the theme’s gem, hidden from your immediate view. Yet all of the necessary directories will be read and processed during Jekyll’s build process.
-
-This allows for easier installation and updating as you don't have to manage any of the theme files. To install:
-
-1. Add the following to your `Gemfile`:
-
-   ```ruby
-   gem "minimal-mistakes-jekyll"
-   ```
-
-2. Fetch and update bundled gems by running the following [Bundler](http://bundler.io/) command:
-
-   ```bash
-   bundle
-   ```
-
-3. Set the `theme` in your project's Jekyll `_config.yml` file:
-
-   ```yaml
-   theme: minimal-mistakes-jekyll
-   ```
-
-To update the theme run `bundle update`.
-
-### Remote theme method
-
-Remote themes are similar to Gem-based themes, but do not require `Gemfile` changes or whitelisting making them ideal for sites hosted with GitHub Pages.
-
-To install:
-
-1. Create/replace the contents of your `Gemfile` with the following:
-
-   ```ruby
-   source "https://rubygems.org"
-
-   gem "github-pages", group: :jekyll_plugins
-   gem "jekyll-include-cache", group: :jekyll_plugins
-   ```
-
-2. Add `jekyll-include-cache` to the `plugins` array of your `_config.yml`.
-
-3. Fetch and update bundled gems by running the following [Bundler](https://bundler.io/) command:
-
-   ```bash
-   bundle
-   ```
-
-4. Add `remote_theme: "mmistakes/minimal-mistakes@4.26.2"` to your `_config.yml` file. Remove any other `theme:` or `remote_theme:` entry.
-
-<!--
-  Dev note: The version number is currently hard-coded in these files:
-
-    - package.json
-    - README.md (this file)
-    - docs/_data/theme.yml
-    - docs/_pages/home.md (in Front Matter "excerpt")
-
-  `package.json` holds the authoritative version number, and the others can be updated with `bundle exec rake version`.
-
-  The following files should also be regenerated:
-
-    - _includes/copyright.html, _includes/copyright.js, _sass/minimal-mistakes/_copyright.scss
-      (Run `bundle exec rake clean` then `bundle exec rake copyright` - all three references `package.json`)
-    - assets/js/main.min.js (Run `bundle exec rake js`, references `_includes/copyright.js`)
-
-  *Tip*: The default Rake task will update all of the above files at once.
-
-  Additionally, the license year is hard-coded in these files and are NOT covered by a Rake task:
-
-    - README.md (this file, near the end)
-    - LICENSE
--->
-
-**Looking for an example?** Use the [Minimal Mistakes remote theme starter](https://github.com/mmistakes/mm-github-pages-starter/generate) for the quickest method of getting a GitHub Pages hosted site up and running. Generate a new repository from the starter, replace sample content with your own, and configure as needed.
-
-## Usage
-
-For detailed instructions on how to configure, customize, add/migrate content, and more read the [theme's documentation](https://mmistakes.github.io/minimal-mistakes/docs/quick-start-guide/).
-
-## Contributing
-
-Found a typo in the documentation or interested in [fixing a bug](https://github.com/mmistakes/minimal-mistakes/issues)? Then by all means [submit an issue](https://github.com/mmistakes/minimal-mistakes/issues/new) or [pull request](https://help.github.com/articles/using-pull-requests/). If this is your first pull request, it may be helpful to read up on the [GitHub Flow](https://guides.github.com/introduction/flow/) first.
-
-For help with using the theme or general Jekyll support questions, please use the [Jekyll Talk forums](https://talk.jekyllrb.com/).
-
-### Pull Requests
-
-When submitting a pull request:
-
-1. Clone the repo.
-2. Create a branch off of `master` and give it a meaningful name (e.g. `my-awesome-new-feature`).
-3. Open a pull request on GitHub and describe the feature or fix.
-
-Theme documentation and demo pages can be found in the [`/docs`](docs) if submitting improvements, typo corrections, etc.
-
-## Development
-
-To set up your environment to develop this theme, run `bundle install`.
-
-To test the theme, run `bundle exec rake preview` and open your browser at `http://localhost:4000/test/`. This starts a Jekyll server using content in the `test/` directory. As modifications are made to the theme and test site, it will regenerate and you should see the changes in the browser after a refresh.
-
-## Credits
-
-### Creator
-
-**Michael Rose**
-
-- <https://mademistakes.com>
-- <https://twitter.com/mmistakes>
-- <https://github.com/mmistakes>
-
-### Icons + Demo Images:
-
-- [The Noun Project](https://thenounproject.com) - Garrett Knoll, Arthur Shlain, and [tracy tam](https://thenounproject.com/tracytam)
-- [Font Awesome](http://fontawesome.io/)
-- [Unsplash](https://unsplash.com/)
-
-### Other:
-
-- [Jekyll](http://jekyllrb.com/)
-- [jQuery](http://jquery.com/)
-- [Susy](http://susy.oddbird.net/)
-- [Breakpoint](http://breakpoint-sass.com/)
-- [Magnific Popup](http://dimsemenov.com/plugins/magnific-popup/)
-- [FitVids.JS](http://fitvidsjs.com/)
-- [GreedyNav.js](https://github.com/lukejacksonn/GreedyNav)
-- [Smooth Scroll](https://github.com/cferdinandi/smooth-scroll)
-- [Gumshoe](https://github.com/cferdinandi/gumshoe)
-- [jQuery throttle / debounce](http://benalman.com/projects/jquery-throttle-debounce-plugin/)
-- [Lunr](http://lunrjs.com)
-- [Clipboard.js](https://clipboardjs.com)
-
-## License
-
-The MIT License (MIT)
-
-Copyright (c) 2013-2024 Michael Rose and contributors
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
-
-Minimal Mistakes incorporates icons from [The Noun Project](https://thenounproject.com/) 
-creators Garrett Knoll, Arthur Shlain, and tracy tam.
-Icons are distributed under Creative Commons Attribution 3.0 United States (CC BY 3.0 US).
-
-Minimal Mistakes incorporates [Font Awesome](http://fontawesome.io/),
-Copyright (c) 2017 Dave Gandy.
-Font Awesome is distributed under the terms of the [SIL OFL 1.1](http://scripts.sil.org/OFL) 
-and [MIT License](http://opensource.org/licenses/MIT).
-
-Minimal Mistakes incorporates photographs from [Unsplash](https://unsplash.com).
-
-Minimal Mistakes incorporates [Susy](http://susy.oddbird.net/),
-Copyright (c) 2017, Miriam Eric Suzanne.
-Susy is distributed under the terms of the [BSD 3-clause "New" or "Revised" License](https://opensource.org/licenses/BSD-3-Clause).
-
-Minimal Mistakes incorporates [Breakpoint](http://breakpoint-sass.com/).
-Breakpoint is distributed under the terms of the [MIT/GPL Licenses](http://opensource.org/licenses/MIT).
-
-Minimal Mistakes incorporates [FitVids.js](https://github.com/davatron5000/FitVids.js/),
-Copyright (c) 2013 Dave Rubert and Chris Coyier.
-FitVids is distributed under the terms of the [WTFPL License](http://www.wtfpl.net/).
-
-Minimal Mistakes incorporates [Magnific Popup](http://dimsemenov.com/plugins/magnific-popup/),
-Copyright (c) 2014-2016 Dmitry Semenov, http://dimsemenov.com.
-Magnific Popup is distributed under the terms of the MIT License.
-
-Minimal Mistakes incorporates [Smooth Scroll](http://github.com/cferdinandi/smooth-scroll),
-Copyright (c) 2019 Chris Ferdinandi.
-Smooth Scroll is distributed under the terms of the [MIT License](http://opensource.org/licenses/MIT).
-
-Minimal Mistakes incorporates [Gumshoejs](http://github.com/cferdinandi/gumshoe),
-Copyright (c) 2019 Chris Ferdinandi.
-Gumshoejs is distributed under the terms of the [MIT License](http://opensource.org/licenses/MIT).
-
-Minimal Mistakes incorporates [jQuery throttle / debounce](http://benalman.com/projects/jquery-throttle-debounce-plugin/),
-Copyright (c) 2010 "Cowboy" Ben Alman.
-jQuery throttle / debounce is distributed under the terms of the [MIT License](http://opensource.org/licenses/MIT).
-
-Minimal Mistakes incorporates [GreedyNav.js](https://github.com/lukejacksonn/GreedyNav),
-Copyright (c) 2015 Luke Jackson.
-GreedyNav.js is distributed under the terms of the [MIT License](http://opensource.org/licenses/MIT).
-
-Minimal Mistakes incorporates [Jekyll Group-By-Array](https://github.com/mushishi78/jekyll-group-by-array),
-Copyright (c) 2015 Max White <mushishi78@gmail.com>.
-Jekyll Group-By-Array is distributed under the terms of the [MIT License](http://opensource.org/licenses/MIT).
-
-Minimal Mistakes incorporates [@allejo's Pure Liquid Jekyll Table of Contents](https://allejo.io/blog/a-jekyll-toc-in-liquid-only/),
-Copyright (c) 2017 Vladimir Jimenez.
-Pure Liquid Jekyll Table of Contents is distributed under the terms of the [MIT License](http://opensource.org/licenses/MIT).
-
-Minimal Mistakes incorporates [Lunr](http://lunrjs.com),
-Copyright (c) 2018 Oliver Nightingale.
-Lunr is distributed under the terms of the [MIT License](http://opensource.org/licenses/MIT).
-
-Minimal Mistakes incorporates [clipboard.js](https://clipboardjs.com/),
-Copyright (c) 2021 Zeno Rocha.
-Clipboard.js is distributed under the terms of the [MIT License](https://opensource.org/licenses/MIT).
+## google analitics로 블로그 방문객 통계 집계 중.
+### https://analytics.google.com/analytics/web/?authuser=0#/p450888864/reports/reportinghub?params=_u..nav%3Dmaui
+----
+## disqus로 게시글에 대한 댓글 기능 구현 중
+### https://ysh195.disqus.com/admin/settings/recommendations/
+----
+## Google Search Console로 내 블로그를 검색에 노출 중
+### https://search.google.com/search-console
+----
+## 네이버 Search Advisor로 내 블로그를 검색에 노출 중
+### https://searchadvisor.naver.com/
+----
+### 기타
+1. 게시물 본문 사이즈를 바꾸고 싶으면 _sass/minimal-mistakes/_page.scss 내부의 .page의 width를 만지면 됨.
+2. assets/css/main.scss에서 스타일 수정됨.
+~~~
+추가한 사항
+
+1. breadcrumbs
+: 화면 상단에 Home/Works/.... 라고 표시되는 창이 왔다갔다 하니까
+정리가 안 되고, 마음에 안 들어서 게시물 본문과 정렬하여 왼쪽에 고정시킴
+
+2. pre, code
+: "~~~"나 "```"  사이에 들어가는 코드들이 화면 밖으로 계속 나가서 화면 밖으로 나가면 자동 줄바꿈 되도록 수정.
+그 외에도 배경색과 글자색 등 수정
+
+3. page__related
+: 화면 하단에 "참고"라고 뜨면서 다른 게시물들 추천하는데, 위치가 이상해서 게시물 본문과 정렬하여 왼쪽에 고정시킴
+~~~
+~~~
+현재 추가한 내용
+
+
+.breadcrumbs{
+    display: flex !important;
+    justify-content: flex-start !important;
+}
+
+// pre 내부에 있지 않은 code들의 색상은 따로 지정하는 곳이 있고,
+// pre 내부에 있는 애들은 그냥 pre의 스타일을 따르게 됨
+pre {
+  overflow-x: auto;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  width: 100%;
+  padding: 10px;
+}
+
+code {
+  width: auto;
+  color: black;
+}
+
+~~~
+3. 사이드바 쓰려면 아래의 내용을 위쪽 포스트 설정에 입력
+ ~~~
+  sidebar:
+    nav:
+      "docs"
+  ~~~
+4. 이 블로그에 대한 원 저작자의 업데이트를 반영하고 싶으면 아래의 영상 참고.
+ ~~~
+   https://www.youtube.com/watch?v=zoZ4LF-8j2E&list=PLIMb_GuNnFwfMm3alTSOmDK4AnpdG7USY&index=3
+  ~~~
+5. 블로그 내 키워드 검색에서 제외하고 싶으면 해당 게시물의 머릿말 속성에서 search : false 쓰면 됨. 중간에 뭔가 확 강조하고 싶거나 공지해야 할 때 그냥 문장 끝에 달아주면 됨. 이런 식으로{: .notice}. 그리고 여러 문장을 한 번에 묶어서 강조하려면 div로 묶어야 함. 아래의 내용 참고.
+ ~~~
+  https://mmistakes.github.io/minimal-mistakes/docs/utility-classes/#notices
+  ~~~
+6. 버튼은 [텍스트 내용](url){버튼 양식}으로 써주면 됨.
+~~~
+버튼 사용법 링크
+https://www.youtube.com/redirect?event=video_description&redir_token=QUFFLUhqbGxzQ0dMNjhsVUVzR0J0Z2lsbk1OWktDNzdtZ3xBQ3Jtc0trSU9DLXE5aHlwaERUaGY2WF9fdkk2ekhRbjlkUjVPRHhMcmdHQVp6cGtEWjVBTlppbFkyNk5teWFfYnN3ZUc2WjN2SEJDNTBrNmgtdHlGM05rMnUtQTViMHY2MGtXdS1XZUIxMnUwN0lUc0VYblJPQQ&q=https%3A%2F%2Fmmistakes.github.io%2Fminimal-mistakes%2Fdocs%2Futility-classes%2F%23buttons&v=q0P3TSoVNDM
+~~~
+7. 유튜브 영상 및 기타 미디어 연결하는 방법.
+ ~~~
+  {% include video id="XsxDH4HcOWA" provider="youtube" %}
+  여기서 말하는 video id는 유튜브 영상 주소의 https://www.youtube.com/watch?v= 뒤에 영어하고 숫자 조합으로 나오는 걸 말함. 주소표시줄에 없으면 공유 - 퍼가기에서 확인 가능.
+  
+  유튜브 영상 및 기타 미디어 사용법 링크
+  https://www.youtube.com/redirect?event=video_description&redir_token=QUFFLUhqa1N1TWpqQzB3OGsxVE9vc3pkdndtakRmNlJnZ3xBQ3Jtc0tuVDdqUjgybUJrZEg2QTc4WGhXcDZ0Sy1kUmJraDhwMl9VcTRDbHVRUWJHV1l3a0pENkNMRThuQnQtNlNIZ3h2WGVFZkFiZU0xU0hqV01pNUJFNlJVYjI0YURzbjBEak1FNWlhaVhkNHlGbTFtY2gzVQ&q=https%3A%2F%2Fmmistakes.github.io%2Fminimal-mistakes%2Fdocs%2Fhelpers%2F%23responsive-video-embed&v=q0P3TSoVNDM
+  ~~~
+8. 목차 색깔 바꾸기
+~~~  
+  _sass/minimal-mistakes/_navigation.scss의 .nav_title(대략 516번째라고 함)
+  
+  .nav_title{
+    ...
+    background : $primary-color;
+    ...
+  }
+  
+  $primary-color 를 $toc-color로 수정
+
+  이걸 활용해서 글자색도 수정 가능.
+
+  현재 목차 요소 색깔을 바꿔놨음
+  .active a {
+      background-color: #55acee;
+      // @include yiq-contrasted($active-color);
+  }
+  ~~~
+9. 포스트 내에 이미지 추가하려면 무조건 permalink로 절대참조할 것.
+10. 게시물의 카테고리나 게시물 제목을 바꿔서 주소가 변경될 경우, 이전 주소로도 연결되게 하는 방법. 근데 이거 설치하는 데에 엄청 애먹었는데 생각보다 별 거 없어서 괜히 했나 싶음. 오히려 삭제하거나 하면 오류 생길까 걱정됨.
+~~~
+상단의 게시물 속성에 다음과 같은 내용을 추가한다.
+
+redirect_profile: false
+redirect_from:
+ - /이전 카테고리명/이전 게시물 제목
+~~~
+11. 사용자지정 서식 간단 적용
+~~~
+적용할 대상 앞 혹은 뒤에 {: .서식명}을 입력하고 엔터로 분리해주면 됨. 띄어쓰기로 구분해서 .서식명 여러 개 쓰는 것도 가능
+
+현재 지정된 사용자 지정 서식 ( _sass/minimal-mistakes/_utilities.scss )
+ - img-limit-width : 이미지가 너무 커서 안 보이는 일을 막아줌.
+~~~
+12. 게시물 기본 설정
+~~~
+_config.yml 의 맨 아래 default 부분에 원하는 내용 추가
+~~~
+13. banner 사용
+~~~
+배너 구성은 _includes/top-banner.html 에서 하고
+배너의 배치는 _layouts/single.html 에서 함
+~~~
+14. 현재 _includes/footer.html (15~17줄)에서 footer - feed 숨김 처리 해둠.
+15. 현재 _data/ui-text.yml (30줄, 621줄)에서 "follow" / "팔로우"라고 되어 있는 것들 "Contact"라고 수정해둠. 그리고 611줄에서 "분 소요"로 되어 있는 것을 "분 소요 예상(정독 시)" 로 수정해둠
+16. 현재 _includes/page__meta.html (8줄)에서 날짜/시간 포맷 수정해둠
+17. /_sass/minimal-mistakes/\_reset.scss 에서 각 폰트 사이즈 조절 가능
+18. 이 리포지토리의 가장 바깥(최상위 디렉토리)에 robots.txt 파일을 추가하고 그 파일에 다음과 같이 입력하여서 게시물들을 검색에 노출시킴
+~~~
+User-agent: *
+Disallow:
+Sitemap: https://ysh195.github.io/sitemap.xml
+~~~
+19. 폰트 수정 _sass/minimal-mistakes.scss에서 import로 폰트 사용.   
+그리고 같은 폴더 내의 variables.scss의 17줄 $sans-serif : 의 뒤 ""로 된 것들의 맨 앞에 새로운 폰트명을 입력.   
+!! 폰트 함부러 바꾸면 구글 검색엔진이 크롤링하기에 적합하지 않은 사이트라고 판단해서 검색 대상에서 제외당하니까 주의   
+20. _sass/minimal-mistakes/_page.scss의 .page__content - :not(pre) > code
+pre 내부에 있지 않은 code의 색상을 일괄적으로 지정하는 css가 있어서 수정함
+~~~
+  :not(pre) > code {
+    padding-top: 0.1rem;
+    padding-bottom: 0.1rem;
+    font-size: 0.8em;
+    background: lightgray;
+    // background: $code-background-color;
+    border-radius: $border-radius;
+~~~

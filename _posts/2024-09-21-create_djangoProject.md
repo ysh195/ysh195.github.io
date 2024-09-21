@@ -25,7 +25,7 @@ author_profile: false
 
 <br>
 
-파이썬 - [파이썬 다운로드](https://www.python.org/downloads/ "파이썬 다운로드")
+- `파이썬` - [파이썬 다운로드](https://www.python.org/downloads/ "파이썬 다운로드")
 
 <br>
 
@@ -35,7 +35,7 @@ author_profile: false
 
 <br>
 
-아나콘다 - [아나콘다 다운로드](https://www.anaconda.com/ "아나콘다 다운로드")
+- `아나콘다` - [아나콘다 다운로드](https://www.anaconda.com/ "아나콘다 다운로드")
 
 <br>
 
@@ -47,7 +47,7 @@ author_profile: false
 
 <br>
 
-파이참 - [파이참 다운로드](https://www.jetbrains.com/ko-kr/pycharm/download/?section=windows "파이참 다운로드")
+- `파이참` - [파이참 다운로드](https://www.jetbrains.com/ko-kr/pycharm/download/?section=windows "파이참 다운로드")
 
 <br>
 
@@ -58,6 +58,8 @@ author_profile: false
 <br>
 
 ### 1-2. 프로그램 설치하기
+
+<br>
 
 다운로드 받은 파일들을 실행해서 설치하면 됩니다. 모두 확인 버튼만 계속 누르면 되니 어렵지 않습니다.
 
@@ -71,7 +73,7 @@ author_profile: false
 
 <br>
 
-**파이썬의 경우**
+- `파이썬의 경우`
 
 설치할 때 화면 하단에
 <br>
@@ -79,7 +81,7 @@ author_profile: false
 <br>
 [x] Add python.exe to PATH
 <br>
-를 체크해주세요. 굳이 체크하지 않아도 따로 설정하면 그만이지만, 클릭 한 번에 끝날 일을 
+를 체크해주세요. 굳이 체크하지 않아도 따로 설정하면 그만이지만, 클릭 한 번에 끝날 일을
 따로 조사까지 해가며 다시 진행할 필요는 없습니다.
 <br>
 <br>
@@ -87,17 +89,19 @@ author_profile: false
 
 <br>
 
-**아나콘다의 경우**
+- `아나콘다의 경우`
 
 설치할 때 화면 중단에
 <br>
 [x] Add Anaconda3 to my PATH environment variable
 <br>
-[x] Remove Anaconda3 as my default Python *.**
+[x] Remove Anaconda3 as my default Python \*.\*\*
 <br>
 를 체크해주세요. 파이썬의 경우와 같습니다. 클릭 한 번으로 끝내면 충분한 일입니다.
 
 ## 2. 프로젝트 생성하기
+
+<br>
 
 | 번호 | 설명                                                                                                                                                                                                                                                                                   |
 | ---- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |

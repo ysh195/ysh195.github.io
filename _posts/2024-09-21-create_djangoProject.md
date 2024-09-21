@@ -77,15 +77,16 @@ author_profile: false
 
 설치할 때 화면 하단에
 <br>
-[x] Use admin privileges when installing py.exe
-<br>
-[x] Add python.exe to PATH
-<br>
-를 체크해주세요. 굳이 체크하지 않아도 따로 설정하면 그만이지만, 클릭 한 번에 끝날 일을
-따로 조사까지 해가며 다시 진행할 필요는 없습니다.
-<br>
-<br>
-그리고 혹시 파이썬을 설치하다가 중간에 저절로 취소되는 일이 있다면 파이썬 설치 프로그램을 관리자 권한으로 실행해주세요.<br>
+
+- [x] Use admin privileges when installing py.exe
+      <br>
+- [x] Add python.exe to PATH
+      <br>
+      를 체크해주세요. 굳이 체크하지 않아도 따로 설정하면 그만이지만, 클릭 한 번에 끝날 일을
+      따로 조사까지 해가며 다시 진행할 필요는 없습니다.
+      <br>
+      <br>
+      그리고 혹시 파이썬을 설치하다가 중간에 저절로 취소되는 일이 있다면 파이썬 설치 프로그램을 관리자 권한으로 실행해주세요.<br>
 
 <br>
 
@@ -93,11 +94,12 @@ author_profile: false
 
 설치할 때 화면 중단에
 <br>
-[x] Add Anaconda3 to my PATH environment variable
-<br>
-[x] Remove Anaconda3 as my default Python \*.\*\*
-<br>
-를 체크해주세요. 파이썬의 경우와 같습니다. 클릭 한 번으로 끝내면 충분한 일입니다.
+
+- [x] Add Anaconda3 to my PATH environment variable
+      <br>
+- [x] Remove Anaconda3 as my default Python \*.\*\*
+      <br>
+      를 체크해주세요. 파이썬의 경우와 같습니다. 클릭 한 번으로 끝내면 충분한 일입니다.
 
 ## 2. 프로젝트 생성하기
 

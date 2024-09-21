@@ -73,7 +73,6 @@ author_profile: false
 
 **파이썬의 경우**
 
-<br>
 설치할 때 화면 하단에
 <br>
 [x] Use admin privileges when installing py.exe

@@ -42,7 +42,7 @@ docker ps
 docker exec -it mysql /bin/bash --(3)
 mysql -u root -p --(4)
 password: 1111 --(5)
-GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' --(6)
+GRANT ALL PRIVILEGES ON *.* TO 'root'@'%'; --(6)
 FLUSH PRIVILEGES; --(7)
 CREATE DATABASE [DB이름]; --(8)
 ```

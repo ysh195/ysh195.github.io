@@ -124,7 +124,7 @@ author_profile: false
 혹시 setuptool이 없으셨다면 프로젝트 폴더에서
 \[ ctrl + ` \] 을 눌러서 터미널을 실행시키고, 터미널에 다음과 같이 입력합니다.
 
-```python
+```java
 venv\Scripts\activate
 pip install setuptools wheel
 ```

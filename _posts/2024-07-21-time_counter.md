@@ -6,7 +6,9 @@ tag: [java, 공부, 연습용]
 author_profile: false
 ---
 
-## 1. 완성 이미지
+<br>
+
+# 1. 완성 이미지
 
 | 번호  | 이미지                                                |
 | ----- | ----------------------------------------------------- |
@@ -14,7 +16,7 @@ author_profile: false
 | **2** | ![ysh195](https://ysh195.github.io/images/tc/tc2.png) |
 | **3** | ![ysh195](https://ysh195.github.io/images/tc/tc3.png) |
 
-## 2. 코드
+# 2. 코드
 
 ## main : TimeCounter
 

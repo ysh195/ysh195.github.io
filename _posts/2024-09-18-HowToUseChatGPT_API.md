@@ -6,6 +6,8 @@ tag: [java, 공부, chatGPT, API]
 author_profile: false
 ---
 
+<br>
+
 api 키는 openai 홈페이지에서 간단히 발급 받으실 수 있으니 생략합니다.
 <br>
 

@@ -97,19 +97,21 @@ sudo apt-get update
 3. 그 폴더 안에 `hello.js` 라는 이름의 파일을 생성합니다.<br>※ 파일 생성 방법입니다. 폴더를 열고 나서 vscode 화면 왼쪽에 보이는 것이 해당 폴더의 내부입니다. 거기서 `마우스 우클릭 - 새 파일` 을 누르거나 그 폴더 영역의 상단에 있는 `종이에 (+)가 붙은 아이콘` 을 누르시면 됩니다.<br><br>
 4. 그리고 아래의 내용을 입력해주세요.
 
-```javascript
-const http = require("http"); --(1)
+```typescript
+const http = require("http"); // (1)
 
-const server = http.createServer((req, res) => { --(2)
-  res.setHeader("Content-Type", "text/plain"); --(3)
-  res.write("hello\n"); --(4)
-  res.end("Nice to meet you"); --(5)
+const server = http.createServer((req, res) => {
+  // (2)
+  res.setHeader("Content-Type", "text/plain"); // (3)
+  res.write("hello\n"); // (4)
+  res.end("Nice to meet you"); // (5)
 });
 
-server.listen(8000, () => console.log("Hello Node.js")); --(6)
+server.listen(8000, () => console.log("Hello Node.js"));
+--6;
 ```
 
-> **주의!! `--(숫자)`는 어디에 대한 설명인지 표시하기 위한 책깔피 느낌으로 제가 넣은 것입니다. 실제 코드에는 이걸 빼고 입력하셔야 합니다.**
+> **주의!! `// (숫자)`는 어디에 대한 설명인지 표시하기 위한 책깔피 느낌으로 제가 넣은 것입니다. 실제 코드에는 이걸 빼고 입력하셔야 합니다.**
 
 | 번호 | 설명                                                                                                                                                                                                                                                              |
 | ---- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |

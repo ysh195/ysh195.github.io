@@ -164,6 +164,14 @@ ssh [user]@[웹서버의 고정 ip]
 우분투 터미널에 아래의 내용을 입력합니다.
 
 ```java
+sudo nano /etc/ssh/sshd_config
+(sshd_config 파일에 들어가서 AllowUsers에 새로운 사용자를 추가합니다.)
+
+AllowUsers ubuntu newUser(새로운 사용자. 띄어쓰기로 구분)
+(ctrl+o 눌러서 저장하고, 바로 엔터 눌러서 경로 확정. 그리고 crtl+x 눌러서 나옴. 그리고 아래의 내용을 이어서 입력)
+
+sudo systemctl restart ssh
+
 sudo su -
 useradd [전달받은username]
 
@@ -183,6 +191,8 @@ chmod 600 .ssh/authorized_keys
 <br><br>
 위의 명령어들의 흐름을 간략하게 설명하자면
 
+- 접속이 허가된 유저 목록에 새로운 유저를 추가합니다.
+- ssh를 재시작하여 업데이트 된 허가된 유저 목록이 적용되도록 합니다.
 - 관리자 계정으로 접속합니다.
 - 새로운 사용자 계정을 생성합니다.
 - 그리고 생성된 사용자 계정으로 접속합니다.

@@ -33,7 +33,7 @@ author_profile: false
 
 | **내 생각**                                                                  |
 | ---------------------------------------------------------------------------- |
-| ![초기 구상](https://ysh195.github.io/images/24-09-28_post/initialdream.PNG) |
+| ![초기 구상](https://ysh195.github.io/images/24-09-20_post/initialdream.PNG) |
 
 <br>
 
@@ -74,7 +74,7 @@ CREATE DATABASE [DB이름]; --(8)
                                                                
 | **(2)는 대충 이런 개념으로 추측합니다.**                                         |
 | ----------------------------------------------------------------------- |
-| ![개념 추측](https://ysh195.github.io/images/24-09-28_post/guessTheConception.PNG) |
+| ![개념 추측](https://ysh195.github.io/images/24-09-20_post/guessTheConception.PNG) |
 
 ### 2단계 - 도커 내 DB의 외부 접근 허용하기
 
@@ -141,7 +141,7 @@ spring.datasource.password=1111
 
 | **vscode의 mysql 플러그인 사용**                                              |
 | ----------------------------------------------------------------------------- |
-| ![vscode로 구성](https://ysh195.github.io/images/24-09-28_post/vscodeVer.jpg) |
+| ![vscode로 구성](https://ysh195.github.io/images/24-09-20_post/vscodeVer.jpg) |
 
 ### 5단계 - docker-compose 만들기(선택)
 
@@ -213,7 +213,7 @@ networks:
 
 | **실제 도커의 DB 공유**                                                       |
 | ----------------------------------------------------------------------------- |
-| ![현실의 도커](https://ysh195.github.io/images/24-09-28_post/realDocker2.PNG) |
+| ![현실의 도커](https://ysh195.github.io/images/24-09-20_post/realDocker2.PNG) |
 
 <br>
 물론 도커를 통해 DB와 그 데이터를 함께 공유하는 방법도 있다고 한다. 바로 DB가 들어 있는 컨테이너 자체를 이미지화 해서 다시 공유하는 것.

@@ -1,8 +1,8 @@
 ---
 layout: single
-title: 우분투 웹서버 생성 및 공유
+title: 우분투 DB 생성 및 공유
 categories: study
-tag: [공부, ubuntu, 웹서버 공유]
+tag: [공부, ubuntu, 웹서버 공유, DB]
 author_profile: false
 ---
 

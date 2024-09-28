@@ -6,8 +6,6 @@ tag: [공부, java, docker, DB, springboot]
 author_profile: false
 ---
 
-# 도커로 DB 공유하기
-
 이것은 프로젝트 과정에서 제가 겪었던 실수입니다.
 <br>
 혹시 저와 같은 생각을 하시는 분이 있다면 이 글을 보고 헛수고하지 않으셨으면 합니다.

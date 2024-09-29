@@ -97,7 +97,7 @@ sudo apt-get update
 3. 그 폴더 안에 `hello.js` 라는 이름의 파일을 생성합니다.<br>※ 파일 생성 방법입니다. 폴더를 열고 나서 vscode 화면 왼쪽에 보이는 것이 해당 폴더의 내부입니다. 거기서 `마우스 우클릭 - 새 파일` 을 누르거나 그 폴더 영역의 상단에 있는 `종이에 (+)가 붙은 아이콘` 을 누르시면 됩니다.<br><br>
 4. 그리고 아래의 내용을 입력해주세요.
 
-```typescript
+```java
 const http = require("http"); // (1)
 
 const server = http.createServer((req, res) => {

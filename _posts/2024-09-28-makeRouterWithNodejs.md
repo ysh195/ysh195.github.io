@@ -24,7 +24,7 @@ author_profile: false
 
 <br>
 
-```typescript
+```java
 const http = require("http");
 const url = require("url"); // (1)
 

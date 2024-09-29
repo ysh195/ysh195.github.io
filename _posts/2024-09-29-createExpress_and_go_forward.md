@@ -93,7 +93,7 @@ author_profile: false
 
 <p>만들어진 express 프로젝트 폴더 안에 hello.js라는 파일을 만들고 아래의 내용을 입력합니다.</p>
 
-```typescript
+```java
 const express = require("express");
 const app = express();
 const port = 3000;
@@ -122,7 +122,7 @@ app.listen(port, () => {
 
 **[이전 글 - nodejs 시작하기](https://ysh195.github.io/study/whatsThenodejs/ "nodejs 시작하기")**
 
-```typescript
+```java
 const http = require("http");
 
 const server = http.createServer((req, res) => {
@@ -179,7 +179,7 @@ server.listen(8000, () => console.log("Hello Node.js"));
 
 <br>
 
-```typescript
+```java
 const express = require("express");
 const app = express();
 let posts = []; // (1)

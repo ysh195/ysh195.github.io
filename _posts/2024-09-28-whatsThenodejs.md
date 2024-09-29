@@ -107,8 +107,7 @@ const server = http.createServer((req, res) => {
   res.end("Nice to meet you"); // (5)
 });
 
-server.listen(8000, () => console.log("Hello Node.js"));
---6;
+server.listen(8000, () => console.log("Hello Node.js")); // 6
 ```
 
 > **주의!! `// (숫자)`는 어디에 대한 설명인지 표시하기 위한 책깔피 느낌으로 제가 넣은 것입니다. 실제 코드에는 이걸 빼고 입력하셔야 합니다.**

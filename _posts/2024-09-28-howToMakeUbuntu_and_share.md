@@ -42,11 +42,11 @@ author_profile: false
 ② 우분투 - 네트워킹 - ipv4 방화역 - 규칙 추가
 
 - 443
-  > > 웹 서비스용. 프로젝트를 내부에서 실행시키고 웹으로 공개할 거 아니면 불필요
+  > - 웹 서비스용. 프로젝트를 내부에서 실행시키고 웹으로 공개할 거 아니면 불필요
 - 3306
-  > > mysql용. 다른 DB를 쓴다면 다른 걸로
+  > - mysql용. 다른 DB를 쓴다면 다른 걸로
 - 8080
-  > > 스프링부트 내장 웹서버용. 다른 프레임워크 쓴다면 그거에 맞춰서
+  > - 스프링부트 내장 웹서버용. 다른 프레임워크 쓴다면 그거에 맞춰서
 - 모든 ICMP
 
 <br>
@@ -173,18 +173,19 @@ AllowUsers ubuntu newUser(새로운 사용자. 띄어쓰기로 구분)
 sudo systemctl restart ssh
 
 sudo su -
-useradd [전달받은username]
+adduser [전달받은username]
 
 su - [전달받은username]
 mkdir .ssh
 chmod 700 .ssh
-touch .ssh/authorized*keys
+touch .ssh/authorized_keys
 echo "[전달받은공개키]" >> ~/.ssh/authorized_keys
 chmod 600 .ssh/authorized_keys
 ```
 
 <br>
-
+<p><b>!!주의!!</b> adduser 명령어와 useradd 명령어가 모두 존재합니다. 반드시 adduser 명령어를 써야 합니다.</p>
+<p>그리고 사용자 추가하고 나서 바로 접속은 안 됩니다. 1분 정도 기다려야 합니다.</p>
 집에서 사람마다 각자 자기 방이 있는 것처럼 우분투 사용자에게도 각자 홈 디렉토리가 존재합니다.
 <br><br>
 그리고 그 사용자별 홈 디렉토리에 공개키를 저장해야 우분투 웹서버에 입장이 가능해지기 때문에 이러한 절차가 필요합니다.

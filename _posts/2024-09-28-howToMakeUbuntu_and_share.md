@@ -173,7 +173,7 @@ AllowUsers ubuntu newUser(새로운 사용자. 띄어쓰기로 구분)
 sudo systemctl restart ssh
 
 sudo su -
-useradd [전달받은username]
+adduser [전달받은username]
 
 su - [전달받은username]
 mkdir .ssh
@@ -184,7 +184,7 @@ chmod 600 .ssh/authorized_keys
 ```
 
 <br>
-
+<p>**!!주의!! adduser 명령어와 useradd 명령어가 모두 존재합니다. 반드시 adduser 명령어를 써야 합니다.</p>
 집에서 사람마다 각자 자기 방이 있는 것처럼 우분투 사용자에게도 각자 홈 디렉토리가 존재합니다.
 <br><br>
 그리고 그 사용자별 홈 디렉토리에 공개키를 저장해야 우분투 웹서버에 입장이 가능해지기 때문에 이러한 절차가 필요합니다.

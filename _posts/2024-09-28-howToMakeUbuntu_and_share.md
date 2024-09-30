@@ -178,7 +178,7 @@ adduser [전달받은username]
 su - [전달받은username]
 mkdir .ssh
 chmod 700 .ssh
-touch .ssh/authorized*keys
+touch .ssh/authorized_keys
 echo "[전달받은공개키]" >> ~/.ssh/authorized_keys
 chmod 600 .ssh/authorized_keys
 ```

@@ -39,7 +39,7 @@ async function extractTextFromBase64Image(base64Image, fileId, password) {
 
     return result;
   } catch (error) {
-    console.error(error);
+    console.error("aws lambda 호출 실패");
   }
 }
 

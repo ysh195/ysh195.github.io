@@ -188,7 +188,7 @@ function applyMethodToDeleteBtn() {
       onOffClassElement(captureSetClassName, false);
       onOffClassElement(imgSetClassName, true);
     } catch (error) {
-      console.error(error);
+      console.error("객체 관리 중 오류 발생");
     }
   });
 }
@@ -209,7 +209,7 @@ function applyMethodToRequestBtn() {
         link_element.href = url;
         link_element.innerText = "구글시트 입력";
       } catch (error) {
-        console.error(error);
+        console.error("텍스트 추출 중 오류 발생);
       }
     });
 }

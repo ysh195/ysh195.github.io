@@ -1,1 +1,1 @@
-https://ysh195.github.io/maddalFansCapture/
+- [말딸 팬수 캡쳐 페이지](https://ysh195.github.io/maddalFansCapture/)

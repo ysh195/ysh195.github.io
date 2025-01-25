@@ -1,107 +1,92 @@
-/* 기본 스타일 설정 */
-body {
-  font-family: Arial, sans-serif;
-  margin: 20px;
+/* 기본 스타일 초기화 */
+* {
+  margin: 0;
   padding: 0;
-  background-color: #f4f4f9;
+  box-sizing: border-box;
 }
 
-/* 버튼 스타일 */
+/* 페이지 전체 스타일 */
+body {
+  font-family: "Arial", sans-serif;
+  background-color: #f4f4f9;
+  color: #333;
+  line-height: 1.6;
+  padding: 20px;
+}
+
+h1 {
+  text-align: center;
+  margin-bottom: 30px;
+  color: #2c3e50;
+}
+
+h2 {
+  color: #2980b9;
+  font-size: 1.2em;
+  margin-bottom: 10px;
+}
+
+/* 홈 버튼 스타일 */
 button {
-  padding: 10px 20px;
-  margin: 10px;
+  background-color: #3498db;
   border: none;
-  cursor: pointer;
-  font-size: 16px;
-  background-color: #007bff;
   color: white;
-  border-radius: 5px;
-  transition: background-color 0.3s;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  margin-bottom: 20px;
+  display: block;
+  width: 100px;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
+
+button a {
+  text-decoration: none;
+  color: white;
 }
 
 button:hover {
-  background-color: #0056b3;
+  background-color: #2980b9;
 }
 
-/* 버튼 비활성화 스타일 */
-button:disabled {
-  background-color: #cccccc;
-  cursor: not-allowed;
+/* 각 항목 스타일 */
+div > div {
+  margin-bottom: 20px;
 }
 
-/* 링크 스타일 */
-a {
-  color: #007bff;
-  text-decoration: none;
-  font-size: 16px;
+dl {
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
-a:hover {
-  text-decoration: underline;
+dt {
+  font-weight: bold;
+  margin-bottom: 10px;
 }
 
-/* 캡처 및 이미지 제어 영역 */
-.capture-set,
-.image-set,
-.request-set {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin: 20px 0;
+dd {
+  margin-bottom: 10px;
+  line-height: 1.5;
 }
 
-/* 이미지 컨테이너 스타일 */
-#image-container {
-  margin-top: 20px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  height: 400px;
-  background-color: #ffffff;
-  border: 1px solid #ddd;
-  border-radius: 10px;
-  overflow: hidden;
-}
-
-#captured-image {
+/* 이미지 스타일 */
+img {
   max-width: 100%;
-  max-height: 100%;
-}
-
-/* 입력 필드 및 레이블 스타일 */
-label {
-  font-size: 16px;
-  margin-bottom: 5px;
-}
-
-input[type="text"],
-input[type="password"] {
-  padding: 10px;
-  font-size: 16px;
-  width: 200px;
-  margin: 5px;
-  border: 1px solid #ddd;
-  border-radius: 5px;
-}
-
-/* 요청 버튼 및 입력 컨테이너 */
-.request-set div {
-  margin: 10px 0;
-}
-
-.request-set button {
+  border-radius: 8px;
   margin-top: 10px;
 }
 
-/* 숨겨진 요소의 스타일 */
-.hidden {
-  display: none;
+/* 링크 강조 스타일 */
+b {
+  font-weight: bold;
 }
 
-/* 레이아웃을 잘 보기 위해 가운데 정렬 */
-body > div {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+/* container 하위 요소 스타일 */
+.container > * {
+  margin: 10px 0; /* 하위 요소 간 간격 */
+  padding: 8px; /* 하위 요소 내부 여백 */
 }

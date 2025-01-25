@@ -203,6 +203,14 @@ function applyMethodToRequestBtn() {
         const fileId = document.getElementById(fileId_input_id).value;
         const password = document.getElementById(password_input_id).value;
 
+        if (!fileId || !password) {
+          console.error("아이디와 비밀번호 입력이 필요합니다.");
+          return;
+        }
+
+        localStorage.setItem(nameOfSavedFileId, fileId);
+        localStorage.setItem(nameOfSavedPassword, password);
+
         const url = await composeUrl(fileId, password);
 
         const link_element = document.getElementById(google_script_link_id);

@@ -1,1 +1,1 @@
-https://ysh195.github.io/maddalFansCapture/pages/
+https://ysh195.github.io/maddalFansCapture/

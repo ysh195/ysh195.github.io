@@ -35,7 +35,6 @@ async function extractTextFromBase64Image(base64Image, fileId, password) {
   try {
     const res = await fetch(aws_lambda_url, options);
     const result = await res.json();
-    console.log(result);
 
     return result;
   } catch (error) {
@@ -47,7 +46,6 @@ async function extractTextFromBase64Image(base64Image, fileId, password) {
 function cleanText(text) {
   const roles = ["리더", "서브리더", "멤버"];
   const list = text.split("\n");
-  console.log(list);
 
   let compiled = [];
   let playerName = "";

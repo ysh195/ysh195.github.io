@@ -25,7 +25,7 @@ async function captureScreen() {
       });
     }
   } catch (err) {
-    console.error("화면 캡처 권한이 필요합니다 :", err);
+    console.error("화면 캡처 권한이 필요합니다.");
     return;
   }
 
@@ -78,7 +78,7 @@ async function captureScreen() {
       capturedHeight += captureHeight;
     }, 1000);
   } catch (err) {
-    console.error("화면 캡처 실패:", err);
+    console.error("화면 캡처 실패:");
     // 오류 발생 시 스트림 정리
     if (displayStream) {
       displayStream.getTracks().forEach((track) => track.stop());

@@ -1,5 +1,5 @@
 // 사용자 설정 변수
-const totalHeight = 5500; // 캡처할 전체 높이 (수동으로 설정)
+const totalHeight = 7000; // 캡처할 전체 높이 (수동으로 설정)
 const captureStartY = window.innerHeight * 0.32; // 캡쳐할 화면높이(시작)
 const captureEndY = window.innerHeight * 0.6; // 캡쳐할 화면높이(끝)
 

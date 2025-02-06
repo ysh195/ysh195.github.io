@@ -1,6 +1,7 @@
 const captureSetClassName = "capture-set";
 const imgSetClassName = "image-set";
 const requestSetClassName = "request-set";
+const spinnerClassName = "spinner";
 
 const start_capturing_btn_id = "start-btn";
 const stop_capturing_btn_id = "stop-btn";
@@ -10,6 +11,7 @@ const request_btn_id = "request-btn";
 const fileId_input_id = "fileId";
 const password_input_id = "password";
 const google_script_link_id = "link";
+const loading_id = "loading";
 
 const nameOfSavedFileId = "googleSheet_file_id";
 // 비밀번호 가져오면 엄청 길고 이상한 값으로 변경되어서 비번은 저장 안 하는 것으로 수정
@@ -20,6 +22,7 @@ function page_init() {
   createImageControlBtn();
   createImageContainer();
   createRequestSet();
+  createLoadingSpinner();
 
   applyMethodsToElements();
 
@@ -134,6 +137,23 @@ function createRequestSet() {
   document.body.appendChild(parent);
 }
 
+function createLoadingSpinner() {
+  const parent = document.createElement("div");
+  const spinner = document.createElement("div");
+  const message = document.createElement("p");
+
+  parent.id = loading_id;
+
+  spinner.className = spinnerClassName;
+
+  message.innerText = "로딩 중....";
+
+  parent.appendChild(spinner);
+  parent.appendChild(message);
+
+  document.body.appendChild(parent);
+}
+
 function applyMethodsToElements() {
   applyMethodToStartBtn();
   applyMethodToStopBtn();
@@ -205,18 +225,20 @@ function applyMethodToRequestBtn() {
     .addEventListener("click", async (e) => {
       e.stopPropagation();
 
+      const fileId = document.getElementById(fileId_input_id).value;
+      const password = document.getElementById(password_input_id).value;
+
+      if (!fileId || !password) {
+        console.error("아이디와 비밀번호 입력이 필요합니다.");
+        return;
+      }
+
+      localStorage.setItem(nameOfSavedFileId, fileId);
+      // localStorage.setItem(nameOfSavedPassword, password);
+
+      document.getElementById("loading").style.display = "block";
+
       try {
-        const fileId = document.getElementById(fileId_input_id).value;
-        const password = document.getElementById(password_input_id).value;
-
-        if (!fileId || !password) {
-          console.error("아이디와 비밀번호 입력이 필요합니다.");
-          return;
-        }
-
-        localStorage.setItem(nameOfSavedFileId, fileId);
-        // localStorage.setItem(nameOfSavedPassword, password);
-
         const url = await composeUrl(fileId, password);
 
         const link_element = document.getElementById(google_script_link_id);
@@ -224,6 +246,9 @@ function applyMethodToRequestBtn() {
         link_element.innerText = "구글시트 입력";
       } catch (error) {
         console.error("텍스트 추출 중 오류 발생");
+      } finally {
+        // 로딩 메시지 숨기기
+        document.getElementById("loading").style.display = "none";
       }
     });
 }

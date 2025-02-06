@@ -12,7 +12,8 @@ const password_input_id = "password";
 const google_script_link_id = "link";
 
 const nameOfSavedFileId = "googleSheet_file_id";
-const nameOfSavedPassword = "maddal_fans_page_pw";
+// 비밀번호 가져오면 엄청 길고 이상한 값으로 변경되어서 비번은 저장 안 하는 것으로 수정
+// const nameOfSavedPassword = "maddal_fans_page_pw";
 
 function page_init() {
   createCaptureAndStopButton();
@@ -214,7 +215,7 @@ function applyMethodToRequestBtn() {
         }
 
         localStorage.setItem(nameOfSavedFileId, fileId);
-        localStorage.setItem(nameOfSavedPassword, password);
+        // localStorage.setItem(nameOfSavedPassword, password);
 
         const url = await composeUrl(fileId, password);
 
@@ -229,7 +230,7 @@ function applyMethodToRequestBtn() {
 
 function getSavedIdAndPw() {
   getSavedFileId();
-  getSavedPw();
+  // getSavedPw();
 }
 
 function getSavedFileId() {
@@ -241,14 +242,14 @@ function getSavedFileId() {
   document.getElementById(fileId_input_id).value = fileId;
 }
 
-function getSavedPw() {
-  const pw = localStorage.getItem(nameOfSavedPassword);
-  if (!pw) {
-    return;
-  }
+// function getSavedPw() {
+//   const pw = localStorage.getItem(nameOfSavedPassword);
+//   if (!pw) {
+//     return;
+//   }
 
-  document.getElementById(password_input_id).value = fileId;
-}
+//   document.getElementById(password_input_id).value = fileId;
+// }
 
 // true면 꺼지고, false면 켜짐
 function onOffClassElement(className, OnOff) {

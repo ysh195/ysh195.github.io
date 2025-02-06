@@ -62,6 +62,8 @@ async function captureScreen() {
       video.srcObject = displayStream; // 이미 생성된 displayStream을 재사용
       await video.play();
 
+      capturedHeight += captureHeight;
+
       // 캡처된 부분을 캔버스에 그리기
       ctx.drawImage(
         video, // video element
@@ -74,8 +76,6 @@ async function captureScreen() {
         canvas.width, // 캔버스에 그릴 너비
         captureHeight // 캔버스에 그릴 높이
       );
-
-      capturedHeight += captureHeight;
     }, 1000);
   } catch (err) {
     console.error("화면 캡처 실패:");

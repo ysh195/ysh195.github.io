@@ -6,8 +6,8 @@ const captureEndY = Math.floor(window.innerHeight * 0.8); // 캡쳐할 화면높
 // 기본 변수
 const canvas = document.createElement("canvas");
 const ctx = canvas.getContext("2d");
-let keepCapturing = false;
 const captureHeight = captureEndY - captureStartY;
+var keepCapturing = false;
 
 // 메서드
 async function captureScreen() {

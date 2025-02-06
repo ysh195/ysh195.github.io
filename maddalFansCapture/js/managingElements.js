@@ -157,6 +157,11 @@ function applyMethodToStopBtn() {
     .addEventListener("click", (e) => {
       e.stopPropagation();
 
+      if (keepCapturing === false) {
+        console.log("캡쳐 실행 중이 아닙니다.");
+        return;
+      }
+
       stopCapturing();
 
       onOffClassElement(imgSetClassName, false);

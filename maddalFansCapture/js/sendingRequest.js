@@ -62,8 +62,8 @@ function cleanText(text) {
           let num = getCleanNumber(list[j]);
 
           if (num !== "") {
-            let number = Number(num);
-            const elementOfList = { playerName, number };
+            let countOfFans = Number(num);
+            const elementOfList = { playerName, countOfFans };
             compiled.push(elementOfList);
 
             i = j;
@@ -75,14 +75,28 @@ function cleanText(text) {
   }
 
   // 중복값 제거
-  const uniqueData = compiled.filter(
-    (value, index, self) =>
-      index === self.findIndex((t) => t.playerName === value.playerName)
+  // const uniqueData = compiled.filter(
+  //   (value, index, self) =>
+  //     index === self.findIndex((t) => t.playerName === value.playerName)
+  // );
+  const uniqueData = Object.values(
+    compiled.reduce((acc, item) => {
+      if (acc[item.playerName]) {
+        acc[item.playerName].countOfFans = Math.max(
+          acc[item.playerName].countOfFans,
+          item.countOfFans
+        );
+      } else {
+        acc[item.playerName] = { ...item };
+      }
+
+      return acc;
+    }, {})
   );
 
   // url에 넣을 형태로 변환
   const result_text = uniqueData
-    .map((e) => `${e.playerName}-${e.number}`)
+    .map((e) => `${e.playerName}-${e.countOfFans}`)
     .join("_");
 
   return result_text;

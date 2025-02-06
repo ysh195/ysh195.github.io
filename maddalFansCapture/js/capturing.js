@@ -1,7 +1,7 @@
 // 사용자 설정 변수
 const totalHeight = 5500; // 캡처할 전체 높이 (수동으로 설정)
-const captureStartY = Math.floor(window.innerHeight * 0.47); // 캡쳐할 화면높이(시작)
-const captureEndY = Math.floor(window.innerHeight * 0.8); // 캡쳐할 화면높이(끝)
+const captureStartY = window.innerHeight * 0.32; // 캡쳐할 화면높이(시작)
+const captureEndY = window.innerHeight * 0.6; // 캡쳐할 화면높이(끝)
 
 // 기본 변수
 const canvas = document.createElement("canvas");
@@ -62,20 +62,20 @@ async function captureScreen() {
       video.srcObject = displayStream; // 이미 생성된 displayStream을 재사용
       await video.play();
 
-      capturedHeight += captureHeight;
-
       // 캡처된 부분을 캔버스에 그리기
       ctx.drawImage(
         video, // video element
-        0, // X좌표 (전체 화면 캡처)
-        captureStartY, // 캡처 시작 Y 좌표
-        canvas.width, // 캡처할 영역의 너비 (전체 화면)
-        captureHeight, // 캡처할 영역의 높이
-        0, // 캔버스에 그릴 X 좌표 (캔버스의 좌상단에 그리기)
-        capturedHeight, // 캔버스에 그릴 Y 좌표
+        0, // 이미지 내 x 좌표
+        captureStartY, // 이미지 내 y 좌표
+        canvas.width, // 이미지 내 좌표를 기준으로 그려질 그림의 가로 길이
+        captureHeight, // 이미지 내 좌표를 기준으로 그려질 그림의 세로 길이
+        0, // 캔버스 내 x 좌표
+        capturedHeight, // 캔버스 내 y
         canvas.width, // 캔버스에 그릴 너비
         captureHeight // 캔버스에 그릴 높이
       );
+
+      capturedHeight += captureHeight;
     }, 1000);
   } catch (err) {
     console.error("화면 캡처 실패:");

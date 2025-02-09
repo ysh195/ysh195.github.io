@@ -14,6 +14,8 @@ const google_script_link_id = "link";
 const loading_id = "loading";
 
 const nameOfSavedFileId = "googleSheet_file_id";
+const nameOfSavedStartOfY = "startOfY";
+const nameOfSavedEndOfY = "endOfY";
 // 비밀번호 가져오면 엄청 길고 이상한 값으로 변경되어서 비번은 저장 안 하는 것으로 수정
 // const nameOfSavedPassword = "maddal_fans_page_pw";
 
@@ -26,7 +28,7 @@ function page_init() {
 
   applyMethodsToElements();
 
-  getSavedIdAndPw();
+  getTheSaved();
 }
 
 function createCaptureAndStopButton() {
@@ -169,6 +171,13 @@ function applyMethodToStartBtn() {
       e.stopPropagation();
 
       await captureScreen();
+
+      // 이 값들의 입력 오류에 관한 사항은 캡쳐 메서드 안에서 먼저 체크함
+      let start_of_y_value = document.getElementById("startOfY");
+      let end_of_y_value = document.getElementById("endOfY");
+
+      saveIfAbsentOrDifferent(nameOfSavedStartOfY, start_of_y_value);
+      saveIfAbsentOrDifferent(nameOfSavedEndOfY, end_of_y_value);
     });
 }
 
@@ -233,7 +242,8 @@ function applyMethodToRequestBtn() {
         return;
       }
 
-      localStorage.setItem(nameOfSavedFileId, fileId);
+      saveIfAbsentOrDifferent(nameOfSavedFileId, fileId);
+      // localStorage.setItem(nameOfSavedFileId, fileId);
       // localStorage.setItem(nameOfSavedPassword, password);
 
       document.getElementById("loading").style.display = "block";
@@ -253,18 +263,49 @@ function applyMethodToRequestBtn() {
     });
 }
 
-function getSavedIdAndPw() {
-  getSavedFileId();
+function getTheSaved() {
+  getIfSaved(fileId_input_id, nameOfSavedFileId);
+  getIfSaved("startOfY", nameOfSavedStartOfY);
+  getIfSaved("endOfY", nameOfSavedEndOfY);
+  // getSavedFileId();
   // getSavedPw();
 }
 
-function getSavedFileId() {
-  const fileId = localStorage.getItem(nameOfSavedFileId);
-  if (!fileId) {
+function getIfSaved(nameInHtml, nameInStorage) {
+  const saved = localStorage.getItem(nameInStorage);
+  if (!saved) {
+    // 저장된 게 없으면
     return;
   }
 
-  document.getElementById(fileId_input_id).value = fileId;
+  document.getElementById(nameInHtml).value = saved;
+}
+
+function saveIfAbsentOrDifferent(nameInStorage, value) {
+  const saved = localStorage.getItem(nameInStorage);
+
+  if (!saved) {
+    // 없으면 바로 저장
+    localStorage.setItem(nameInStorage, value);
+  } else {
+    // 이미 있는 값이면
+    if (saved === value) {
+      // 그리고 일치하면 중단
+      return;
+    }
+
+    // 일치하지 않으면(새로운 값이면) 저장
+    localStorage.setItem(nameInStorage, value);
+  }
+}
+
+// true면 꺼지고, false면 켜짐
+function onOffClassElement(className, OnOff) {
+  const imageSets = document.getElementsByClassName(className);
+  for (let element of imageSets) {
+    element.hidden = OnOff;
+    element.disabled = OnOff;
+  }
 }
 
 // function getSavedPw() {
@@ -276,11 +317,11 @@ function getSavedFileId() {
 //   document.getElementById(password_input_id).value = fileId;
 // }
 
-// true면 꺼지고, false면 켜짐
-function onOffClassElement(className, OnOff) {
-  const imageSets = document.getElementsByClassName(className);
-  for (let element of imageSets) {
-    element.hidden = OnOff;
-    element.disabled = OnOff;
-  }
-}
+// function getSavedFileId() {
+//   const fileId = localStorage.getItem(nameOfSavedFileId);
+//   if (!fileId) {
+//     return;
+//   }
+
+//   document.getElementById(fileId_input_id).value = fileId;
+// }

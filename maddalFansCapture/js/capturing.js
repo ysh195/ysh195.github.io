@@ -1,16 +1,30 @@
 // 사용자 설정 변수
 const totalHeight = 7000; // 캡처할 전체 높이 (수동으로 설정)
-const captureStartY = window.innerHeight * 0.32; // 캡쳐할 화면높이(시작)
-const captureEndY = window.innerHeight * 0.6; // 캡쳐할 화면높이(끝)
 
 // 기본 변수
 const canvas = document.createElement("canvas");
 const ctx = canvas.getContext("2d");
-const captureHeight = captureEndY - captureStartY;
 var keepCapturing = false;
 
 // 메서드
 async function captureScreen() {
+  let startOfY_value = document.getElementById("startOfY").value;
+  let endOfY_value = document.getElementById("endOfY").value;
+
+  if (!startOfY_value || !endOfY_value) {
+    alert("시작점과 끝 점을 입력해주세요.");
+    return;
+  }
+
+  if (Number(startOfY_value) === NaN || Number(endOfY_value) === NaN) {
+    alert("시작점과 끝 점에 숫자를 입력해주세요.");
+    return;
+  }
+
+  const captureStartY = window.innerHeight * (startOfY_value / 100); // 캡쳐할 화면높이(시작)
+  const captureEndY = window.innerHeight * (endOfY_value / 100); // 캡쳐할 화면높이(끝)
+  const captureHeight = captureEndY - captureStartY;
+
   let displayStream = null; // 화면 캡처를 위한 스트림
   let captureInterval = null; // 캡처를 위한 setInterval 저장 변수
 

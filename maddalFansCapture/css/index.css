@@ -1,3 +1,11 @@
 .body * {
   margin: 10px 5px;
 }
+
+.rateEx {
+  display: none;
+}
+
+.exampleBox:hover + .rateEx {
+  display: block;
+}

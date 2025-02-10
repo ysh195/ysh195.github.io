@@ -24,30 +24,34 @@
         클라이언트 화면을 기준으로, 서클원 명단이 보이는 부분의 시작하는 점과 끝
         점의 비율을 입력하세요.
       </p>
-      <p>보통 40% 지점과 80% 지점인데, 캡쳐해보면서 수정하면 됨</p>
-      <p>ex)<br />시작점의 Y축 비율(%) 40<br />끝 점의 Y축 비율(%) 80</p>
-      <div>
-        <p>
-          시작점의 Y축 비율(%)
-          <input
-            id="startOfY"
-            placeholder="정수로 입력"
-            type="number"
-            style="width: auto"
-          />
-        </p>
-      </div>
-      <div>
-        <p>
-          끝 점의 Y축 비율(%)
-          <input
-            id="endOfY"
-            placeholder="정수로 입력"
-            type="number"
-            style="width: auto"
-          />
-        </p>
-      </div>
+      <table style="border: 1px solid">
+        <thead>
+          <tr>
+            <th>시작점의 Y축 비율(%)</th>
+            <th>끝 점의 Y축 비율(%)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <input
+                id="startOfY"
+                placeholder="정수로 입력 ex) 32"
+                type="number"
+                style="width: auto"
+              />
+            </td>
+            <td>
+              <input
+                id="endOfY"
+                placeholder="정수로 입력 ex) 60"
+                type="number"
+                style="width: auto"
+              />
+            </td>
+          </tr>
+        </tbody>
+      </table>
     </div>
     <script>
       var image_container_id = "image-container";

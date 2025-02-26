@@ -1,0 +1,1176 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>코딩 3주차 연습</title>
+
+    <link rel="stylesheet" href="../css/basic.css" />
+  </head>
+  <body>
+    <div>
+      <a href="https://ysh195.github.io/">
+        <button class="homeBtn">홈으로</button>
+      </a>
+
+      <h1>코딩 3주차 - 블랙잭 카드게임</h1>
+
+      <p>혼자서 컴퓨터와 대결할 수 있는 블랙잭 카드게임을 만들었습니다.</p>
+
+      <div>
+        <h2>1. 완성 이미지</h2>
+        <ul class="img-list">
+          <li>
+            <img src="../assets/bj/bj1.PNG" />
+          </li>
+
+          <li>
+            <img src="../assets/bj/bj2.PNG" />
+          </li>
+        </ul>
+      </div>
+
+      <div>
+        <h2>2. 코드</h2>
+
+        <div>
+          <h4>main : GamePlay</h4>
+
+          <pre><code>
+// 게임을 실행할 메인 클래스입니다.
+// GamePlayer, GameDealer, AnotherPlayer의 클래스 내용이 거의 유사한데, 상속과 abstract로 처리할 걸 그랬나
+package blackjack_Pack;
+
+public class GamePlay{
+
+public static void main(String[] args) {
+
+  GameProcess GP = new GameProcess();
+
+  GP.open_game();
+
+  GP.make_yourHands();
+
+  GP.who_is_the_winner();
+
+  GP.we_have_a_winner();
+
+}
+
+}
+          </code></pre>
+        </div>
+
+        <div>
+          <h4>GameProcess</h4>
+
+          <pre><code>
+// 게임의 세부적인 진행 사항을 구성하는 게임프로세스입니다.
+
+package blackjack_Pack;
+import java.util.Scanner;
+
+public class GameProcess {
+
+CardManager cm = new CardManager();
+
+GamePlayer user = new GamePlayer();
+GameDealer dealer = new GameDealer();
+AnotherPlayer ap = new AnotherPlayer();
+
+static int save_myScore;
+
+public GameProcess() {}
+
+void open_game() {
+
+  cm.Create_Card();
+
+  System.out.println("첫 번째 카드를 받습니다.");
+
+  user.Get_hands(cm.draw_Card());
+  user.Show_hands();
+
+  dealer.Get_hands(cm.draw_Card());
+
+  ap.Get_hands(cm.draw_Card());
+
+  System.out.println("첫 번째 카드는 모두에게 공개됩니다.");
+  System.out.println("딜러 : " + dealer.Pick_Hands(0));
+  System.out.println("또다른 플레이어 : " + ap.Pick_Hands(0));
+  // System.out.println("본인 : " + user.Pick_Hands(0)); 이건 이미 봤으니까 또 보여줄 필요 없으려나?
+
+  String[] unveiled_cards = {dealer.Pick_Hands(0), user.Pick_Hands(0), ap.Pick_Hands(0)};
+
+  dealer.recognize_yours(unveiled_cards);
+  ap.recognize_yours(unveiled_cards);
+
+  System.out.println("두 번째 카드를 받습니다.");
+
+  dealer.Get_hands(cm.draw_Card());
+  ap.Get_hands(cm.draw_Card());
+
+  user.Get_hands(cm.draw_Card());
+  user.Show_hands();
+
+}
+
+void make_yourHands() {
+  boolean show_must_go_on = true;
+
+  while(show_must_go_on) {
+
+    if(dealer.game_continue) { // 딜러의 턴
+      if(dealer.make_a_decision()) { // 딜러는 카드 드로우에 대한 선택지가 없는 수준이라 판단에 인수가 필요 없음.
+        dealer.Get_hands(cm.draw_Card());
+        System.out.println("딜러가 카드를 한 장 받습니다.");
+      }
+      else {
+        System.out.println("딜러가 더 이상 카드를 받지 않습니다.");
+        dealer.good_game();
+      }
+    }
+    else {
+      System.out.println("딜러는 이미 카드 구성을 끝마쳤습니다.");
+      dealer.good_game();
+    }
+
+    if(ap.game_continue) { // 또다른 플레이어의 턴
+      int ap_count = cm.Count_used();
+
+      if(ap.make_a_decision(ap_count)) { // 어나더 플레이어는 카드 드로우에 대한 선택이 가능해서 판단에 인수가 필요함.
+        ap.Get_hands(cm.draw_Card());
+        System.out.println("또다른 플레이어가 카드를 한 장 받습니다.");
+      }
+      else {
+        System.out.println("또다른 플레이어가 더 이상 카드를 받지 않습니다.");
+        ap.good_game();
+      }
+    }
+    else {
+      System.out.println("또다른 플레이어가 더 이상 카드를 받지 않습니다.");
+      ap.good_game();
+    }
+
+    if(user.game_continue) { // 유저의 턴
+
+      Scanner sc = new Scanner(System.in);
+      System.out.println("카드를 더 받으시겠습니까? Y / N");
+      String answer = sc.nextLine();
+
+      if(answer.equals("N")||answer.equals("n")) {
+        user.good_game();
+      }
+      else {
+        user.Get_hands(cm.draw_Card());
+        user.Show_hands();
+      }
+
+    }
+
+    if((dealer.game_continue==false)&&(user.game_continue==false)&&(ap.game_continue==false)) { // 모두 턴을 종료하면 덱 구성 끝
+      show_must_go_on = false;
+    }
+
+  }
+}
+
+void who_is_the_winner() {
+
+  System.out.println("모든 플레이어와 딜러의 카드 수령이 끝났습니다.");
+  System.out.println("점수 계산을 진행합니다.");
+
+  save_myScore = user.Calc_myScore();
+
+  System.out.println("모든 점수 계산이 끝났습니다. 결과를 공개합니다.");
+
+  System.out.println("============= 딜러 =============");
+  dealer.Show_hands();
+  System.out.println("점수 : " + dealer.Final_Dealer_Score());
+  System.out.println("===============================");
+
+  System.out.println("");
+  System.out.println("===== 플레이어2(또다른 플레이어) =====");
+  ap.Show_hands();
+  System.out.println("점수 : " + ap.Calc_myScore());
+  System.out.println("===============================");
+
+  System.out.println("");
+  System.out.println("========= 플레이어1(본인)=========");
+  user.Show_hands();
+  System.out.println("점수 : " + save_myScore);
+  System.out.println("===============================");
+
+}
+
+void we_have_a_winner() {
+
+  this_is_judgement("플레이어1(본인)", save_myScore);
+  this_is_judgement("플레이어2(또다른 플레이어)", ap.Calc_myScore());
+}
+
+void this_is_judgement(String player_name, int playerS_score) { // 아래는 블랙잭 게임 결과에 따른 승패에 대한 판단표입니다.
+/*
+  딜러
+플레이어	    	 21초과		블랙잭 		21미만
+  21초과	딜러 win		딜러 win		딜러 win
+  블랙잭	플레이어 win	무승부		플레이어 win
+  21미만	플레이어 win  딜러 win		점수 판단(동점 시 무승부)
+*/
+// 이러한 내용이 담긴 String 2차원 배열로서 표를 구성하고, 점수에 따라 표에서 적절한 값을 찾도록 하였습니다.
+
+  int dealerS_score = dealer.Final_Dealer_Score();
+
+  String[][] judgement_table = {
+  {"딜러 win", "딜러 win", "딜러 win"},
+  {"플레이어 win", "무승부", "플레이어 win"},
+  {"플레이어 win", "딜러 win", "점수판단"}
+  };
+
+  int dealerS_side = (dealerS_score == 21) ? 1 : ((dealerS_score > 21) ? 0 : 2);
+  int playerS_side = (playerS_score == 21) ? 1 : ((playerS_score > 21) ? 0 : 2);
+
+  String judge_text = judgement_table[playerS_side][dealerS_side]; // 배열의 height가 플레이어 쪽이고, width가 딜러쪽.
+
+  if(judge_text.equals("딜러 win")) {
+    System.out.println(player_name + "님, 안타깝습니다. 딜러의 승리입니다.");
+  }
+  else if(judge_text.equals("플레이어 win")){
+    System.out.println(player_name + "님, 축하드립니다. 당신의 승리입니다.");
+  }
+  else if(judge_text.equals("무승부")) {
+    System.out.println(player_name + "님, 이번 경기는 무승부입니다.");
+  }
+  else { // 점수판단일 경우
+    if(dealerS_score&gt;playerS_score) {
+      System.out.println(player_name + "님, 안타깝습니다. 딜러의 승리입니다.");
+    }
+    else if(dealerS_score&lt;playerS_score) {
+      System.out.println(player_name + "님, 축하드립니다. 당신의 승리입니다.");
+    }
+    else {
+      System.out.println(player_name + "님, 이번 경기는 무승부입니다.");
+    }
+  }
+
+}
+
+}
+          </code></pre>
+        </div>
+
+        <div>
+          <h4>GamePlayer</h4>
+
+          <pre><code>
+// 게임을 할 본인을 의미합니다. 편의상 게임 중 플레이어1으로 명명하였습니다.
+package blackjack_Pack;
+import java.util.Scanner;
+
+public class GamePlayer {
+
+String[] hands = new String[30];
+int hand_count=0;
+boolean game_continue = true;
+
+public GamePlayer(){}
+
+void Show_hands() {
+  if(hand_count&lt;=0)
+  {
+    System.out.println("수중에 카드가 없습니다.");
+  }
+  else {
+    for(int i=0; i&lt;hand_count; i++) {
+    System.out.print(hands[i] + " | ");
+    }
+  }
+  System.out.println("");
+} // Show_hands : 자신의 패를 sysout으로 출력합니다.
+
+void Get_hands(String card) {
+  hands[hand_count]=card;
+  hand_count++;
+} // Get_hands : 자신의 패에 카드를 추가합니다.
+
+String Pick_Hands(int i) {
+  return hands[i];
+} // Pick_Hands : 자신의 패 중 지정한 순서의 카드를 출력합니다. 이는 블랙잭 경기 규칙 중 카드 공개가 포함되어 있기 때문에 그 부분을 구현하기 위한 것입니다.
+
+int Calc_myScore() {
+
+  int[] num_counter = new int[13]; // 카드는 A, 2... 10, J, Q, K으로, 총 13가지 카드가 있습니다. 이 배열에는 각 카드 종류별 갯수가 저장됩니다.
+  int result=0;
+
+  for(int i=0; i&lt;hand_count; i++) {
+    // 자신의 패를 의미하는 hands 배열에는 자신이 가지고 있는 카드의 정보가 담겨 있습니다.
+    // 향상된 for문을 사용하여 카드 정보를 String s에 대입하고, 그 s에 각 카드 정보와 일치하는 부분이 있는지 확인합니다.
+    // 이러한 과정으로 자신의 패를 모두 확인하여, 각 카드를 몇 장씩 가지고 있는지 계산합니다.
+    if(hands[i].contains("A")) {
+      num_counter[0]++;
+    }
+    if(hands[i].contains("2")) {
+      num_counter[1]++;
+    }
+    if(hands[i].contains("3")) {
+      num_counter[2]++;
+    }
+    if(hands[i].contains("4")) {
+      num_counter[3]++;
+    }
+    if(hands[i].contains("5")) {
+      num_counter[4]++;
+    }
+    if(hands[i].contains("6")) {
+      num_counter[5]++;
+    }
+    if(hands[i].contains("7")) {
+      num_counter[6]++;
+    }
+    if(hands[i].contains("8")) {
+      num_counter[7]++;
+    }
+    if(hands[i].contains("9")) {
+      num_counter[8]++;
+    }
+    if(hands[i].contains("10")) {
+      num_counter[9]++;
+    }
+    if(hands[i].contains("J")) {
+      num_counter[10]++;
+    }
+    if(hands[i].contains("Q")) {
+      num_counter[11]++;
+    }
+    if(hands[i].contains("K")) {
+      num_counter[12]++;
+    }
+  } // 각 카드의 소지한 갯수 확인을 위한, for문 종료
+
+
+  // 이 아래는 블랙잭의 특수한 점수 환산 방법으로 인한 것입니다.
+  // 점수 계산 시, 플레이어는 A카드를 1점으로 계산할 것인지, 10점으로 계산할 것인지 선택할 수 있습니다.
+  int selection_available = num_counter[0]; // 선택 가능 횟수입니다. A카드의 갯수만큼 선택 가능합니다. num_counter[0]에는 소지한 A카드의 갯수가 저장되어 있으므로, 이를 저장합니다.
+  int wildCard = 0; // A카드를 10점으로 환산한 횟수입니다.
+
+  while(selection_available&gt;0) { // A카드의 갯수만큼 환산 여부를 묻습니다. 다만 소지한 A카드의 갯수가 0개라면 이를 실행하지 않습니다.
+
+    Scanner sc = new Scanner(System.in);
+    System.out.println("A 카드를 몇 점으로 계산하시겠습니까? 1. [1점] | 2. [10점]");
+    int answer = sc.nextInt();
+
+    if(answer == 2) {
+      wildCard++;
+      num_counter[0]--;
+      selection_available--;
+    }
+    else {
+      selection_available--;
+    }
+
+    System.out.println("남은 A 카드 선택 횟수 : " + selection_available);
+  }
+
+  result += wildCard*10;
+  // 여기까지가 A카드에 대한 특수한 계산입니다.
+
+  for(int i=0; i&lt;13; i++) { // 보통의 점수 계산입니다.
+    switch(i+1) {
+    case 11:
+    case 12:
+    case 13:
+      result += num_counter[i]*10;
+      break;
+    default:
+      result += num_counter[i]*(i+1);
+      break;
+    } // 블랙잭의 규칙에 따라 J, Q, K는 10점으로 계산합니다.
+    // 스스로도 다소의 혼동이 있어 내용을 정리해 두었습니다.
+    // 만약 A카드를 10으로 변환했다면 위에서 num_counter[0]--;를 통해 자신이 10으로 변환한 횟수만큼 이미 num_counter[0]은 줄어들었고, 10으로 변환하지 않았다면 그것은 1로 사용하겠다는 의미입니다.
+    // 따라서 계산이 정상적으로 진행됩니다.
+  }
+  return result;
+} // Calc_myScore : 블랙잭 룰에 따른 점수 계산 방법입니다.
+
+void good_game() {
+  game_continue = false; // 이거 this 쓰는 게 맞나?
+} // good_game : 카드를 더 이상 받지 않기로 결정했습니다. 다른 플레이어의 카드 구성이 끝날 때까지 대기합니다.
+
+}
+          </code></pre>
+        </div>
+
+        <div>
+          <h4>AnotherPlayer</h4>
+
+          <pre><code>
+// 본인이나 딜러가 아닌 또 다른 플레이어로서, 컴퓨터인 플레이어입니다.
+// 대부분의 메서드가 게임플레이어와 동일하나, 다른 플레이어의 A카드 사용이나 카드 드로우 여부 등을
+// 플레이어 본인이 대신 선택해줄 수는 없으므로, 컴퓨터가 알아서 처리할 수 있도록 조건문을 설정하였습니다.
+
+package blackjack_Pack;
+import java.util.Scanner;
+
+public class AnotherPlayer {
+
+String[] hands = new String[30];
+int hand_count=0;
+
+boolean game_continue = true;
+
+String[] recognized_cards = new String[5];
+int recognized_cards_count = 0;
+
+public AnotherPlayer(){}
+
+void Show_hands() {
+  if(hand_count&lt;=0)
+  {
+    System.out.println("수중에 카드가 없습니다.");
+  }
+  else {
+    for(int i=0; i&lt;hand_count; i++) {
+    System.out.print(hands[i] + " | ");
+    }
+  }
+  System.out.println("");
+} // Show_hands : 자신의 패를 sysout으로 출력합니다.
+
+void Get_hands(String card) {
+  hands[hand_count]=card;
+  hand_count++;
+} // Get_hands : 자신의 패에 카드를 추가합니다.
+
+String Pick_Hands(int i) {
+  return hands[i];
+} // Pick_Hands : 자신의 패 중 지정한 순서의 카드를 출력합니다. 이는 블랙잭 경기 규칙 중 카드 공개가 포함되어 있기 때문에 그 부분을 구현하기 위한 것입니다.
+
+int Calc_myScore() {
+  int[] num_counter = new int[13];
+  int result=0;
+  for(int i=0; i&lt;hand_count; i++) {
+    // 자신의 패를 의미하는 hands 배열에는 자신이 가지고 있는 카드의 정보가 담겨 있습니다.
+    // 향상된 for문을 사용하여 카드 정보를 String s에 대입하고, 그 s에 각 카드 정보와 일치하는 부분이 있는지 확인합니다.
+    // 이러한 과정으로 자신의 패를 모두 확인하여, 각 카드를 몇 장씩 가지고 있는지 계산합니다.
+    if(hands[i].contains("A")) {
+      num_counter[0]++;
+    }
+    if(hands[i].contains("2")) {
+      num_counter[1]++;
+    }
+    if(hands[i].contains("3")) {
+      num_counter[2]++;
+    }
+    if(hands[i].contains("4")) {
+      num_counter[3]++;
+    }
+    if(hands[i].contains("5")) {
+      num_counter[4]++;
+    }
+    if(hands[i].contains("6")) {
+      num_counter[5]++;
+    }
+    if(hands[i].contains("7")) {
+      num_counter[6]++;
+    }
+    if(hands[i].contains("8")) {
+      num_counter[7]++;
+    }
+    if(hands[i].contains("9")) {
+      num_counter[8]++;
+    }
+    if(hands[i].contains("10")) {
+      num_counter[9]++;
+    }
+    if(hands[i].contains("J")) {
+      num_counter[10]++;
+    }
+    if(hands[i].contains("Q")) {
+      num_counter[11]++;
+    }
+    if(hands[i].contains("K")) {
+      num_counter[12]++;
+    }
+  } // 각 카드의 소지한 갯수 확인을 위한, for문 종료
+
+  // 이 아래는 블랙잭의 특수한 점수 환산 방법으로 인한 것입니다.
+  // 점수 계산 시, 플레이어는 A카드를 1점으로 계산할 것인지, 10점으로 계산할 것인지 선택할 수 있습니다.
+  for(int i=0; i&lt;13; i++) { // 보통의 점수 계산이지만, 와일드카드 계산을 위해 1(카드 A)은 계산하지 않고 넘어갑니다.
+    // 선택 가능 횟수입니다. A카드의 갯수만큼 선택 가능합니다. num_counter[0]에는 소지한 A카드의 갯수가 저장되어 있으므로, 이를 저장합니다.
+    switch(i+1) {
+    case 1:
+      break; // 1(카드 A)은 계산하지 않고 넘어갑니다. 이는 뒤에서 따로 계산하기 위합니다.
+    case 11:
+    case 12:
+    case 13:
+      result += num_counter[i]*10;
+      break;
+    default:
+      result += num_counter[i]*(i+1);
+      break;
+    } // 블랙잭의 규칙에 따라 J, Q, K는 10점으로 계산합니다.
+  }
+
+  int selection_available = num_counter[0]; // A카드 선택권의 숫자입니다.
+  int[] arr = new int[selection_available]; // A카드 선택권 사용의 경우에 수를 계산할 배열입니다.
+  int candidate = 0; // 최종적으로 선택하기에 가장 적절해 보이는, 숫자를 저장할 변수입니다.
+
+  for(int i=0; i&lt;selection_available; i++) { // 갯수가 제한된 선택권을 1과 10에 각각 사용했을 때의 결과를 계산하는 for문입니다.
+    int j=selection_available-i;
+    arr[i]= i*10 + j;
+
+    if((17&lt;=(arr[i]+result))&&((arr[i]+result)&lt;21)&&(arr[i]&gt;candidate)){ // 선택하기 좋은 숫자를 고르는 조건문입니다.
+      candidate = arr[i];
+    }
+  }
+
+  candidate = (candidate &lt;= selection_available) ? selection_available : candidate;
+  // 하지만 좋은 숫자가 없어서 결국 아무것도 고르지 못했다면 모두 1을 선택한 것으로 계산합니다.
+
+  result += candidate;
+
+  return result;
+} // Calc_myScore : 그러나 A 선택권 없이 계산한 점수가 21을 초과할 경우 A 선택권을 사용할 수 있습니다.
+
+void good_game() {
+  game_continue = false;
+}  // good_game : 카드를 더 이상 받지 않기로 결정했습니다. 다른 플레이어의 카드 구성이 끝날 때까지 대기합니다.
+
+void recognize_yours(String[] strArr) {
+  recognized_cards_count = strArr.length;
+  int count=0; // recognized_cards 배열에 앞에서부터 차례대로 정보를 입력하기 위한 카운트입니다.
+
+  for(int i=0; i&lt;hand_count; i++) { // 입력된 배열 strArr은 공개된 모든 카드의 정보가 입력된 배열입니다.
+    for(int j=0; j&lt;recognized_cards_count; j++) { // 그 중에서 자신의 카드와 일치하는 것을 조사합니다
+      if(hands[i].equals(strArr[j])){ // 자신이 가진 카드는 배열에 저장하지 않고, 자신의 것이 아닌 것만 저장합니다.
+        break;
+      }
+      else {
+        recognized_cards[count] = strArr[j];
+        count++;
+      }
+    }
+  }
+} // recognize_yours : 게임 진행 중 타인의 카드가 공개됩니다. 이 때, 공개된 카드의 정보들을 수집하고 기억합니다.
+// 플레이어가 선택해줄 수 없는, 컴퓨터의 입장이기 때문에 자체적인 판단이 필요합니다.
+
+boolean make_a_decision(int used_card_number) {
+
+  int now_myScore = Calc_myScore();
+  int random_num = (int)(Math.random()*101);
+  int possibility;
+
+  if(now_myScore&gt;=21) { // 다른 임의의 컴퓨터 플레이어는 카드 드로우 여부를 선택하는 것에 제약이 없습니다. 따라서 21 미만이라면 뭘 선택해도 좋습니다.
+    return false;
+  }
+  else {
+
+    int count = 0;
+    String[] AllCards_I_know = new String[32]; // 일단 현재 알고 있는(= 사용된) 카드들 정리
+    int[] num_sort = new int[13]; // int 배열이니 0으로 초기화해주지 않아도 무방.
+
+    for(int i=0; i&lt;hand_count; i++){
+      AllCards_I_know[count] = hands[i];
+      count++;
+    }
+
+    for(int i=0; i&lt;recognized_cards_count; i++){
+      AllCards_I_know[count] = recognized_cards[i];
+      count++;
+    }
+
+    for(int i=0; i&lt;count; i++) { // 사용된 카드들을 종류별로 갯수 정리 시작
+
+      if(AllCards_I_know[i] == null) { // 솔직히 다 멀쩡한 값만 골라서 집어넣도록 구성했는데 왜 그런지 모르겠지만, null값 때문에 오류가 나는 경우가 많음.
+        break; // 그래서 null이면 계산 안 하도록 처리.
+      }
+      else {
+        if(AllCards_I_know[i].contains("A")) {
+          num_sort[0]++;
+        }
+        if(AllCards_I_know[i].contains("2")) {
+          num_sort[1]++;
+        }
+        if(AllCards_I_know[i].contains("3")) {
+          num_sort[2]++;
+        }
+        if(AllCards_I_know[i].contains("4")) {
+          num_sort[3]++;
+        }
+        if(AllCards_I_know[i].contains("5")) {
+          num_sort[4]++;
+        }
+        if(AllCards_I_know[i].contains("6")) {
+          num_sort[5]++;
+        }
+        if(AllCards_I_know[i].contains("7")) {
+          num_sort[6]++;
+        }
+        if(AllCards_I_know[i].contains("8")) {
+          num_sort[7]++;
+        }
+        if(AllCards_I_know[i].contains("9")) {
+          num_sort[8]++;
+        }
+        if(AllCards_I_know[i].contains("10")) {
+          num_sort[9]++;
+        }
+        if(AllCards_I_know[i].contains("J")) {
+          num_sort[10]++;
+        }
+        if(AllCards_I_know[i].contains("Q")) {
+          num_sort[11]++;
+        }
+        if(AllCards_I_know[i].contains("K")) {
+          num_sort[12]++;
+        }
+      }
+    } // 사용된 카드들을 종류별로 갯수 정리 시작
+
+    boolean[] I_need = new boolean[13]; // 자신이 필요한 숫자가 무엇인지 판단하는 과정입니다.
+
+    for(int i=0; i&lt;13; i++) {
+
+      int added_score = (i&gt;10) ? 10 : i+1;
+
+      if(21&gt;(now_myScore+added_score)) {
+        I_need[i]=true;
+      }
+      else {
+        I_need[i]=false;
+      }
+    }
+
+    int number_I_want = 0; // 자신이 원하는 숫자 중 남아 있는 숫자의 갯수를 저장할 변수입니다.
+
+    for(int i=0; i&lt;13; i++) {
+      if(I_need[i]) { // 각 종류별로 동일한 카드는 4장이고, num_sort에 저장된 숫자는 이미 사용된 숫자의 갯수입니다.
+        number_I_want += (4-num_sort[i]); // 그러니 자신이 원하는 종류의 카드 중 남아 있는 갯수는 4-num_sort입니다.
+        // 예를 들어, 자신이 필요한 카드는 5입니다. 그런데 카드 5 중 이미 사용되었음을 인지한 갯수는 1개입니다. 이 때, 남은 5카드는 3장입니다.
+      }
+    }
+
+    possibility = (int)(number_I_want/(52-used_card_number)*100); // 총 52장의 카드 중 사용된 카드를 빼고, 남은 카드 중에서 자신이 원하는 카드가 나올 확률을 계산합니다.
+
+  } // else문 종료
+
+  return (random_num&lt;possibility)? true : false;	// 무작위로 정해진 난수가 자신이 카드를 뽑을 확률보다 낮으면 카드를 더 뽑는 것으로 판단하고, 높으면 멈춥니다.
+  // 예를 들어, 원하는 카드가 나올 확률이 25일 때, 난수가 25와 같거나 보다 크면 뽑지 않고, 25보다 작으면 카드를 뽑습니다.
+  // 반대로, 원하는 카드가 나올 확률이 85일 때, 난수가 85와 같거나 보다 크면 뽑지 않고, 85보다 작으면 카드를 뽑습니다.
+  // 이러한 조건을 통해, 보다 확률이 높은 쪽의 결론이 도출되도록 하였습니다.
+
+} // make_a_decision : 카드를 더 받을지에 대한 판단을 내립니다.
+// 플레이어가 선택해줄 수 없는, 컴퓨터의 입장이기 때문에 자체적인 판단이 필요합니다.
+
+}
+          </code></pre>
+        </div>
+
+        <div>
+          <h4>GameDealer</h4>
+
+          <pre><code>
+// 게임의 딜러입니다. 메소드가 플레이어와 거의 같으나, 딜러의 경우 계산식에 특별한 과정이 추가됩니다.
+
+package blackjack_Pack;
+import java.util.Scanner;
+
+public class GameDealer {
+
+String[] hands = new String[30];
+int hand_count=0;
+
+boolean game_continue = true;
+
+String[] recognized_cards = new String[5];
+int recognized_cards_count = 0;
+
+public GameDealer(){}
+
+void Show_hands() {
+  if(hand_count&lt;=0)
+  {
+    System.out.println("수중에 카드가 없습니다.");
+  }
+  else {
+    for(int i=0; i&lt;hand_count; i++) {
+    System.out.print(hands[i] + " | ");
+    }
+  }
+  System.out.println("");
+} // Show_hands : 자신의 패를 sysout으로 출력합니다.
+
+void Get_hands(String card) {
+  hands[hand_count]=card;
+  hand_count++;
+} // Get_hands : 자신의 패에 카드를 추가합니다.
+
+String Pick_Hands(int i) {
+  return hands[i];
+} // Pick_Hands : 자신의 패 중 지정한 순서의 카드를 출력합니다. 이는 블랙잭 경기 규칙 중 카드 공개가 포함되어 있기 때문에 그 부분을 구현하기 위한 것입니다.
+
+int Calc_Dealer_Score1() {
+  int[] num_counter = new int[13];
+  int result=0;
+  for(int i=0; i&lt;hand_count; i++) {
+    // 자신의 패를 의미하는 hands 배열에는 자신이 가지고 있는 카드의 정보가 담겨 있습니다.
+    // 향상된 for문을 사용하여 카드 정보를 String s에 대입하고, 그 s에 각 카드 정보와 일치하는 부분이 있는지 확인합니다.
+    // 이러한 과정으로 자신의 패를 모두 확인하여, 각 카드를 몇 장씩 가지고 있는지 계산합니다.
+    if(hands[i].contains("A")) {
+      num_counter[0]++;
+    }
+    if(hands[i].contains("2")) {
+      num_counter[1]++;
+    }
+    if(hands[i].contains("3")) {
+      num_counter[2]++;
+    }
+    if(hands[i].contains("4")) {
+      num_counter[3]++;
+    }
+    if(hands[i].contains("5")) {
+      num_counter[4]++;
+    }
+    if(hands[i].contains("6")) {
+      num_counter[5]++;
+    }
+    if(hands[i].contains("7")) {
+      num_counter[6]++;
+    }
+    if(hands[i].contains("8")) {
+      num_counter[7]++;
+    }
+    if(hands[i].contains("9")) {
+      num_counter[8]++;
+    }
+    if(hands[i].contains("10")) {
+      num_counter[9]++;
+    }
+    if(hands[i].contains("J")) {
+      num_counter[10]++;
+    }
+    if(hands[i].contains("Q")) {
+      num_counter[11]++;
+    }
+    if(hands[i].contains("K")) {
+      num_counter[12]++;
+    }
+  } // 각 카드의 소지한 갯수 확인을 위한, for문 종료
+
+  // 딜러는 플레이어와 달리 A카드의 점수 계산 방법을 선택할 수 없습니다.
+
+  for(int i=0; i&lt;13; i++) { // 보통의 점수 계산입니다.
+    switch(i+1) {
+    case 11:
+    case 12:
+    case 13:
+      result += num_counter[i]*10;
+      break;
+    default:
+      result += num_counter[i]*(i+1);
+      break;
+    } // 블랙잭의 규칙에 따라 J, Q, K는 10점으로 계산합니다.
+  }
+
+  return result;
+} // Calc_Dealer_Score1 : 딜러는 플레이어와 달리 A카드의 점수 계산 방법을 선택할 수 없습니다.
+
+int Calc_Dealer_Score2() {
+  int[] num_counter = new int[13];
+  int result=0;
+  for(int i=0; i&lt;hand_count; i++) {
+    // 자신의 패를 의미하는 hands 배열에는 자신이 가지고 있는 카드의 정보가 담겨 있습니다.
+    // 향상된 for문을 사용하여 카드 정보를 String s에 대입하고, 그 s에 각 카드 정보와 일치하는 부분이 있는지 확인합니다.
+    // 이러한 과정으로 자신의 패를 모두 확인하여, 각 카드를 몇 장씩 가지고 있는지 계산합니다.
+    if(hands[i].contains("A")) {
+      num_counter[0]++;
+    }
+    if(hands[i].contains("2")) {
+      num_counter[1]++;
+    }
+    if(hands[i].contains("3")) {
+      num_counter[2]++;
+    }
+    if(hands[i].contains("4")) {
+      num_counter[3]++;
+    }
+    if(hands[i].contains("5")) {
+      num_counter[4]++;
+    }
+    if(hands[i].contains("6")) {
+      num_counter[5]++;
+    }
+    if(hands[i].contains("7")) {
+      num_counter[6]++;
+    }
+    if(hands[i].contains("8")) {
+      num_counter[7]++;
+    }
+    if(hands[i].contains("9")) {
+      num_counter[8]++;
+    }
+    if(hands[i].contains("10")) {
+      num_counter[9]++;
+    }
+    if(hands[i].contains("J")) {
+      num_counter[10]++;
+    }
+    if(hands[i].contains("Q")) {
+      num_counter[11]++;
+    }
+    if(hands[i].contains("K")) {
+      num_counter[12]++;
+    }
+  } // 각 카드의 소지한 갯수 확인을 위한, for문 종료
+
+
+  // 이 아래는 블랙잭의 특수한 점수 환산 방법으로 인한 것입니다.
+  // 점수 계산 시, 플레이어는 A카드를 1점으로 계산할 것인지, 10점으로 계산할 것인지 선택할 수 있습니다.
+  for(int i=0; i&lt;13; i++) { // 보통의 점수 계산이지만, 와일드카드 계산 조건을 구성해야 하기 때문에 1(카드 A)은 계산하지 않고 넘어갑니다.
+    // 선택 가능 횟수입니다. A카드의 갯수만큼 선택 가능합니다. num_counter[0]에는 소지한 A카드의 갯수가 저장되어 있으므로, 이를 저장합니다.
+    switch(i+1) {
+    case 1:
+      break; // 1(카드 A)은 계산하지 않고 넘어갑니다. 이는 뒤에서 따로 계산하기 위합니다.
+    case 11:
+    case 12:
+    case 13:
+      result += num_counter[i]*10;
+      break;
+    default:
+      result += num_counter[i]*(i+1);
+      break;
+    } // 블랙잭의 규칙에 따라 J, Q, K는 10점으로 계산합니다.
+  }
+
+  int selection_available = num_counter[0]; // A카드 선택권의 숫자입니다.
+  int[] arr = new int[selection_available]; // A카드 선택권 사용의 경우에 수를 계산할 배열입니다.
+  int candidate = 0; // 최종적으로 선택하기에 가장 적절해 보이는, 숫자를 저장할 변수입니다.
+
+  for(int i=0; i&lt;selection_available; i++) { // 갯수가 제한된 선택권을 1과 10에 각각 사용했을 때의 결과를 계산하는 for문입니다.
+    int j=selection_available-i;
+    arr[i]= i*10 + j;
+
+    if((17&lt;=(arr[i]+result))&&((arr[i]+result)&lt;21)&&(arr[i]&gt;candidate)){ // 선택하기 좋은 숫자를 고르는 조건문입니다.
+      candidate = arr[i];
+    }
+  }
+
+  candidate = (candidate &lt;= selection_available) ? selection_available : candidate;
+  // 하지만 좋은 숫자가 없어서 결국 아무것도 고르지 못했다면 모두 1을 선택한 것으로 계산합니다.
+
+  result += candidate;
+
+  return result;
+} // Calc_Dealer_Score2 : 그러나 A 선택권 없이 계산한 점수가 21을 초과할 경우 A 선택권을 사용할 수 있습니다.
+
+int Final_Dealer_Score() {
+  int result = Calc_Dealer_Score1(); // A선택권 없을 때의 점수입니다.
+  int sub_score = Calc_Dealer_Score2(); // A선택권을 사용했을 때의 점수입니다.
+
+  return (result&gt;21) ? sub_score : result; // 21을 오버했을 때보다 차라리 숫자가 낮은 편이 딜러가 이기는 경우의 수가 더 많으므로, 더 낮은 수를 선택.
+  // 만약 sub_score도 21을 넘었다면 어차피 둘 다 넘은 거라 승부에는 아무런 상관이 없음
+}
+
+void good_game() {
+  game_continue = false;
+}  // good_game : 카드를 더 이상 받지 않기로 결정했습니다. 다른 플레이어의 카드 구성이 끝날 때까지 대기합니다.
+
+void recognize_yours(String[] strArr) {
+  recognized_cards_count = strArr.length;
+  int count=0; // recognized_cards 배열에 앞에서부터 차례대로 정보를 입력하기 위한 카운트입니다.
+
+  for(int i=0; i&lt;hand_count; i++) { // 입력된 배열 strArr은 공개된 모든 카드의 정보가 입력된 배열입니다.
+    for(int j=0; j&lt;recognized_cards_count; j++) { // 그 중에서 자신의 카드와 일치하는 것을 조사합니다
+      if(hands[i].equals(strArr[j])){ // 자신이 가진 카드는 배열에 저장하지 않고, 자신의 것이 아닌 것만 저장합니다.
+        break;
+      }
+      else {
+        recognized_cards[count] = strArr[j];
+        count++;
+      }
+    }
+  }
+} // recognize_yours : 게임 진행 중 타인의 카드가 공개됩니다. 이 때, 공개된 카드의 정보들을 수집하고 기억합니다.
+// 플레이어가 선택해줄 수 없는, 컴퓨터의 입장이기 때문에 자체적인 판단이 필요합니다.
+
+boolean make_a_decision() {
+
+  int now_myScore = Final_Dealer_Score();
+  // 블랙잭의 규칙에 의해 딜러는 점수가 17보다 작으면 무조건 뽑아야 하지만 17 이상이면 무조건 멈춰야 합니다.
+
+  return (now_myScore &lt; 17)? true : false;
+} // make_a_decision : 카드를 더 받을지에 대한 판단을 내립니다.
+// 플레이어가 선택해줄 수 없는, 컴퓨터의 입장이기 때문에 자체적인 판단이 필요합니다.
+
+}
+```
+
+## CardManager
+
+```java
+// 게임에 사용되는 카드 중 아직 사용되지 않은 것들을 관리할 카드 매니저입니다.
+
+package blackjack_Pack;
+
+public class CardManager {
+
+String[][] card = new String[4][13];
+int[] remained_card = new int[13];
+int used_number;
+
+public CardManager() {}
+
+void Create_Card(){
+
+for(int i=0; i&lt;card.length; i++) {
+
+  String shape="";
+  String num="";
+
+  switch(i) {
+  case 0:
+    shape = "하트";
+    break;
+  case 1:
+    shape = "클로버";
+    break;
+  case 2:
+    shape = "다이아";
+    break;
+  case 3:
+    shape = "스페이드";
+    break;
+  default :
+    break;
+  }
+
+  for(int j=0; j&lt;card[i].length; j++) {
+
+    switch(j+1) {
+    case 1:
+      num = "A";
+      break;
+    case 11:
+      num = "J";
+      break;
+    case 12:
+      num = "Q";
+      break;
+    case 13:
+      num = "K";
+      break;
+    default:
+      num = String.valueOf(j+1);
+      break;
+    }
+
+    card[i][j] = "[" + shape + " " + num + "]";
+  }
+}
+} // Create_Card : 카드를 새롭게 생성합니다.
+
+void Show_Remain_Card() {
+
+  for(int i=0; i&lt;card.length; i++) {
+
+    for(int j=0; j&lt;card[i].length; j++) {
+      System.out.println(card[i][j]+" ");
+        }
+
+  }
+} // Show_Remain_Card : 남아 있는 카드 목록들을 sysout으로 보여줍니다.
+
+String draw_Card(){
+
+  int x=0, y=0;
+
+  do {
+    x = (int)(Math.random()*4); // 눈 앞에 보여줄 숫자가 아니라 배열 순서값이니까 0부터 출력
+    y = (int)(Math.random()*13);
+  }while(card[x][y].equals("used"));
+
+  String temp = card[x][y];
+
+  card[x][y]="used";
+
+  return temp;
+} // draw_Card : 무작위로 카드 한 장을 뽑습니다. 뽑은 카드가 이미 사용되었다면 사용된 적 없는 카드가 나올 때까지 계속 뽑습니다.
+  // 사용된 카드에는 "used"를 저장하고, 그 카드에 저장되어 있던 값을 출력합니다.
+
+int Count_Remain_Card(String str) {
+
+  int count=0;
+
+  for(int i=0; i&lt;card.length; i++) {
+    for(int j=0; j&lt;card[i].length; j++) {
+      if(card[i][j].contains(str)) {
+        count++;
+      }
+    }
+
+  }
+
+  return count;
+} // Count_Remain_Card : 남아 있는 카드 중 찾고자 하는 값이 포함된 갯수를 찾습니다. 에이스 : "A", 킹 : "K"...와 같이 표기하니 찾고자 하는 문자 그대로 입력하면 됩니다.
+
+void Count_All_Remain_Card() {
+
+  for(int i=0; i&lt;13; i++) {
+    remained_card[i] = 0;
+  } // 이전에 이미 카운트해서 저장된 숫자가 있을 수 있으니, 한 번 0으로 만들어줍니다.
+
+  for(int j=0; j&lt;13; j++) { // j값에 따라 Count_Remain()에 들어갈 문자열이 달라지도록 합니다.
+
+    String num="";
+
+    switch(j+1) {
+    case 1:
+      num = "A";
+      break;
+    case 11:
+      num = "J";
+      break;
+    case 12:
+      num = "Q";
+      break;
+    case 13:
+      num = "K";
+      break;
+    default:
+      num = String.valueOf(j+1);
+      break;
+    }
+
+    remained_card[j] = Count_Remain_Card(num); // j값에 따라 문자열이 변화하며 순차적으로 Count_Remain()을 실행합니다.
+  }
+
+} // Count_All_Remain_Card : Count_Remain 메서드로 13번을 반복하기엔 너무나도 번거롭고 오래 걸립니다.
+// 따라서 메서드 하나를 실행시키는 것으로 모두 처리할 수 있도록 Count_All_Remain 함수를 만들었습니다.
+
+void Show_All_Remains_Count() {
+  System.out.println("남은 카드들");
+  for(int i=0; i&lt;13; i++) {
+    System.out.println((i+1) + " : "+ remained_card[i]);
+  }
+} // Show_All_Remains_Count : 각 카드가 몇 장씩 남았는지 sysout으로 출력합니다. 다만, Count_Remain 혹은 Count_All_Remain 을 사용한 후에 사용하지 않으면 0이 출력될 뿐입니다.
+
+int Count_used() {
+
+  used_number = 0; // 이미 계산된 것이 있을 수 있으니 한 번 초기화
+
+  for(int i=0; i&lt;4; i++) {
+    for(int j=0; j&lt;13; j++) {
+      if(card[i][j].equals("used")) {
+        used_number++;
+      }
+
+    }
+  }
+
+  return used_number;
+}
+
+}
+          </code></pre>
+        </div>
+      </div>
+
+      <div>
+        <h2>3. 기록</h2>
+
+        <ol>
+          <li>
+            코딩학원 3주차만에 무언가를 만들어내서 스스로 뿌듯하고 기쁘지만,
+            부족한 점이 많았음.
+          </li>
+
+          <li>
+            상속을 안 써서 비효율
+
+            <ul>
+              <li>
+                뒤늦게 생각났지만 GamePlayer, GameDealer, AnotherPlayer 겹치는
+                기능이 대부분임. 차라리 상속을 사용해서 겹치는 부분의 코딩 및
+                수정에 들어가는 시간을 줄였더라면 훨씬 효율적이고 좋았을 것임
+              </li>
+
+              <li>
+                거의 막힘 없이 쳤는데도, 코딩에 4~5시간 정도 걸렸고, 사소한
+                수정도 똑같은 걸 3번씩 해서 매우 비효율적이었음.
+              </li>
+            </ul>
+          </li>
+
+          <li>
+            여전히 public, private나 static에 대한 이해도가 부족함. 그리고
+            그나마 this는 이제 이해함
+          </li>
+
+          <li>
+            String 타입의 변수를 활용하는 것이 까다로웠음
+
+            <ul>
+              <li>특히 계산과정에서 발생하는 null값의 처리가 문제였음</li>
+
+              <li>
+                AnotherPlayer는 unveiled cards를 recognized yours로 받아옴.
+
+                <ol>
+                  <li>
+                    받아온 카드와 자신의 패를 대조해서, 받아온 카드 중 자신의
+                    카드는 제외하고 새롭게 알게 된 카드만 추려냄.
+                  </li>
+
+                  <li>
+                    그리고 새롭게 알게 된 카드와 자신의 패를 합쳐서 recognized
+                    cards에 저장함.
+                  </li>
+
+                  <li>
+                    recognized cards에 저장한 카드는 나중에 카드 카운팅 과정을
+                    거쳐 현재 자신의 상황에서 카드를 더 받는 것이 이득일지,
+                    멈추는 것이 이득일지 컴퓨터가 자체적으로 판단하는 데에
+                    사용됨.
+                  </li>
+                </ol>
+              </li>
+
+              <li>
+                근데 위의 저장 과정으로 인해 사용 시에 문제가 발생함.
+
+                <ol>
+                  <li>
+                    unveiled cards의 갯수를 확인하고, 그것을 하나하나 대조하도록
+                    하여 모든 카드가 빠짐없이 확인되면서도, 카드 갯수만큼만
+                    반복하는 만큼 null값이 들어갈 여지가 없다고 생각했음
+                  </li>
+
+                  <li>
+                    그러나 unveiled cards (= n개)에는 필연적으로 자신의 카드가
+                    하나는 섞여 있고, 자신의 카드는 제외하고 저장하니까 저장된
+                    갯수는 (n-1)개인데 앞으로 체크는 n번만큼 함.
+                  </li>
+
+                  <li>
+                    그러니 아직 값이 저장되지 않은 곳(null값이 들어있는 곳)까지
+                    계산에 사용하면서 null 오류가 발생함.
+                  </li>
+                </ol>
+              </li>
+
+              <li>
+                이 문제는 저장 과정이 끝난 후 앞으로 카운트에 사용할 숫자에서
+                자신의 카드 갯수만큼 빼서 해결함.
+              </li>
+            </ul>
+          </li>
+
+          <li>
+            간단하게 구성할 수 있는 조건문도 괜히 복잡하게 꼬아서 오류가 났었음.
+            조건문 구성할 때 좀 더 빈틈없고 간결하게 구성할 필요가 있음.
+          </li>
+        </ol>
+      </div>
+    </div>
+  </body>
+</html>

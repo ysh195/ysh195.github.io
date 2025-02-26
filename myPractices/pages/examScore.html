@@ -1,0 +1,949 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>코딩 6주차 연습</title>
+
+    <link rel="stylesheet" href="../css/basic.css" />
+  </head>
+  <body>
+    <div>
+      <a href="https://ysh195.github.io/">
+        <button class="homeBtn">홈으로</button>
+      </a>
+
+      <h1>코딩 6주차 - 학생들 성적 계산기</h1>
+
+      <p>
+        학생과 성적을 추가, 삭제, 수정할 수 있고, 시험 결과를 시각적으로
+        표현해주는 프로그램을 만들었습니다.
+      </p>
+
+      <div>
+        <h2>1. 완성 이미지</h2>
+
+        <ul class="img-list">
+          <li>
+            <img src="../assets/es/es1.png" />
+          </li>
+
+          <li>
+            <img src="../assets/es/es2.png" />
+          </li>
+
+          <li>
+            <img src="../assets/es/es3.png" />
+          </li>
+
+          <li>
+            <img src="../assets/es/es4.png" />
+          </li>
+
+          <li>
+            <img src="../assets/es/es5.png" />
+          </li>
+
+          <li>
+            <img src="../assets/es/es6.png" />
+          </li>
+
+          <li>
+            <img src="../assets/es/es7.png" />
+          </li>
+
+          <li>
+            <img src="../assets/es/es8.png" />
+          </li>
+
+          <li>
+            <img src="../assets/es/es9.png" />
+          </li>
+
+          <li>
+            <img src="../assets/es/es10.png" />
+          </li>
+
+          <li>
+            <img src="../assets/es/es11.png" />
+          </li>
+
+          <li>
+            <img src="../assets/es/es12.png" />
+          </li>
+
+          <li>
+            <img src="../assets/es/es13.png" />
+          </li>
+        </ul>
+      </div>
+
+      <div>
+        <h2>2. 코드</h2>
+
+        <div>
+          <h4>main : Operator</h4>
+
+          <pre><code>
+package examScore;
+
+public class Operator {
+
+public static void main(String[] args) {
+  StudentManager sm = StudentManager.getInstance();
+  sm.initialized();
+
+  MainFrame mainframe = new MainFrame(sm);
+}
+
+}
+          </code></pre>
+        </div>
+
+        <div>
+          <h4>Student</h4>
+
+          <pre><code>
+package examScore;
+
+public class Student {
+
+// 필드
+private String name;
+private int kor_score;
+private int eng_score;
+private int math_score;
+private int science_score;
+private int society_score;
+
+// 생성자
+public Student() {}
+public Student(String name, int kor_score, int eng_score, int math_score, int science_score, int society_score) {
+  this.name = name;
+  this.kor_score = kor_score;
+  this.eng_score = eng_score;
+  this.math_score = math_score;
+  this.science_score = science_score;
+  this.society_score = society_score;
+}
+
+// 메서드
+public void setAll(String name, int kor_score, int eng_score, int math_score, int science_score, int society_score) {
+  this.name = name;
+  this.kor_score = kor_score;
+  this.eng_score = eng_score;
+  this.math_score = math_score;
+  this.science_score = science_score;
+  this.society_score = society_score;
+}
+
+public int getMyTotal() {
+  return kor_score + eng_score + math_score + science_score + society_score;
+}
+
+public int getAnyScore(String subject) {
+  switch(subject) {
+  case "국어":
+    return kor_score;
+  case "영어":
+    return eng_score;
+  case "수학":
+    return math_score;
+  case "과학":
+    return science_score;
+  case "사회":
+    return society_score;
+  default:
+    System.out.println("정규 과목이 아닙니다.");
+    return 0;
+  }
+}
+
+public String getName() {
+  return name;
+}
+public void setName(String name) {
+  this.name = name;
+}
+public int getKor_score() {
+  return kor_score;
+}
+public void setKor_score(int kor_score) {
+  this.kor_score = kor_score;
+}
+public int getEng_score() {
+  return eng_score;
+}
+public void setEng_score(int eng_score) {
+  this.eng_score = eng_score;
+}
+public int getMath_score() {
+  return math_score;
+}
+public void setMath_score(int math_score) {
+  this.math_score = math_score;
+}
+public int getScience_score() {
+  return science_score;
+}
+public void setScience_score(int science_score) {
+  this.science_score = science_score;
+}
+public int getSociety_score() {
+  return society_score;
+}
+public void setSociety_score(int society_score) {
+  this.society_score = society_score;
+}
+
+}
+          </code></pre>
+        </div>
+
+        <div>
+          <h4>StudentManager</h4>
+
+          <pre><code>
+package examScore;
+
+import java.util.ArrayList; // 차라리 수정사항 적용할 때마다 반영하는 게 더 낫지 않을까?
+
+public class StudentManager {
+
+private static ArrayList&lt;Student&gt; ARRAYLIST = new ArrayList&lt;&gt;();
+
+private StudentManager() {}
+private static StudentManager replace = new StudentManager();
+public static StudentManager getInstance() {
+  return replace;
+}
+
+void initialized() {
+  int x_size = 5;
+  int y_size = 10;
+  String[] initial_names = {"김1","김2","김3","박1","박2","박3","이1","이2","이3","최1"};
+  int[][] initial_scores = new int[y_size][x_size];
+  for(int i=0; i&lt;y_size; i++) {
+    for(int j=0; j&lt;x_size; j++) {
+      initial_scores[i][j] = (int)(Math.random()*101);
+    }
+    ARRAYLIST.add(new Student(initial_names[i],initial_scores[i][0],initial_scores[i][1],initial_scores[i][2],initial_scores[i][3],initial_scores[i][4]));
+  }
+}
+
+void update(String[] nameList, int[][] scoreList) { // 자바 테이블 체계상 두 배열의 길이는 항상 같을 수밖에 없음
+
+  ArrayList&lt;Student&gt; temp = new ArrayList&lt;&gt;(); // 타입 변환 중의 오류는 여기에 값을 넣어줄 곳에서 처리할 테니 상관없음. 여긴 값을 넣어서 arraylist만 업데이트하면 됨
+
+  for(int i=0; i&lt;nameList.length; i++) {
+    temp.add(new Student(nameList[i],scoreList[i][0],scoreList[i][1],scoreList[i][2],scoreList[i][3],scoreList[i][4]));
+  }
+
+  System.out.println("데이터 동기화에 성공하였습니다.");
+  ARRAYLIST = temp;
+
+}
+
+float avgBySubject(String subjectName) {
+
+  int student_count = ARRAYLIST.size(); // 학생 수
+
+  if(student_count&lt;=0) { // 혹시 0 나누기라서 계산이 안 되거나, 이상한 수가 나왔을 때에 대한 대비
+    return 0;
+  }
+
+  int total = 0;
+  switch(subjectName) {
+  case "국어":
+    total = ARRAYLIST.stream().mapToInt(Student::getKor_score).sum(); // map을 쓰면 특정 클래스 타입의 메소드를 불러올 수 있네
+    break; // 여기서도 getAnyScore 쓰고 싶은데, mapToInt로 메서드 쓰려면 인수 필요 없는 것이어야 함
+  case "영어":
+    total = ARRAYLIST.stream().mapToInt(Student::getEng_score).sum();
+    break;
+  case "수학":
+    total = ARRAYLIST.stream().mapToInt(Student::getMath_score).sum();
+    break;
+  case "과학":
+    total = ARRAYLIST.stream().mapToInt(Student::getScience_score).sum();
+    break;
+  case "사회":
+    total = ARRAYLIST.stream().mapToInt(Student::getSociety_score).sum();
+    break;
+  case "전체":
+    total = ARRAYLIST.stream().mapToInt(Student::getMyTotal).sum();
+    return (float)total/(student_count*5);
+  default:
+    System.out.println("잘못된 입력입니다.");
+    return 0;
+  }
+
+  return (float)total/student_count;
+}
+
+float avgByName(String studentName) {
+  int subject_count = 5;
+  int total = 0;
+
+  if(ARRAYLIST.stream().filter(s -&gt; s.getName().equals(studentName)).count() == 0) {
+    System.out.println("존재하지 않는 학생입니다.");
+    return 0;
+  }
+
+  if(studentName == "전체") {
+    total = ARRAYLIST.stream().mapToInt(Student::getMyTotal).sum();
+  }
+  else {
+    total = ARRAYLIST.stream().filter(s -&gt; s.getName().equals(studentName)).mapToInt(Student::getMyTotal).sum();
+  }
+
+  return (float)total/subject_count;
+}
+
+String[][] allToStringArray(){
+
+  int y = ARRAYLIST.size();
+  String[][] temp = new String[y][6];
+
+  // toArray의 리턴 타입은 object[]
+  Object[] nameList = ARRAYLIST.stream().map(Student::getName).toArray(); // 각 항목별로 배열로 분리.
+  Object[] kor_list = ARRAYLIST.stream().map(Student::getKor_score).toArray();
+  Object[] eng_list = ARRAYLIST.stream().map(Student::getEng_score).toArray();
+  Object[] math_list = ARRAYLIST.stream().map(Student::getMath_score).toArray();
+  Object[] sci_list = ARRAYLIST.stream().map(Student::getScience_score).toArray();
+  Object[] soc_list = ARRAYLIST.stream().map(Student::getSociety_score).toArray();
+
+  for(int i=0; i&lt;y; i++) {
+
+    // 먼저 변수 선언. 이 메서드 내에서 많이 씀
+    String name;
+    String kor_score = String.valueOf(kor_list[i]);
+    String eng_score;
+    String math_score;
+    String sci_score;
+    String soc_score;
+
+    // 타입 변환 및 오류 대비. 사실 다 object 타입이라 상관없지 않나 싶음
+    try {name = String.valueOf(nameList[i]);}catch(Exception e) {name = ""; System.out.println("StudentManger - allToStringArray - name : String타입으로 변환하기에 적합하지 않습니다."); e.getStackTrace();}
+    try {kor_score = String.valueOf(kor_list[i]);}catch(Exception e) {kor_score = ""; System.out.println("StudentManger - allToStringArray - kor : int타입으로 변환하기에 적합하지 않습니다."); e.getStackTrace();}
+    try {eng_score = String.valueOf(eng_list[i]);}catch(Exception e) {eng_score = ""; System.out.println("StudentManger - allToStringArray - eng: int타입으로 변환하기에 적합하지 않습니다."); e.getStackTrace();}
+    try {math_score = String.valueOf(math_list[i]);}catch(Exception e) {math_score = ""; System.out.println("StudentManger - allToStringArray - math : int타입으로 변환하기에 적합하지 않습니다."); e.getStackTrace();}
+    try {sci_score = String.valueOf(sci_list[i]);}catch(Exception e) {sci_score = ""; System.out.println("StudentManger - allToStringArray - sci : int타입으로 변환하기에 적합하지 않습니다."); e.getStackTrace();}
+    try {soc_score = String.valueOf(soc_list[i]);}catch(Exception e) {soc_score = ""; System.out.println("StudentManger - allToStringArray - soc : int타입으로 변환하기에 적합하지 않습니다."); e.getStackTrace();}
+
+    // 변환된 값을 temp에 저장
+    temp[i][0] = name;
+    temp[i][1] = kor_score;
+    temp[i][2] = eng_score;
+    temp[i][3] = math_score;
+    temp[i][4] = sci_score;
+    temp[i][5] = soc_score;
+
+  }
+
+  return temp;
+}
+
+void whose_score_is(String subject, int score) {
+
+  ARRAYLIST.forEach(s -&gt; {
+    if(s.getAnyScore(subject) == score) {
+      System.out.println(s.getName() + " (" + String.valueOf(s.getAnyScore(subject)) +"점)");
+    }
+  });
+}
+
+void MaxScoreBySubject(String subject) {
+  int maxScore = 0;
+
+  switch(subject) {
+  case "국어":
+    maxScore = ARRAYLIST.stream().mapToInt(s -&gt; s.getKor_score()).max().getAsInt(); // min/max 계산 시 리턴값이 optionalInt라서 마지막에 그냥 int로 변환
+    break;
+  case "영어":
+    maxScore = ARRAYLIST.stream().mapToInt(s -&gt; s.getEng_score()).max().getAsInt();
+    break;
+  case "수학":
+    maxScore = ARRAYLIST.stream().mapToInt(s -&gt; s.getMath_score()).max().getAsInt();
+    break;
+  case "과학":
+    maxScore = ARRAYLIST.stream().mapToInt(s -&gt; s.getScience_score()).max().getAsInt();
+    break;
+  case "사회":
+    maxScore = ARRAYLIST.stream().mapToInt(s -&gt; s.getSociety_score()).max().getAsInt();
+    break;
+  default:
+    System.out.println("적절한 입력이 아닙니다.");
+    return;
+  }
+
+  System.out.print(subject + " 과목의 최고 득점자 : "); // 일부러 print로 해서 뒤와 이어지게 함
+  whose_score_is(subject, maxScore); // 콘솔에 텍스트 출력함.
+
+}
+
+void MinScoreBySubject(String subject) {
+  int minScore = 0;
+
+  switch(subject) {
+  case "국어":
+    minScore = ARRAYLIST.stream().mapToInt(s -&gt; s.getKor_score()).min().getAsInt();
+    break;
+  case "영어":
+    minScore = ARRAYLIST.stream().mapToInt(s -&gt; s.getEng_score()).min().getAsInt();
+    break;
+  case "수학":
+    minScore = ARRAYLIST.stream().mapToInt(s -&gt; s.getMath_score()).min().getAsInt();
+    break;
+  case "과학":
+    minScore = ARRAYLIST.stream().mapToInt(s -&gt; s.getScience_score()).min().getAsInt();
+    break;
+  case "사회":
+    minScore = ARRAYLIST.stream().mapToInt(s -&gt; s.getSociety_score()).min().getAsInt();
+    break;
+  default:
+    System.out.println("적절한 입력이 아닙니다.");
+    return;
+  }
+
+  System.out.print(subject + " 과목의 최저 득점자 : "); // 일부러 print로 해서 뒤와 이어지게 함
+  whose_score_is(subject, minScore); // 콘솔에 텍스트 출력함.
+
+}
+
+void TopAvg() {
+  Object[] nameListObj = ARRAYLIST.stream().map(Student::getName).toArray();
+
+  String[] nameListStr = new String[nameListObj.length];
+  float[] avgScores = new float[nameListObj.length];
+  int hisOrder = 0;
+  float maxScore = 0;
+  for (int i=0; i&lt;nameListObj.length; i++) {
+
+    // 배열에 값을 입력하는 과정.
+    nameListStr[i] = String.valueOf(nameListObj[i]); // object[]라서 String[]처럼 처리할 수가 없음. 그래서 값을 String으로 변환하는 중
+    avgScores[i] = avgByName(nameListStr[i]); // 변환된 이름으로 각자의 평균 점수 계산해서 배열에 입력
+
+    if(maxScore &lt; avgScores[i]) { // 평균 점수들 중에서 최고 점수가 몇 점이고, 최고점수가 있는 순서를 저장.
+      maxScore = avgScores[i];
+      hisOrder=i;
+    }
+  }
+
+  System.out.println("전체 평균 최고 득점자 : " + nameListStr[hisOrder] + " (평균 : " + String.valueOf(maxScore) +")");
+
+}
+
+// 전체 평균 최고 득점자 표시
+}
+          </code></pre>
+        </div>
+
+        <div>
+          <h4>MainFrame</h4>
+
+          <pre><code>
+package examScore;
+
+import javax.swing.*;
+import javax.swing.table.DefaultTableModel; // 테이블 수정에 관련된 패키지
+import javax.swing.table.JTableHeader;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+
+public class MainFrame { // 학생 추가 및 삭제, 현재 데이터 리턴, 변동 사항 반영. 여기까지는 확정인데, 평균이나 등수 같은 거 표현을 어떻게 할 지 아직 고민. 그냥 귀찮으니까 한 번에 할까
+
+static JComboBox combo = new JComboBox();
+static JTable table;
+
+public MainFrame(StudentManager studentManager) { // 저장소와 사용자가 보는 파일 목록은 서로 연동되지 않고, 별개로 동작합니다.
+
+  Dimension dim = new Dimension(700,300);
+
+  JFrame frame = new JFrame("학생 성적 계산");
+  frame.setLocation(200, 400);
+  frame.setPreferredSize(dim);
+
+  String[][] contents = studentManager.allToStringArray();
+  String[] header = {"학생 이름", "국어","영어","수학","과학","사회"};
+  DefaultTableModel model = new DefaultTableModel(contents,header); // 테이블 세팅과 관련된 것
+  table = new JTable(model); // 테이블 생성.
+  JScrollPane scrollpane = new JScrollPane(table);
+  // 내용을 모델에 넘기고, 모델을 테이블에 연결.
+
+  setComboBox();
+
+  JPanel panel = new JPanel();
+  JPanel panel1 = new JPanel();
+
+  panel.setLayout(new BoxLayout(panel,BoxLayout.Y_AXIS)); //
+  panel1.setLayout(new BoxLayout(panel1,BoxLayout.X_AXIS)); //
+
+  JLabel text1 = new JLabel("       리스트  관리");
+  JLabel blank = new JLabel(" ");
+
+  JButton add_Btn = new JButton("         추가        ");
+  add_Btn.addActionListener(new ActionListener() {
+    @Override
+    public void actionPerformed(ActionEvent e) {
+      String[] temp = {"","","","","",""};
+      model.addRow(temp);
+    }
+
+  });
+
+  JButton remove_Btn = new JButton("         삭제        ");
+  remove_Btn.addActionListener(new ActionListener() {
+    @Override
+    public void actionPerformed(ActionEvent e) {
+
+      if(table.getRowCount()&lt;=0) {
+        System.out.println("더 이상 삭제할 수 없습니다.");
+        return;
+      }
+
+      if(table.getSelectedRow() == -1) {
+        model.setRowCount(table.getRowCount()-1);
+      }
+      else {
+        model.removeRow(table.getSelectedRow());
+      }
+      setComboBox();
+    }
+
+  });
+
+  JButton synchroniztion_Btn = new JButton("데이터 동기화");
+  synchroniztion_Btn.addActionListener(new ActionListener() {
+    @Override
+    public void actionPerformed(ActionEvent e) {
+      System.out.println("데이터 동기화를 진행합니다.");
+      studentManager.update(getNameData(), getScoreData());
+      setComboBox();
+    }
+
+  });
+
+  JButton all_result_Btn = new JButton("전체 결과");
+  all_result_Btn.addActionListener(new ActionListener() {
+    @Override
+    public void actionPerformed(ActionEvent e) {
+      String[] nameList = getNameData();
+      String[] subjectList = {"국어","영어","수학","과학","사회"};
+      int[][] scoreList = getScoreData();
+
+      boolean[] occupied = new boolean[nameList.length];
+      int count_occupied = 0;
+      for(int i=0; i&lt;nameList.length; i++) {
+        if(nameList[i].equals("")) { // 내가 ""으로 저장했으니 아마 되겠지?
+          occupied[i] = false;
+        }
+        else {
+          occupied[i] = true;
+          count_occupied++;
+        }
+      }
+
+      int[] avgBySub = new int[5];
+      for(int i=0; i&lt;nameList.length; i++) { // 일단 합계 구하기
+        if(occupied[i]) {
+          avgBySub[0] += scoreList[i][0];
+          avgBySub[1] += scoreList[i][1];
+          avgBySub[2] += scoreList[i][2];
+          avgBySub[3] += scoreList[i][3];
+          avgBySub[4] += scoreList[i][4];
+        }
+      }
+
+      for(int i=0; i&lt;5; i++) { // 갯수로 나눠서 평균 구하기. 과목별 평균 그래프 그리는 데에 필요한 건 다 준비됨
+        avgBySub[i] = avgBySub[i]/count_occupied;
+      }
+
+      String[] newNameList = new String[count_occupied];
+      int[] avgByName = new int[count_occupied];
+      count_occupied = 0;
+
+      for(int i=0;i&lt;nameList.length; i++) {
+        if(occupied[i]) {
+          newNameList[count_occupied] = nameList[i];
+          avgByName[count_occupied] = (scoreList[i][0] + scoreList[i][1] + scoreList[i][2] + scoreList[i][3] + scoreList[i][4]) / 5;
+          count_occupied++;
+        }
+      }
+
+      CreateGragh gragh1 = new CreateGragh(subjectList, avgBySub);
+      gragh1.setScreenTitle("과목별 평균 점수");
+      gragh1.setScreenVisible();
+
+      CreateGragh gragh2 = new CreateGragh(newNameList, avgByName);
+      gragh2.setScreenTitle("학생별 평균 점수");
+      gragh2.setScreenVisible();
+
+      for(String s : subjectList) {
+        studentManager.MaxScoreBySubject(s); // 이게 arrayList-stream-filter로 처리하니까 동점자도 같이 나옴.
+        studentManager.MinScoreBySubject(s);
+      }
+
+    }
+
+  });
+
+  JButton eachResult_Btn = new JButton("개별 결과");
+  eachResult_Btn.addActionListener(new ActionListener() {
+    @Override
+    public void actionPerformed(ActionEvent e) {
+      // 항목이 실제로 존재하는지에 대한 검증은 필요 없음. 콤보 박스로 선택하는데, 콤보 박스는 저장소의 데이터랑 바로 연동되기 때문에 항상 옳음.
+      int location = -1;
+      Object selectedOne = combo.getSelectedItem();
+      String selectedStr = String.valueOf(selectedOne);
+      for(int i=0; i&lt;table.getRowCount(); i++) {
+        if(table.getValueAt(i, 0).equals(selectedOne)) {
+          location = i;
+          break;
+        }
+      }
+      // 배열 중에서 찾으니 검색에 실패했다면 location = -1인 점을 이용
+      // 어차피 콤보 내에서만 선택되기 때문에 오류가 날 일은 많지 않고, 이름 중에서 못 찾았다면 당연히 과목일 것임.
+      // 근데 혹시라도 오류의 가능성이 있으니 switch문 중 default로 처리
+      if(location == -1) {
+
+        switch(selectedStr) { // 알아서 적당히 처리.
+        case "국어":
+          location = 1;
+          break;
+        case "영어":
+          location = 2;
+          break;
+        case "수학":
+          location = 3;
+          break;
+        case "과학":
+          location = 4;
+          break;
+        case "사회":
+          location = 5;
+          break;
+        default:
+          System.out.println("잘못된 입력입니다.");
+          return;
+        }
+
+        // getNameData()와 getScoreData()는 이름 없는 빈 칸도 일단 저장은 하게 해둬서 그래프 그리는 데에 쓸 데이터로는 적합하지 않음. 그래서 일일이 찾아야 함
+        int count1 = 0, count2 = 0, total = 0;
+
+        for(int i=0; i&lt;table.getRowCount(); i++) {
+          if( (String.valueOf(table.getValueAt(i, 0)).length() &gt;= 1) && (String.valueOf(table.getValueAt(i, 0)) != null) ) {
+            count1++;
+          }
+        }
+
+        String[] studentNameList = new String[count1];
+        int[] scoresList = new int[count1];
+
+
+        for(int i=0; i&lt;table.getRowCount(); i++) {
+          if( (String.valueOf(table.getValueAt(i, 0)).length() &gt;= 1) && (String.valueOf(table.getValueAt(i, 0)) != null) ) {
+            studentNameList[count2] = String.valueOf(table.getValueAt(i, 0));
+            try {
+              int num = Integer.valueOf(String.valueOf(table.getValueAt(i, location)));
+              scoresList[count2] = Math.min(100, Math.max(0, num));
+            }
+            catch(Exception err) {
+              System.out.println("MainFrame - eachResult_Btn : Int 타입으로 변환하기에 적합하지 않은 숫자입니다.");
+              scoresList[count2] = 0;
+            }
+            total += scoresList[count2];
+            count2++;
+          }
+
+          if(count2 == count1) {
+            break;
+          }
+        }
+
+        CreateGragh gragh = new CreateGragh(studentNameList,scoresList);
+        gragh.setScreenTitle("학생별 " + selectedStr + " 과목 점수");
+        gragh.setTextLabel("         "+selectedStr+" 과목의 평균 점수 : " + String.valueOf((float)total/studentNameList.length));
+        gragh.setScreenVisible();
+
+      }
+      else { // 애초에 테이블 내의 이름 중에서 위치를 탐색했으니, 이쪽은 더 찾을 필요 없이 바로 계산.
+        String[] subjectNameList = {"국어","영어","수학","과학","사회"};
+        int[] scoresList = new int[5];
+        int total = 0;
+        for(int i=0; i&lt;5; i++) {
+          try {
+            int num = Integer.valueOf(String.valueOf(table.getValueAt(location, i+1))); // 이름이 0부터 시작하니까 점수들은 1부터 시작해야 함
+            scoresList[i] = Math.min(100, Math.max(0, num));
+          }
+          catch(Exception err) {
+            scoresList[i] = 0;
+            System.out.println("MainFrame - eachResult_Btn : Int 타입으로 변환하기에 적합하지 않은 숫자입니다.");
+          }
+          total += scoresList[i];
+        }
+
+        CreateGragh gragh = new CreateGragh(subjectNameList,scoresList);
+        gragh.setScreenTitle(selectedStr + "의 성적표");
+        gragh.setTextLabel("         "+selectedStr+"의 평균 점수 : " + String.valueOf((float)total/scoresList.length));
+        gragh.setScreenVisible();
+
+      }
+
+
+      // 그게 과목중에 있으면 &gt; 학생들 이름 + 학생별 과목 점수
+      // 아니면 &gt; 과목명 + 해당 학생의 전체 점수
+      // 점수와 이름은 해당 항목의 위치를 테이블 내에서 찾아서 getNameData()와 getScoreData()로 가져온 데이터에서 추출하면 됨.
+      // 그렇게 String[]과 int[] 타입으로 바꿔서 CreateGragh에 넣어주면 끝. 평균은 프레임 내부에서 해결하는 걸로.
+
+    }
+
+  });
+
+  panel.add(text1);
+  panel.add(blank);
+  panel.add(add_Btn);
+  panel.add(remove_Btn);
+  panel.add(synchroniztion_Btn);
+
+  panel1.add(all_result_Btn);
+  panel1.add(eachResult_Btn);
+  panel1.add(combo);
+
+  frame.add(scrollpane,BorderLayout.CENTER);
+  frame.add(panel,BorderLayout.EAST);
+  frame.add(panel1,BorderLayout.SOUTH);
+  frame.pack();
+
+  frame.setVisible(true);
+
+}
+
+void setComboBox() {
+
+  combo.removeAllItems(); // 일단 다 지움
+
+  String[] subjectText = {"국어","영어","수학","과학","사회"}; // 목록에 과목 추가
+  for(String s: subjectText) {
+    combo.addItem(s);
+  }
+
+  for(int i=0; i&lt;table.getRowCount(); i++) { // 목록에 학생 이름 추가
+    if((String.valueOf(table.getValueAt(i, 0)).length() &gt; 0) && (String.valueOf(table.getValueAt(i, 0)) != null) ) {
+      combo.addItem(table.getValueAt(i, 0));
+    }
+  }
+}
+
+String[] getNameData() {
+  int length = table.getRowCount();
+  String[] output = new String[length];
+  for(int i=0; i&lt;length; i++) {
+    try { // String 타입으로 변환하는 과정에서 문제 생기면 에러로 잡음
+      String str = String.valueOf(table.getValueAt(i, 0)); // x축 0번은 이름란이니까.
+      if((str.length() &lt;= 0) || (str == null) ) { // 테이블 데이터 가져올 때는 값이 없어도 오류도 뭣도 안 뜸. 그래서 길이가 0이거나 null일 때로 설정
+        output[i] = "";
+      }
+      else {
+        output[i] = str; // 값이 멀쩡히 존재하고, String타입으로 변환 가능하면 저장
+      }
+    }
+    catch(Exception e) {
+      System.out.println("MainFrame - getNameData : String 타입으로 변환하기에 적절하지 않습니다.");
+      output[i] = "";
+    }
+  }
+
+  return output;
+}
+
+int[][] getScoreData(){
+
+  int length = table.getRowCount();
+  int[][] output = new int[length][5];
+
+  for(int i=0; i&lt;length; i++) {
+    for(int j=0; j&lt;5; j++) {
+      try {
+        if((String.valueOf(table.getValueAt(i, j+1)).length() &lt;= 0 ) || (String.valueOf(table.getValueAt(i, j+1)) == null)) {
+          System.out.println("MainFrame - getNameData : Int 타입으로 변환하기에 적절하지 않습니다.");
+          output[i][j] = 0;
+        }
+        else {
+          int num = Integer.valueOf(String.valueOf(table.getValueAt(i, j+1))); // table 값을 바로 int로 바꾸면 왜인지 모르게 입력이 안 됨.
+          output[i][j] = Math.min(100, Math.max(0, num));
+        }
+      }
+      catch(Exception e) {
+        System.out.println("MainFrame - getNameData : Int 타입으로 변환하기에 적절하지 않습니다.");
+        output[i][j] = 0;
+      }
+    }
+  }
+
+  return output;
+}
+
+}
+          </code></pre>
+        </div>
+
+        <div>
+          <h4>CreateGragh</h4>
+
+          <pre><code>
+package examScore;
+
+import javax.swing.*;
+import java.awt.*;
+
+public class CreateGragh {
+
+private JFrame frame = new JFrame("");
+private JLabel textLine = new JLabel("");
+
+public CreateGragh(String[] nameList, int[] scoreList) {
+
+  System.out.println("시험 결과를 출력합니다.");
+
+  int x_size = 100*(1+nameList.length);
+  frame.setLocation(500,200);
+  frame.setSize(x_size+50,400);
+
+  buildGUI(nameList, scoreList); // 임시 입력
+
+}
+
+private void buildGUI(String[] nameList, int[] scoreList) {
+
+  frame.setLayout(new BorderLayout());
+
+  Container contentpane = frame.getContentPane();
+
+  ResultPanel resultPanel = new ResultPanel(nameList, scoreList);
+
+  contentpane.add(resultPanel,BorderLayout.CENTER);
+  contentpane.add(textLine,BorderLayout.SOUTH);
+
+}
+
+void setScreenTitle(String str) {
+  frame.setTitle(str);
+}
+
+void setScreenVisible() {
+  frame.setVisible(true);
+}
+
+void setTextLabel(String str) {
+  textLine.setText(str);
+  Font font = new Font("Serif",Font.BOLD,20);
+  textLine.setFont(font);
+}
+
+}
+          </code></pre>
+        </div>
+
+        <div>
+          <h4>ResultPanel</h4>
+
+          <pre><code>
+package examScore;
+
+import java.awt.*;
+import javax.swing.*;
+
+public class ResultPanel extends JPanel {
+
+private String[] nameList;
+private int[] numberList;
+
+public ResultPanel(String[] nameList, int[] numberList) {
+  this.nameList = nameList;
+  this.numberList = numberList;
+  repaint();
+}
+
+public void paint(Graphics g) {
+  g.clearRect(0, 0, getWidth(), getHeight());
+  g.drawLine(50, 250, 100*(nameList.length+1)-20, 250);
+
+  for(int i=1; i&lt;11; i++) {
+    g.drawString(i*10+"", 25, 255-(20*i));
+    g.drawLine(50, 250-(20*i), 100*(nameList.length+1)-20, 250-(20*i));
+  }
+
+  g.drawLine(50, 50, 50, 250);
+  g.drawLine(100*(nameList.length+1)-20, 50, 100*(nameList.length+1)-20, 250);
+
+  for(int i=0; i&lt;nameList.length; i++) {
+    g.drawString(nameList[i], 100*(1+i), 270);
+  }
+  g.setColor(Color.BLUE);
+
+  for(int i=0; i&lt;numberList.length; i++) {
+    if(numberList[i] &gt; 0) {
+      g.fillRect(10+100*(i+1), 250-numberList[i]*2, 10, numberList[i]*2);
+    }
+  }
+}
+}
+          </code></pre>
+        </div>
+      </div>
+
+      <div>
+        <h2>3. 기록</h2>
+
+        <ol>
+          <li>5~6주차 연습.</li>
+
+          <li>ArrayList와 stream을 주로 사용해서 만든다는 주목적은 달성함.</li>
+
+          <li>
+            이번에는 구성과 연결에 좀 더 신경 써서 코딩하고, 각 객체들을
+            연결하는 과정이 전보다 매끄러웠음
+          </li>
+
+          <li>
+            하지만 기존에는 그냥 콘솔 메시지로 결과를 출력할 생각이었는데,
+            그래프로 출력하는 것으로 수정하는 과정에서 ArrayList와 stream의
+            비중이 확 줄어들었음
+
+            <ul>
+              <li>
+                그래도 만들어 둔 게 아까워서 마지막에 전체 결과 출력에 좀
+                넣었음.
+              </li>
+            </ul>
+          </li>
+
+          <li>
+            이번에 만들면서 왜 ui를 기준으로 코드를 설계해야 하는지 깨달았음.
+            결국 가장 많은 데이터 입력과 오류 보정 등이 필요한 곳은 유저가
+            사용하는 곳이고, 그곳을 어떻게 처리할 지가 핵심임
+
+            <ul>
+              <li>
+                이전에는 ui가 빈약하고, 그냥 내부적으로 처리하는 게 대부분이어서
+                데이터 저장을 기준으로 했지만, 이번에 ui를 더 추가해보니 유저가
+                입력할 데이터가 먼저고, 저장소는 그 다음.
+              </li>
+
+              <li>유저가 직접적으로 이용할 단말기에서부터 뻗어가야 함</li>
+            </ul>
+          </li>
+
+          <li>
+            데이터 저장 방법을 treeSet으로 할 걸 그랬나? 애초에 arraylist와
+            stream을 연습하는 게 목적이라서 그렇게 했지만 다른 컬렉션을 쓰는 게
+            더 효율적이었다고 봄
+          </li>
+        </ol>
+      </div>
+    </div>
+  </body>
+</html>

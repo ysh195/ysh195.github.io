@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>코딩 4주차 연습</title>
+
+    <link rel="stylesheet" href="../css/basic.css" />
+  </head>
+  <body>
+    <div>
+      <a href="https://ysh195.github.io/">
+        <button class="homeBtn">홈으로</button>
+      </a>
+
+      <h1>코딩 4주차 - 지뢰찾기</h1>
+
+      <div>
+        <h2>1. 완성 이미지</h2>
+
+        <ul class="img-list">
+          <li>
+            <img src="../assets/sm/sm1.PNG" />
+          </li>
+
+          <li>
+            <img src="../assets/sm/sm2.PNG" />
+          </li>
+
+          <li>
+            <img src="../assets/sm/sm3.PNG" />
+          </li>
+
+          <li>
+            <img src="../assets/sm/sm4.PNG" />
+          </li>
+        </ul>
+      </div>
+
+      <div>
+        <h2>2. 코드</h2>
+
+        <div>
+          <h4>main : GamePlay</h4>
+
+          <pre><code>
+package scan_mine;
+
+import java.util.Scanner;
+
+public class GamePlay {
+
+public static void main(String[] args) throws ClassNotFoundException, NullPointerException {
+
+  Scanner sc1 = new Scanner(System.in);
+  Scanner sc2 = new Scanner(System.in);
+
+  System.out.println("원하시는 가로축 갯수를 입력해주세요. (최대 : 17)");
+  int X_size = sc1.nextInt();
+
+  System.out.println("원하시는 세로축 갯수를 입력해주세요. (최대 : 10)");
+  int Y_size = sc2.nextInt();
+
+  int X_Max = 17, Y_Max = 10;
+
+  X_size = Math.min(Math.max(X_size, 1), X_Max); // 사용자에게 사이즈를 입력받을 경우를 대비해 어느 정도 한계를 설정
+  Y_size = Math.min(Math.max(Y_size, 1), Y_Max);
+
+  Screen onlyScreen = Screen.getInstance(); // 다수 생성되는 버튼도 다 Screen과 연결해주려고 안에 스크린 생성자를 가지고 있음
+                      // 근데 그런 식으로 하면 Screen 생성자가 너무 많으니 Screen은 싱글톤으로 만듦
+
+  GroupOfButtons GOB = new GroupOfButtons(X_size, Y_size);
+
+  onlyScreen.setVisible();
+
+}
+
+}
+          </code></pre>
+        </div>
+
+        <div>
+          <h4>Buttons</h4>
+
+          <pre><code>
+package scan_mine;
+
+import java.awt.BorderLayout;
+import java.awt.TextArea;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+import java.awt.Container;
+import java.awt.Font;
+
+import javax.swing.JLabel;
+import javax.swing.JButton;
+import javax.swing.JTextField;
+
+public class Buttons extends JButton{ // 이 클래스 자체로 하나의 버튼으로 기능하면서도 여러 속성과 기능을 담을 수 있도록 JButton을 계승하였습니다.
+
+private int x, y; // 이 버튼의 좌표입니다. 다른 클래스 내에 public static으로 설정된 scanned(스캔 여부)와 mine(지뢰인지 여부) 등을 찾을 때 사용됩니다.
+
+public Buttons(int x, int y) {
+  this.x=x;
+  this.y=y;
+  set_buttons(this.x, this.y);
+}
+
+void set_buttons(int x, int y){ // 버튼에 대한 세부 설정 메서드입니다. 그냥 생성자로 만들면 이벤트리스너 안에 this.x 등으로 입력할 수 없어 분리했습니다.
+
+  Screen onlyScreen = Screen.getInstance(); // 스크린이 될 프레임입니다. 하나의 스크린에 다수의 버튼을 연결할 수 있도록 싱글톤으로 설정했습니다.
+  setBounds((x+1)*50, (y+1)*50, 50, 50); // 각 버튼의 좌표 지정
+  onlyScreen.contentPane.add(this); // 스크린에 연결
+
+  ///////////////////////////////////////////////// 액션 리스너
+  addActionListener(new ActionListener() {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            if(GroupOfButtons.mine[y][x]) { // 누른 버튼이 지뢰일 경우
+              setText("!!!");
+              onlyScreen.textbox.setText("Boom!! You lose"); // 다만 이것은 스크린에 출력되지 않고 스크린이 종료되어서
+              System.out.println("Boom!! You lose"); // 콘솔 출력하였습니다.
+              try {
+                    Thread.sleep(3000);
+                } catch (InterruptedException X) {
+                }
+              System.exit(0); // 3초 대기 후 종료합니다.
+            }
+            else {
+              setText("X"); // 이 버튼은 지뢰가 아니었음을 보여줍니다.
+              onlyScreen.textbox.setText("It's safe!");
+            }
+
+            isScanned(x, y); // 해당 버튼은 스캔되었음으로 상태를 변경합니다.
+            scan_around(x, y); // 주변 버튼에 대한 정보를 수집하고 출력합니다.
+            and_again(x, y);
+
+        }
+    });
+  //////////////////////////////////////////////////
+}
+
+void isScanned(int x, int y) { // 해당 버튼은 스캔되었음으로 상태를 변경합니다.
+  GroupOfButtons.scanned[y][x] = true;
+}
+
+void scan_around(int x, int y) { // 주변 버튼에 대한 정보를 수집하고 출력합니다.
+
+  int mine_count = 0; // 탐색 범위 내 지뢰의 갯수를 세는 변수입니다.
+
+  int x_min = Math.max(x-1, 0); // 탐색할 범위를 설정합니다. min, max, 그리고 GroupOfButtons에 저장된 x,y값을 활용함으로써,
+  int x_max = Math.min(x+1, GroupOfButtons.saveX); // 배열의 범위를 초과하여 존재하지 않는 배열에 대한 작업을 진행하지 않도록 하였습니다.
+
+  int y_min = Math.max(y-1, 0);
+  int y_max = Math.min(y+1, GroupOfButtons.saveY);
+
+  for(int i=y_min; i&lt;y_max; i++) {
+    for(int j=x_min; j&lt;x_max; j++) {
+      if(GroupOfButtons.mine[i][j]==true) { // 탐색 범위 내에 지뢰가 발견될 때마다 지뢰의 갯수를 늘립니다.
+        mine_count++;
+      }
+      else {
+        String str = (mine_count == 0) ? "X" : String.valueOf(mine_count); // 지뢰의 갯수에 따라 버튼에 표시할 텍스트를 다르게 설정합니다.
+        GroupOfButtons.bt[i][j].setText(str); // 지뢰가 주변에 있다면 지뢰의 갯수를 버튼 내 텍스트로 표시합니다.
+        GroupOfButtons.scanned[i][j] = true;
+        mine_count = 0;
+      }
+
+    }
+  }
+}
+
+void and_again(int a, int b) {
+
+  int a_min = Math.max(a-1, 0); // 탐색할 범위를 설정합니다. min, max, 그리고 GroupOfButtons에 저장된 x,y값을 활용함으로써,
+  int a_max = Math.min(a+1, GroupOfButtons.saveX); // 배열의 범위를 초과하여 존재하지 않는 배열에 대한 작업을 진행하지 않도록 하였습니다.
+
+  int b_min = Math.max(b-1, 0);
+  int b_max = Math.min(b+1, GroupOfButtons.saveY);
+
+  for(int c=b_min; c&lt;b_max; c++){
+    for(int d=a_min; d&lt;a_max; d++) {
+      scan_around(b, c);
+    }
+  }
+}
+}
+          </code></pre>
+        </div>
+
+        <div>
+          <h4>GroupOfButtons</h4>
+
+          <pre><code>
+package scan_mine;
+
+public class GroupOfButtons {
+public static boolean[][] scanned, mine;
+public static Buttons bt[][];
+public static int saveX, saveY;
+
+public GroupOfButtons(int x, int y) {
+
+  saveX = x;
+  saveY = y;
+
+  scanned = new boolean[saveY][saveX];
+  mine = new boolean[saveY][saveX];
+  bt = new Buttons[saveY][saveX];
+
+  for(int i=0; i&lt;saveY; i++) {
+    for(int j=0; j&lt;saveX; j++) {
+
+      bt[i][j] = new Buttons(j,i);
+
+      scanned[i][j] = false;
+
+      int random_num = (int)(Math.random()*11);
+      mine[i][j] = (random_num &lt; 1) ? true : false;
+    }
+  }
+}
+
+}
+          </code></pre>
+        </div>
+
+        <div>
+          <h4>Screen</h4>
+
+          <pre><code>
+package scan_mine;
+
+import java.awt.BorderLayout;
+import java.awt.TextArea;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+import java.awt.Container;
+import java.awt.Font;
+
+import javax.swing.JLabel;
+import javax.swing.JButton;
+import javax.swing.JTextField;
+
+public class Screen {
+
+JFrame frame = new JFrame();
+Container contentPane = frame.getContentPane(); // 컨텐트팬과 연결
+JLabel textbox = new JLabel("");
+
+private static Screen screen = new Screen(); // 싱글톤
+public static Screen getInstance() {return screen;} // 싱글톤
+
+private Screen() {
+
+frame.setTitle("지뢰 찾기 만들기"); // 제목
+
+frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+// frame.setLocationRelativeTo(null);
+frame.setSize(1000,600); // 화면 사이즈
+
+Font font = new Font("Serif",Font.BOLD,20);
+
+contentPane.setLayout(null); // 레이아웃 설정을 사용자에게 맡기는 기능 추가
+
+textbox.setFont(font);
+textbox.setBounds(400, 450, 100, 100);
+contentPane.add(textbox);
+
+frame.setVisible(false);
+}
+
+void setVisible() {
+  frame.setVisible(true);
+}
+
+}
+          </code></pre>
+        </div>
+      </div>
+
+      <div>
+        <h2></h2>
+
+        <div></div>
+      </div>
+
+      <div>
+        <h2>3. 기록</h2>
+
+        <ol>
+          <li>지뢰 탐색 시 자동으로 주변이 탐색되는 범위 설정이 어려움.</li>
+
+          <li>
+            버튼에 표시되는 지뢰의 갯수를 어떻게 카운트해야 좋을 지 모르겠음.
+          </li>
+
+          <li>
+            지뢰를 눌렀을 시 게임 종료되는 방식을 어떻게 해야 할 지 모르겠음
+            일단 system.exit으로 했는데, 텍스트라벨과 버튼에 표시한 텍스트는 안
+            나오고 그대로 프레임이 꺼짐. 그래서 할 수 없이 콘솔에 메시지 출력함
+          </li>
+
+          <li>
+            지뢰가 어디 있을 지 추측하고, 거기에 깃발을 모두 꽂아서 승리해야
+            하는데, 뭘 어떻게 해야 클릭으로 인식되지 않고 깃발을 꽂았다고 표현할
+            수 있을 지 모르겠음.
+          </li>
+
+          <li>
+            지뢰의 생성 갯수 설정을 안 함. 최소 몇 개는 만들어지도록 해야
+            하는데, 그냥 난수에 맡겨서 아주 낮은 확률로 지뢰가 존재하지 않는
+            경우도 있음. 이 부분은 솔직히 귀찮아서 안 한 것.
+          </li>
+
+          <li>
+            지뢰찾기를 만들려고 했으면서 정작 지뢰찾기에 대한 이해도가 많이
+            떨어지고, 이걸 완벽하게 구현하기엔 실력이 부족했음.
+          </li>
+        </ol>
+      </div>
+    </div>
+  </body>
+</html>
